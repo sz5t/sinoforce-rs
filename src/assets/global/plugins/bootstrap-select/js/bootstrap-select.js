@@ -359,7 +359,7 @@
       this.$searchbox = this.$menu.find('input');
 
       if (this.options.dropdownAlignRight)
-        this.$menu.addClass('dropdown-menu-right');
+        this.$menu.addClass('cn-top-dropdown-right');
 
       if (typeof id !== 'undefined') {
         this.$button.attr('data-id', id);
@@ -400,7 +400,7 @@
           that.$button
             .addClass('bs-invalid')
             .focus();
-          
+
           that.$element.on({
             'focus.bs.select': function () {
               that.$button.focus();
@@ -417,7 +417,7 @@
               that.$element.off('rendered.bs.select');
             }
           });
-          
+
         });
       }
 
@@ -469,11 +469,11 @@
           this.options.template.caret +
           '</span>' +
           '</button>' +
-          '<div class="dropdown-menu open">' +
+          '<div class="cn-top-dropdown open">' +
           header +
           searchbox +
           actionsbox +
-          '<ul class="dropdown-menu inner" role="menu">' +
+          '<ul class="cn-top-dropdown inner" role="menu">' +
           '</ul>' +
           donebutton +
           '</div>' +
@@ -754,8 +754,8 @@
 
       text.className = 'text';
       newElement.className = this.$menu[0].parentNode.className + ' open';
-      menu.className = 'dropdown-menu open';
-      menuInner.className = 'dropdown-menu inner';
+      menu.className = 'cn-top-dropdown open';
+      menuInner.className = 'cn-top-dropdown inner';
       divider.className = 'divider';
 
       text.appendChild(document.createTextNode('Inner text'));
@@ -1047,12 +1047,12 @@
     },
 
     tabIndex: function () {
-      if (this.$element.data('tabindex') !== this.$element.attr('tabindex') && 
+      if (this.$element.data('tabindex') !== this.$element.attr('tabindex') &&
         (this.$element.attr('tabindex') !== -98 && this.$element.attr('tabindex') !== '-98')) {
         this.$element.data('tabindex', this.$element.attr('tabindex'));
         this.$button.attr('tabindex', this.$element.data('tabindex'));
       }
-      
+
       this.$element.attr('tabindex', -98);
     },
 

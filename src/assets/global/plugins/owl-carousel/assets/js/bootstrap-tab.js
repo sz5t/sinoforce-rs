@@ -36,7 +36,7 @@
 
   , show: function () {
       var $this = this.element
-        , $ul = $this.closest('ul:not(.dropdown-menu)')
+        , $ul = $this.closest('ul:not(.cn-top-dropdown)')
         , selector = $this.attr('data-target')
         , previous
         , $target
@@ -79,7 +79,7 @@
       function next() {
         $active
           .removeClass('active')
-          .find('> .dropdown-menu > .active')
+          .find('> .cn-top-dropdown > .active')
           .removeClass('active')
 
         element.addClass('active')

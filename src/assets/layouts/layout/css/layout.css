@@ -80,7 +80,7 @@ Page Header
       height: 50px;
       border: 0;
       background: transparent !important;
-      font-size: 13px;
+      font-size: 12px;
       padding-left: 0;
       margin-left: 12px;
       text-indent: -150000px; }
@@ -96,7 +96,7 @@ Page Header
         margin-top: 4px;
         display: block; }
         .page-header.navbar .search-form .input-group .input-group-btn .btn.submit > i {
-          font-size: 15px; }
+          font-size: 13px; }
     .page-header.navbar .search-form.open {
       transition: all 0.6s;
       width: 300px !important; }
@@ -200,9 +200,9 @@ Page Header
           .page-header.navbar .top-menu .navbar-nav > li.dropdown > .dropdown-toggle:last-child {
             padding-right: 0; }
           .page-header.navbar .top-menu .navbar-nav > li.dropdown > .dropdown-toggle > i {
-            font-size: 17px; }
+            font-size: 15px; }
             .page-header.navbar .top-menu .navbar-nav > li.dropdown > .dropdown-toggle > i.glyphicon {
-              font-size: 16px; }
+              font-size: 14px; }
           .page-header.navbar .top-menu .navbar-nav > li.dropdown > .dropdown-toggle > .badge {
             font-family: "Open Sans", sans-serif;
             position: absolute;
@@ -260,14 +260,14 @@ Page Header
             margin: 0;
             padding: 0;
             float: left;
-            font-size: 13px;
+            font-size: 12px;
             display: inline-block; }
           .page-header.navbar .top-menu .navbar-nav > li.dropdown-extended .dropdown-menu > li.external > a {
             display: inline-block;
             padding: 0;
             background: none;
             clear: inherit;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 300;
             position: absolute;
             right: 10px;
@@ -285,7 +285,7 @@ Page Header
             font-weight: 300;
             line-height: 20px;
             white-space: normal;
-            font-size: 13px;
+            font-size: 12px;
             padding: 16px 15px 18px;
             text-shadow: none; }
             .page-header.navbar .top-menu .navbar-nav > li.dropdown-extended .dropdown-menu .dropdown-menu-list > li > a:hover {
@@ -424,8 +424,8 @@ Page Header
       .page-header.navbar .search-form.search-form-expanded .input-group .input-group-btn .btn.submit {
         margin-left: 0; } }
 
-/*** 
-Horizontal Menu 
+/***
+Horizontal Menu
 ***/
 .page-header.navbar {
   /* Header container */
@@ -928,12 +928,12 @@ Page sidebar
           margin: 0;
           padding: 6px 15px 6px 43px;
           text-decoration: none;
-          font-size: 14px;
+          font-size: 13px;
           font-weight: 300;
           background: none; }
           .page-sidebar .page-sidebar-menu .sub-menu li > a > i,
           .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu li > a > i {
-            font-size: 14px; }
+            font-size: 13px; }
         .page-sidebar .page-sidebar-menu .sub-menu li > .sub-menu,
         .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu li > .sub-menu {
           margin: 0; }
@@ -1069,7 +1069,7 @@ Page sidebar
       display: none; }
       .page-sidebar .sidebar-search .remove > i,
       .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .sidebar-search .remove > i {
-        font-size: 16px; }
+        font-size: 14px; }
     .page-sidebar .sidebar-search .input-group,
     .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .sidebar-search .input-group {
       -webkit-border-radius: 4px;
@@ -1080,7 +1080,7 @@ Page sidebar
       .page-sidebar .sidebar-search .input-group .form-control,
       .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .sidebar-search .input-group .form-control {
         border: 0;
-        font-size: 14px;
+        font-size: 12px;
         padding: 0;
         height: auto;
         line-height: auto;
@@ -1097,13 +1097,13 @@ Page sidebar
         background-position: 100% 3px; }
         .page-sidebar .sidebar-search .input-group .input-group-btn .btn > i,
         .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .sidebar-search .input-group .input-group-btn .btn > i {
-          font-size: 15px; }
+          font-size: 13px; }
   .page-sidebar .sidebar-search.sidebar-search-bordered,
   .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .sidebar-search.sidebar-search-bordered {
     margin: 25px 18px 25px 18px; }
     .page-sidebar .sidebar-search.sidebar-search-bordered .input-group .form-control,
     .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .sidebar-search.sidebar-search-bordered .input-group .form-control {
-      font-size: 13px;
+      font-size: 12px;
       padding: 6px 8px; }
     .page-sidebar .sidebar-search.sidebar-search-bordered .input-group .input-group-btn .btn,
     .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .sidebar-search.sidebar-search-bordered .input-group .input-group-btn .btn {
@@ -1434,7 +1434,7 @@ Page content
 /* Page title */
 .page-title {
   padding: 0px;
-  font-size: 28px;
+  font-size: 26px;
   letter-spacing: -1px;
   display: block;
   color: #666;
@@ -1442,7 +1442,7 @@ Page content
   font-weight: 300;
   /* subtitle */ }
   .page-title small {
-    font-size: 14px;
+    font-size: 12px;
     letter-spacing: 0px;
     font-weight: 300;
     color: #888; }
@@ -1456,7 +1456,7 @@ Page content
       color: #666; }
   .page-content-white .page-title {
     margin: 25px 0;
-    font-size: 24px; }
+    font-size: 18px; }
 
 /* Page breadcrumb */
 .page-bar {
@@ -1486,11 +1486,11 @@ Page content
       .page-bar .page-breadcrumb > li > a,
       .page-bar .page-breadcrumb > li > span {
         color: #888;
-        font-size: 14px;
+        font-size: 12px;
         text-shadow: none; }
       .page-bar .page-breadcrumb > li > i {
         color: #aaa;
-        font-size: 14px;
+        font-size: 12px;
         text-shadow: none; }
       .page-bar .page-breadcrumb > li > i[class^="icon-"],
       .page-bar .page-breadcrumb > li > i[class*="icon-"] {
@@ -1631,9 +1631,9 @@ Page content
     /* Page title */ }
     .page-content-wrapper .page-content .page-title {
       margin-bottom: 20px;
-      font-size: 18px; }
+      font-size: 16px; }
       .page-content-wrapper .page-content .page-title small {
-        font-size: 13px;
+        font-size: 12px;
         padding-top: 3px; } }
 
 @media (max-width: 480px) {
@@ -1648,7 +1648,7 @@ Page footer
 ***/
 .page-footer {
   padding: 8px 20px 5px 20px;
-  font-size: 13px;
+  font-size: 12px;
   height: 33px; }
   .page-footer:before, .page-footer:after {
     content: " ";
@@ -1757,7 +1757,7 @@ Page footer
     bottom: 10px;
     right: 10px; }
     .scroll-to-top > i {
-      font-size: 28px; } }
+      font-size: 26px; } }
 
 /***
 Theme Panel
@@ -1822,7 +1822,7 @@ Theme Panel
         text-transform: uppercase;
         display: inline-block;
         width: 145px;
-        font-size: 13px;
+        font-size: 12px;
         font-weight: 300; }
       .theme-panel > .theme-options > .theme-option > select.form-control {
         display: inline;
@@ -1919,7 +1919,7 @@ Page Quick Sidebar
       background: none; }
   .page-quick-sidebar-toggler > i {
     color: #99a8b5;
-    font-size: 17px; }
+    font-size: 15px; }
     .page-quick-sidebar-toggler > i:hover {
       color: #fff !important; }
     .page-quick-sidebar-open .page-quick-sidebar-toggler > i:before {
@@ -1968,7 +1968,7 @@ Page Quick Sidebar
           text-align: center;
           border: 0;
           height: auto;
-          font-size: 14px;
+          font-size: 12px;
           padding: 45px 15px 8px;
           text-transform: uppercase;
           background: none;
@@ -2040,7 +2040,7 @@ Page Quick Sidebar
       margin: 0;
       padding: 0; }
     .page-quick-sidebar-wrapper .page-quick-sidebar .list-heading {
-      font-size: 16px;
+      font-size: 14px;
       margin: 10px 10px;
       color: #6c8296; }
     .page-quick-sidebar-wrapper .page-quick-sidebar .list-items {
@@ -2077,13 +2077,13 @@ Page Quick Sidebar
         .page-quick-sidebar-wrapper .page-quick-sidebar .page-quick-sidebar-item .page-quick-sidebar-nav .page-quick-sidebar-back-to-list {
           vertical-align: middle;
           display: inline-block;
-          font-size: 14px;
+          font-size: 12px;
           color: #90a1af; }
           .page-quick-sidebar-wrapper .page-quick-sidebar .page-quick-sidebar-item .page-quick-sidebar-nav .page-quick-sidebar-back-to-list:hover {
             text-decoration: none; }
           .page-quick-sidebar-wrapper .page-quick-sidebar .page-quick-sidebar-item .page-quick-sidebar-nav .page-quick-sidebar-back-to-list > i {
-            font-size: 17px;
-            line-height: 17px;
+            font-size: 15px;
+            line-height: 15px;
             vertical-align: top;
             margin-right: 3px; }
     .page-quick-sidebar-wrapper .page-quick-sidebar .page-quick-sidebar-content-item-shown .page-quick-sidebar-list {
@@ -2119,7 +2119,7 @@ Page Quick Sidebar
             filter: alpha(opacity=100); }
         .page-quick-sidebar-wrapper .page-quick-sidebar .page-quick-sidebar-chat .page-quick-sidebar-chat-users .media-list .media .media-body .media-heading {
           margin: 5px 0 0 0;
-          font-size: 14px; }
+          font-size: 12px; }
         .page-quick-sidebar-wrapper .page-quick-sidebar .page-quick-sidebar-chat .page-quick-sidebar-chat-users .media-list .media .media-body .media-heading-sub {
           font-size: 11px;
           text-transform: uppercase;
@@ -2139,7 +2139,7 @@ Page Quick Sidebar
         transition: display 0.3s;
         padding: 5px 0;
         margin: 10px auto;
-        font-size: 13px; }
+        font-size: 12px; }
         .page-quick-sidebar-wrapper .page-quick-sidebar .page-quick-sidebar-chat .page-quick-sidebar-chat-user .page-quick-sidebar-chat-user-messages .post .body {
           color: #c3c3c3;
           display: block; }
@@ -2229,8 +2229,8 @@ Page Quick Sidebar
       .page-quick-sidebar-wrapper .page-quick-sidebar .page-quick-sidebar-settings .page-quick-sidebar-settings-list .list-items li select.form-control {
         padding: 4px 0px !important; }
 
-/***  
-Page Loading       
+/***
+Page Loading
 ***/
 .page-on-load {
   background: #fefefe; }

@@ -4725,7 +4725,7 @@ Editableform based on Twitter Bootstrap
         if(this.isInline) {
             this.picker.addClass('datepicker-inline').appendTo(this.element);
         } else {
-            this.picker.addClass('datepicker-dropdown dropdown-menu');
+            this.picker.addClass('datepicker-dropdown cn-top-dropdown');
         }
 
         if (this.o.rtl){

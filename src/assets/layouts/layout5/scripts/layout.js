@@ -49,7 +49,7 @@ var Layout = function() {
     };
 
     var handleHeaderMenu = function() {
-        $('.page-header .navbar-nav > .dropdown-fw, .page-header .navbar-nav > .more-dropdown, .page-header .navbar-nav > .dropdown > .dropdown-menu  > .dropdown').click(function(e) {
+        $('.page-header .navbar-nav > .dropdown-fw, .page-header .navbar-nav > .more-dropdown, .page-header .navbar-nav > .dropdown > .cn-top-dropdown  > .dropdown').click(function(e) {
             
             if (App.getViewPort().width > resBreakpointMd) {
                 if ($(this).hasClass('more-dropdown') || $(this).hasClass('more-dropdown-sub')) {
@@ -81,7 +81,7 @@ var Layout = function() {
             }
         });
 
-        $('.page-header .navbar-nav .more-dropdown-sub .dropdown-menu, .page-header .navbar-nav .dropdown-sub .dropdown-menu').click(function(){
+        $('.page-header .navbar-nav .more-dropdown-sub .cn-top-dropdown, .page-header .navbar-nav .dropdown-sub .cn-top-dropdown').click(function(){
 
         });
     };

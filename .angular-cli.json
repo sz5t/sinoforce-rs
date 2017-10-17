@@ -17,11 +17,34 @@
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
-      "prefix": "app",
+      "prefix": "cn",
       "styles": [
         "styles.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "assets/global/plugins/respond.min.js",
+        "assets/global/plugins/excanvas.min.js",
+        "assets/global/plugins/jquery.min.js",
+        "assets/global/plugins/bootstrap/js/bootstrap.min.js",
+        "assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js",
+        "assets/global/plugins/js.cookie.min.js",
+        "assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js",
+        "assets/global/plugins/jquery-slimscroll/jquery.slimscroll.js",
+        "assets/global/plugins/jquery.blockui.min.js",
+        "assets/global/plugins/bootstrap-switch/js/bootstrap-switch.js",
+        "assets/global/plugins/jquery-validation/js/jquery.validate.js",
+        "assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.js",
+        "assets/global/plugins/select2/js/select2.full.min.js",
+        "assets/global/plugins/jstree/dist/jstree.min.js",
+        "assets/global/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js",
+        "assets/global/plugins/datatables/datatables.min.js",
+        "assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js",
+        "assets/bower_components/datatables.net-select/js/dataTables.select.js",
+        "assets/bower_components/datatables.net-buttons/js/dataTables.buttons.js",
+        "assets/bower_components/datatables.net-responsive/js/dataTables.responsive.js",
+        "assets/bower_components/pdfmake/build/pdfmake.js"
+
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

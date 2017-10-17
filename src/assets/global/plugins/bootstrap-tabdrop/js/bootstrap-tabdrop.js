@@ -1,5 +1,5 @@
 /* =========================================================
- * bootstrap-tabdrop.js 
+ * bootstrap-tabdrop.js
  * http://www.eyecon.ro/bootstrap-tabdrop
  * =========================================================
  * Copyright 2012 Stefan Petre
@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * ========================================================= */
- 
+
 !function( $ ) {
 
 	var WinReszier = (function(){
@@ -53,7 +53,7 @@
 
 	var TabDrop = function(element, options) {
 		this.element = $(element);
-		this.dropdown = $('<li class="dropdown hide pull-right tabdrop"><a class="dropdown-toggle" data-toggle="dropdown" href="#">'+options.text+' <b class="caret"></b></a><ul class="dropdown-menu"></ul></li>')
+		this.dropdown = $('<li class="dropdown hide pull-right tabdrop"><a class="dropdown-toggle" data-toggle="dropdown" href="#">'+options.text+' <b class="caret"></b></a><ul class="cn-top-dropdown"></ul></li>')
 							.prependTo(this.element);
 		if (this.element.parent().is('.tabs-below')) {
 			this.dropdown.addClass('dropup');

@@ -107,7 +107,7 @@ var Layout = function () {
         });
 
         // hold mega menu content open on click/tap. 
-        $(document).on('click', '.mega-menu-dropdown .dropdown-menu, .classic-menu-dropdown .dropdown-menu', function (e) {
+        $(document).on('click', '.mega-menu-dropdown .cn-top-dropdown, .classic-menu-dropdown .cn-top-dropdown', function (e) {
             e.stopPropagation();
         });
 

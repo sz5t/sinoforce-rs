@@ -48,7 +48,7 @@
                             '<i class="glyphicon glyphicon-export icon-share"></i> ',
                             '<span class="caret"></span>',
                         '</button>',
-                        '<ul class="dropdown-menu" role="menu">',
+                        '<ul class="cn-top-dropdown" role="menu">',
                         '</ul>',
                     '</div>'].join('')).appendTo($btnGroup);
 

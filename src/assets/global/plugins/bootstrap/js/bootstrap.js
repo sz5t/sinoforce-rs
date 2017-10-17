@@ -2070,7 +2070,7 @@ if (typeof jQuery === 'undefined') {
 
   Tab.prototype.show = function () {
     var $this    = this.element
-    var $ul      = $this.closest('ul:not(.dropdown-menu)')
+    var $ul      = $this.closest('ul:not(.cn-top-dropdown)')
     var selector = $this.data('target')
 
     if (!selector) {
@@ -2117,7 +2117,7 @@ if (typeof jQuery === 'undefined') {
     function next() {
       $active
         .removeClass('active')
-        .find('> .dropdown-menu > .active')
+        .find('> .cn-top-dropdown > .active')
           .removeClass('active')
         .end()
         .find('[data-toggle="tab"]')

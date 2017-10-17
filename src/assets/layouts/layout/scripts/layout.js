@@ -469,7 +469,7 @@ var Layout = function () {
             $(this).addClass('hover-initialized');
         });
 
-        $(document).on('click', '.mega-menu-dropdown .dropdown-menu', function (e) {
+        $(document).on('click', '.mega-menu-dropdown .cn-top-dropdown', function (e) {
             e.stopPropagation();
         });
     };

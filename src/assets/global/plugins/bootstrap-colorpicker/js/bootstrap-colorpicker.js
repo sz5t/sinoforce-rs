@@ -529,7 +529,7 @@
 				}
 			}
 		],
-		template: '<div class="colorpicker dropdown-menu">'+
+		template: '<div class="colorpicker cn-top-dropdown">'+
 							'<div class="colorpicker-saturation"><i><b></b></i></div>'+
 							'<div class="colorpicker-hue"><i></i></div>'+
 							'<div class="colorpicker-alpha"><i></i></div>'+

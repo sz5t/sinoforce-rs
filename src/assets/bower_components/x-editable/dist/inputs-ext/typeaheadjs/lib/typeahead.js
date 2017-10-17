@@ -858,7 +858,7 @@
         var html = {
             wrapper: '<span class="twitter-typeahead"></span>',
             hint: '<input class="tt-hint" type="text" autocomplete="off" spellcheck="off" disabled>',
-            dropdown: '<span class="tt-dropdown-menu"></span>'
+            dropdown: '<span class="tt-cn-top-dropdown"></span>'
         }, css = {
             wrapper: {
                 position: "relative",
@@ -905,7 +905,7 @@
             this.datasets = o.datasets;
             this.dir = null;
             this.eventBus = o.eventBus;
-            $menu = this.$node.find(".tt-dropdown-menu");
+            $menu = this.$node.find(".tt-cn-top-dropdown");
             $input = this.$node.find(".tt-query");
             $hint = this.$node.find(".tt-hint");
             this.dropdownView = new DropdownView({

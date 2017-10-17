@@ -1844,7 +1844,7 @@
     }
   });
 
-  var dropdown = renderer.create('<div class="dropdown-menu">', function ($node, options) {
+  var dropdown = renderer.create('<div class="cn-top-dropdown">', function ($node, options) {
     var markup = $.isArray(options.items) ? options.items.map(function (item) {
       var value = (typeof item === 'string') ? item : (item.value || '');
       var content = options.template ? options.template(item) : item;
@@ -1854,7 +1854,7 @@
     $node.html(markup);
   });
 
-  var dropdownCheck = renderer.create('<div class="dropdown-menu note-check">', function ($node, options) {
+  var dropdownCheck = renderer.create('<div class="cn-top-dropdown note-check">', function ($node, options) {
     var markup = $.isArray(options.items) ? options.items.map(function (item) {
       var value = (typeof item === 'string') ? item : (item.value || '');
       var content = options.template ? options.template(item) : item;

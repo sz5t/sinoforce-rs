@@ -6,5 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  title: string = 'Sinoforce';
+  name: string = 'sinoforce.com';
+  site: string = 'http://www.sinoforce.com';
+  copyright: string = 'sinoforce.com';
+  menuDirect: string = 'pull-right';
+  dropdownType: any = {
+    notification: 'notification',
+    inbox: 'inbox',
+    tasks: 'tasks',
+    user: 'user'
+  };
 }
