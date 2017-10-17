@@ -1,24 +1,21 @@
-import {Component, OnInit, ViewEncapsulation, HostListener, AfterViewInit, ViewChild, Input} from '@angular/core';
-import {ActivatedRoute} from '@angular/router'
-import {DataTableDirective} from 'angular-datatables';
-import { HttpEventType, HttpClient, HttpRequest, HttpResponse} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
-import {ButtonEvent, EVENT_TYPE} from '../../framework/event/button-event';
-import {Configuration} from "../../framework/configuration";
-import {ApiService} from "../../services/api.service";
-import {Subject} from "rxjs/Subject";
-import 'rxjs/add/operator/toPromise';
-import {ConfirmDialogComponent} from "../../components/dialog/confirm-dialog/confirm-dialog.component";
+import {AfterViewInit, Component, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {DataTableDirective} from "angular-datatables";
 import {IFieldConfig} from "../../components/form/form-models/IFieldConfig";
+import {Subject} from "rxjs/Subject";
+import {ActivatedRoute} from "@angular/router";
+import {HttpClient} from "@angular/common/http";
+import {ApiService} from "../../services/api.service";
+import {EVENT_TYPE} from "../../framework/event/button-event";
 import {Validators} from "@angular/forms";
+import {Configuration} from "../../framework/configuration";
 declare let $:any;
 @Component({
-  selector: 'cn-grid-view-template',
-  encapsulation: ViewEncapsulation.None,
-  templateUrl: './grid-view-template.component.html',
-  styleUrls: ['./grid-view-template.component.css']
+  selector: 'cn-master-slaver-template',
+  encapsulation:ViewEncapsulation.None,
+  templateUrl: './master-slaver-template.component.html',
+  styleUrls: ['./master-slaver-template.component.css']
 })
-export class GridViewTemplateComponent implements OnInit, AfterViewInit {
+export class MasterSlaverTemplateComponent implements OnInit,AfterViewInit {
   @ViewChild(DataTableDirective)
   dtElement:DataTableDirective;
   @Input() formConfig:IFieldConfig[];
@@ -31,7 +28,7 @@ export class GridViewTemplateComponent implements OnInit, AfterViewInit {
   confirmEventSetting;
   formDialogTitle:string='表单';
   buttons:any[];
-  buttons1:any[] = [
+  masterButtons:any[] = [
     {
       id: 'new', text: '新建', color: 'green-jungle', img:'fa fa-plus', type: 'button',
       "events":{
@@ -95,11 +92,69 @@ export class GridViewTemplateComponent implements OnInit, AfterViewInit {
       }
     }
   ];
-  buttons2:any[] = [
-    {id: 'new', color: 'btn-default', text: '新建 1', action: 'new', img:'fa fa-plus', type: 'button', eventSetting:{}},
-    {id: 'del', color: 'btn-default', text: '删除 1', action: 'new', img:'fa fa-remove', type: 'button', eventSetting:{}},
-    {id: 'modify', color: 'btn-default', text: '修改 1', action: 'new', img:'fa fa-edit', type: 'button', eventSetting:{}},
-    {id: 'search', color: 'btn-default', text: '查询 1', action: 'new', img:'fa fa-search', type: 'button', eventSetting:{}}
+  slaverButtons:any[] = [
+    {
+      id: 'new', text: '新建', color: 'green-jungle', img:'fa fa-plus', type: 'button',
+      "events":{
+        "eventType":"dialog",
+        "execution":{
+          "api":"AppProject",
+          "method":"get",
+          "keyID":"",
+          "callback":""
+        }
+      }
+    },
+    {
+      id: 'del', text: '删除', color: 'red', img:'fa fa-remove', type: 'button',
+      "events":{
+        "title":"确认提示",
+        "text":"确定要删除选中的记录吗?",
+        "eventType":"confirm",
+        "execution":{
+          "api":"AppProject",
+          "method":"delete",
+          "keyId":"Id"
+        }
+      }
+    },
+    {
+      id: 'sub', text: '提交', color: 'green', img:'fa fa-save', type: 'button',
+      "events":{
+        "title":"确认提示",
+        "text":"是否提交当前数据?",
+        "eventType":"confirm",
+        "execution":{
+          "api":"AppProject",
+          "method":"proc",
+          //"keyId":"Id"
+        }
+      }
+    },
+    {
+      id: 'modify', text: '修改',color: 'yellow', img:'fa fa-edit', type: 'button',
+      "events":{
+        "eventType":"dialog",
+        "execution":{
+          "api":"AppProject",
+          "method":"get",
+          "keyID":"Id",
+          "callback":""
+        }
+      }
+    },
+    {
+      id: 'search', text: '查询',color: 'blue', img:'fa fa-search', type: 'button',
+      "events":{
+        "eventType":"dialog",
+        "execution":{
+          "api":"AppProject",
+          "method":"get",
+          "keyID":"",
+          "callback":""
+        }
+      }
+    }
   ];
   constructor(private router: ActivatedRoute,private http:HttpClient,private apiService:ApiService) {
     this._router = router;
@@ -185,66 +240,7 @@ export class GridViewTemplateComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    if(this._router.routeConfig.path==='grid-view'){
-      this.buttons = this.buttons2;
-      this.dtOption = {
-        "language": {
-          "processing":   "处理中...",
-          "lengthMenu":   "显示 _MENU_ 项结果",
-          "zeroRecords":  "没有匹配结果",
-          "info":         "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-          "infoEmpty":    "显示第 0 至 0 项结果，共 0 项",
-          "infoFiltered": "(由 _MAX_ 项结果过滤)",
-          "infoPostFix":  "",
-          "search":       "搜索:",
-          "url":          "",
-          "emptyTable":     "表中数据为空",
-          "loadingRecords": "载入中...",
-          "thousands":  ",",
-          "paginate": {
-            "first":    "首页",
-            "previous": "上页",
-            "next":     "下页",
-            "last":     "末页"
-          },
-          "aria": {
-            "sortAscending":  ": 以升序排列此列",
-            "sortDescending": ": 以降序排列此列"
-          }
-        },
-        ordering:true,
-        paging:true,
-        processing:true,
-        //scrollX:true,
-        searching:true,
-        deferRender:true,
-        select:true,
-        ajax:{
-          url:'http://192.168.8.131:9595/f2771e4c90db29439e3c986d9859dc74/Res/DynamicResExtend',
-          dataSrc:''
-        },
-        destroy:true,
-        lengthMenu: [ 20, 30, 40, 50, 100 ],
-        rowId:'',
-        pagingType:'full_numbers',
-        pageLength:30,
-        orderMulti:true,
-        columns:[
-          {data:'ExtId', title: 'ExtId'},
-          {data: 'DrmId', title: 'DrmId'},
-          {data: 'EnumValues', title: 'EnumValues'},
-          {data: 'VirtualFolder', title: 'VirtualFolder'},
-          {data: 'DefaultReference', title: 'DefaultReference'},
-          {data: 'ResDescription', title: 'ResDescription'},
-          {data: 'PlatCustomerId', title: 'PlatCustomerId'},
-        ]
-      }
-    }else if(this._router.routeConfig.path==='grid-view2'){
-      this.loadData();
-    }
-  }
-  ngAfterViewInit(){
-    this.dtTrigger.next();
+    this.loadData();
   }
   initButton(data): any[]{
     let btns = [];
@@ -273,7 +269,9 @@ export class GridViewTemplateComponent implements OnInit, AfterViewInit {
     }
     return btns;
   }
-
+  ngAfterViewInit(){
+    this.dtTrigger.next();
+  }
   loadData(){
     this.dtOption = this.apiService
       .doList('AppProject')
@@ -312,7 +310,7 @@ export class GridViewTemplateComponent implements OnInit, AfterViewInit {
           deferRender:true,
           //data:result,
           ajax:{
-            url:Configuration.web_api + 'AppProject',
+            url:Configuration.web_api + 'DynamicResModule',
             dataSrc:''
           },
           autoWidth:true,
@@ -376,8 +374,8 @@ export class GridViewTemplateComponent implements OnInit, AfterViewInit {
           },
           "dom": "<'row' <'col-md-12'B>><'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>", // horizobtal scrollable datatable
           buttons:[]
-        }
-        dt.buttons = this.initButton(this.buttons1);
+        };
+        dt.buttons = this.initButton(this.masterButtons);
         return dt;
       });
   }

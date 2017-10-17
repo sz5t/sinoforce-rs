@@ -8,10 +8,12 @@ import {GridViewTemplateComponent} from "./application/grid-view-template/grid-v
 import { HttpClientModule } from '@angular/common/http';
 import {ApiService} from "./services/api.service";
 import {Broadcaster} from "./broadcast/broadcaster";
+import { MasterSlaverTemplateComponent } from './application/master-slaver-template/master-slaver-template.component';
 @NgModule({
   declarations: [
     AppComponent,
-    GridViewTemplateComponent
+    GridViewTemplateComponent,
+    MasterSlaverTemplateComponent
   ],
   imports: [
     BrowserModule,

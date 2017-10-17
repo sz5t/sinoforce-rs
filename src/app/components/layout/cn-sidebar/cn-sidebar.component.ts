@@ -650,8 +650,8 @@ export class SideBarData {
     {
       icon:'icon-home', title: '看板', type: 'nav-item', sub: [
         { icon:'icon-bar-chart', title: '分析 1', router: 'grid-view' },
-        { icon:'icon-bulb', title: '分析 2', router: 'grid-view2' },
-        { icon:'icon-graph', title: '分析 3', router: 'grid-view/view3' },
+        { icon:'icon-bulb', title: '单表', router: 'grid-view2' },
+        { icon:'icon-graph', title: '主子表', router: 'master-slaver' },
       ]
     },
     { icon: 'icon-folder', title: '组件', type: 'heading' },
