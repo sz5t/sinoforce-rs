@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {GridViewTemplateComponent} from "../application/grid-view-template/grid-view-template.component";
 import {MasterSlaverTemplateComponent} from "../application/master-slaver-template/master-slaver-template.component";
+import {MasterTemplateComponent} from "../application/master-template/master-template.component";
 
 export const routes: Routes = [
   {path: 'grid-view', component: GridViewTemplateComponent},
-  {path: 'grid-view2', component: GridViewTemplateComponent},
+  {path: 'grid-view2', component: MasterTemplateComponent},
   {path: 'master-slaver', component: MasterSlaverTemplateComponent}
 ];
 

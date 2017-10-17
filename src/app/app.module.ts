@@ -9,11 +9,17 @@ import { HttpClientModule } from '@angular/common/http';
 import {ApiService} from "./services/api.service";
 import {Broadcaster} from "./broadcast/broadcaster";
 import { MasterSlaverTemplateComponent } from './application/master-slaver-template/master-slaver-template.component';
+import { MasterGridTemplateComponent } from './application//master-grid-template/master-grid-template.component';
+import { SlaverGridTemplateComponent } from './application/slaver-grid-template/slaver-grid-template.component';
+import { MasterTemplateComponent } from './application/master-template/master-template.component';
 @NgModule({
   declarations: [
     AppComponent,
     GridViewTemplateComponent,
-    MasterSlaverTemplateComponent
+    MasterSlaverTemplateComponent,
+    MasterGridTemplateComponent,
+    SlaverGridTemplateComponent,
+    MasterTemplateComponent
   ],
   imports: [
     BrowserModule,
