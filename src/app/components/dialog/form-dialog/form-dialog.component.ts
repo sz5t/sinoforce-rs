@@ -12,6 +12,7 @@ export class FormDialogComponent implements AfterViewInit {
   @ViewChild(CnDynamicFormComponent) form: CnDynamicFormComponent;
   @Input() title:string;
   @Input() config:IFieldConfig[];
+  @Input() GUID:string;
   ngAfterViewInit(){
     let previousValid = this.form.valid;
     this.form.changes.subscribe(() =>{

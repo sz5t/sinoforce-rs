@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation,ViewContainerRef} from '@angular/core';
 import {IFieldConfig} from "../form-models/IFieldConfig";
 import {FormGroup} from "@angular/forms";
 import {IField} from "../form-models/IField";

@@ -7,6 +7,7 @@ import {ApiService} from "../../services/api.service";
 import {Subject} from "rxjs/Subject";
 import 'rxjs/add/operator/toPromise';
 import {IFieldConfig} from "../../components/form/form-models/IFieldConfig";
+import {CommonUtility} from "../../framework/utility/common-utility";
 declare let $:any;
 @Component({
   selector: 'cn-grid-view-template',
@@ -20,15 +21,17 @@ export class GridViewTemplateComponent implements OnInit, AfterViewInit {
   @Input() formConfig:IFieldConfig[];
   @Input() gridConfig;
   @Input() buttonsConfig:any[];
+  @Input() selectedItem;
 
   dtOption: DataTables.Settings = {};
   dtTrigger:Subject<Object> = new Subject();
   _router: ActivatedRoute;
-  _selectedItem = {};
+
   confirmTitle:string;
   confirmMessage:string;
   confirmEventSetting;
   formDialogTitle:string='表单';
+  templateGUID:string = CommonUtility.uuID(6);
   constructor(private router: ActivatedRoute,private http:HttpClient,private apiService:ApiService) {
     this._router = router;
   }
@@ -55,10 +58,10 @@ export class GridViewTemplateComponent implements OnInit, AfterViewInit {
             this.confirmMessage = btn.events.text;
             this.confirmTitle = btn.events.title;
             this.confirmEventSetting = btn.events.execution;
-            $('#basic_dialog').modal('show');
+            $('#basic_dialog_'+this.templateGUID).modal('show');
             break;
           case EVENT_TYPE.dialog:
-            $('#todo-task-modal').modal('show');
+            $('#formDialig_'+this.templateGUID).modal('show');
             break;
         }
       };
@@ -88,9 +91,15 @@ export class GridViewTemplateComponent implements OnInit, AfterViewInit {
     });
   }
 
-  render():void {
+  reload(newURL?:string):void {
     this.dtElement.dtInstance.then((dtInstance:DataTables.Api) =>{
-      dtInstance.ajax.reload();
+      if(newURL){
+        dtInstance.ajax.url(newURL).load();
+      }
+      else{
+        dtInstance.ajax.reload();
+      }
     })
   }
+
 }

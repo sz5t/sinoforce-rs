@@ -1,4 +1,7 @@
-<div class="form-group" [formGroup]="group">
+{{group}}
+<div class="form-group"
+     [ngClass]="{'has-error': (group.touched || group.dirty) && !group.valid }"
+     [formGroup]="group">
   <label class="col-md-3 control-label">{{config.label}}</label>
   <div class="col-md-9">
     <div class="{{config.inputClass}}">
@@ -9,7 +12,7 @@
         type="{{config.inputType}}"
         class="form-control"
         placeholder="{{config.placeholder}}"
-        [formControlName]="config.name"
+        formControlName="{{config.name}}"
       />
       <span *ngIf="config.iconPstn==='right'" class="input-group-addon">
         <i class="{{config.icon}}"></i>

@@ -175,30 +175,30 @@ NEW TODO Page
 #todo-members-modal .select-height {
   height: 10em; }
 
-#todo-task-modal > .modal-dialog {
+.formDialog > .modal-dialog {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   width: 60%;
   margin: 0 auto; }
-  #todo-task-modal > .modal-dialog .modal-content {
+  .formDialog > .modal-dialog .modal-content {
     position: absolute;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
     overflow: auto; }
-    #todo-task-modal > .modal-dialog .modal-content .todo-task-modal-title {
+    .formDialog > .modal-dialog .modal-content .todo-task-modal-title {
       font-weight: 600;
       text-transform: uppercase;
       margin-left: 2em; }
-    #todo-task-modal > .modal-dialog .modal-content .todo-task-due {
+    .formDialog > .modal-dialog .modal-content .todo-task-due {
       margin-left: 1em;
       font-weight: 600;
       color: #4db3a4;
       width: 150px !important; }
-    #todo-task-modal > .modal-dialog .modal-content .todo-task-assign {
+    .formDialog > .modal-dialog .modal-content .todo-task-assign {
       margin-left: 1em;
       border: 1px solid;
       border-color: #ccc;
@@ -206,37 +206,37 @@ NEW TODO Page
       font-weight: 600;
       color: #4db3a4;
       text-transform: uppercase; }
-      #todo-task-modal > .modal-dialog .modal-content .todo-task-assign:hover, #todo-task-modal > .modal-dialog .modal-content .todo-task-assign:focus {
+      .formDialog > .modal-dialog .modal-content .todo-task-assign:hover, .formDialog > .modal-dialog .modal-content .todo-task-assign:focus {
         text-decoration: none; }
-    #todo-task-modal > .modal-dialog .modal-content > .todo-task-modal-body > .todo-task-modal-bg {
+    .formDialog > .modal-dialog .modal-content > .todo-task-modal-body > .todo-task-modal-bg {
       background-color: #f7f9fa;
       padding: 20px; }
-    #todo-task-modal > .modal-dialog .modal-content > .todo-task-modal-body > h3 {
+    .formDialog > .modal-dialog .modal-content > .todo-task-modal-body > h3 {
       margin: 15px 0;
       font-size: 20px;
       color: #4e5a64;
       font-weight: 600; }
-    #todo-task-modal > .modal-dialog .modal-content > .todo-task-modal-body > p {
+    .formDialog > .modal-dialog .modal-content > .todo-task-modal-body > p {
       font-size: 15px;
       color: #8f9ea6;
       line-height: 24px; }
-    #todo-task-modal > .modal-dialog .modal-content > .todo-task-modal-body > h4 {
+    .formDialog > .modal-dialog .modal-content > .todo-task-modal-body > h4 {
       font-size: 14px;
       font-weight: 600;
       text-transform: uppercase;
       color: #9eacb4;
       margin-top: 25px; }
-      #todo-task-modal > .modal-dialog .modal-content > .todo-task-modal-body > h4 > .todo-add-button {
+      .formDialog > .modal-dialog .modal-content > .todo-task-modal-body > h4 > .todo-add-button {
         float: none; }
-    #todo-task-modal > .modal-dialog .modal-content > .todo-task-modal-body > .todo-task-file {
+    .formDialog > .modal-dialog .modal-content > .todo-task-modal-body > .todo-task-file {
       color: #49a7fa;
       font-size: 13px; }
-      #todo-task-modal > .modal-dialog .modal-content > .todo-task-modal-body > .todo-task-file > i {
+      .formDialog > .modal-dialog .modal-content > .todo-task-modal-body > .todo-task-file > i {
         margin-right: 0.5em; }
-      #todo-task-modal > .modal-dialog .modal-content > .todo-task-modal-body > .todo-task-file > .todo-remove-file {
+      .formDialog > .modal-dialog .modal-content > .todo-task-modal-body > .todo-task-file > .todo-remove-file {
         color: #9eacb4;
         margin-left: 0.5em; }
-        #todo-task-modal > .modal-dialog .modal-content > .todo-task-modal-body > .todo-task-file > .todo-remove-file:hover {
+        .formDialog > .modal-dialog .modal-content > .todo-task-modal-body > .todo-task-file > .todo-remove-file:hover {
           color: #4db3a4;
           cursor: pointer; }
 
@@ -271,7 +271,7 @@ NEW TODO Page
 
 @media (max-width: 991px) {
   /* 991px */
-  #todo-task-modal > .modal-dialog {
+  .formDialog > .modal-dialog {
     width: 95%; }
   .todo-active:after {
     border: none !important; } }

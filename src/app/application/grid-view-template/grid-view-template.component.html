@@ -16,13 +16,15 @@
   </div>
 </div>
 <cn-form-dialog
+[GUID]="templateGUID"
 [config]="formConfig"
 [title]="formDialogTitle"
 ></cn-form-dialog>
 <cn-confirm-dialog
+  [GUID]="templateGUID"
   [(title)]="confirmTitle"
   [(message)]="confirmMessage"
   [(confirmEventSetting)]="confirmEventSetting"
-  [(handleData)]="_selectedItem"
-  (eventCallback)="rerender()"
+  [(handleData)]="selectedItem"
+  (eventCallback)="reload()"
 ></cn-confirm-dialog>

@@ -1,4 +1,7 @@
-<form class="form-horizontal" role="form"
+<div *ngIf="form.valid===false" class="alert alert-danger">
+  <strong>注意!</strong>
+</div>
+<form class="form-horizontal" role="form" novalidate
       [formGroup]="form"
       (submit)="handleSubmit($event)">
   <div class="form-body">

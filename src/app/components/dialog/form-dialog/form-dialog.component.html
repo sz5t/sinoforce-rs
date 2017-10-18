@@ -1,25 +1,25 @@
-<div id="todo-task-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel10" aria-hidden="true">
+<div id="formDialig_{{GUID}}" class="modal fade formDialog" role="dialog" aria-labelledby="myModalLabel10" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content scroller" style="height: 100%;" data-always-visible="1" data-rail-visible="0">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <span class="caption-subject font-hide bold uppercase">{{title}}</span>
+        <span class="caption-subject font-hide bold uppercase"></span>
       </div>
       <!-- BEGIN PORTLET-->
       <div class="portlet light ">
-        <!--<div class="portlet-title">
+        <div class="portlet-title">
           <div class="caption">
-            <i class="icon-bubble font-hide hide"></i>
-
+            <i class="fa fa-check-square-o"></i>
+            {{title}}
           </div>
-          <div class="actions">
+   <!--       <div class="actions">
             <div class="portlet-input input-inline">
               <div class="input-icon right">
                 <i class="icon-magnifier"></i>
                 <input type="text" class="form-control input-circle" placeholder="search..."> </div>
             </div>
-          </div>
-        </div>-->
+          </div>-->
+        </div>
         <div class="portlet-body">
           <cn-dynamic-form
           [config]="config"
@@ -289,9 +289,6 @@
             </div>
           </form>-->
         </div>
-      </div>
-      <div *ngIf="form.valid===false" class="alert alert-danger">
-        <strong>注意!</strong>
       </div>
       <!-- END PORTLET-->
       <div class="modal-footer">
