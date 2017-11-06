@@ -1,15 +1,17 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {IFieldConfig} from "./form-models/IFieldConfig";
 import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   exportAs:'cnDynamicForm',
   selector: 'cn-dynamic-form',
+  encapsulation:ViewEncapsulation.None,
   templateUrl: './cn-dynamic-form.component.html',
   styleUrls: ['./cn-dynamic-form.component.css']
 })
 export class CnDynamicFormComponent implements OnInit, OnChanges {
   @Input() config:IFieldConfig[] = [];
+  @Input() submitValid;
   @Output() submit:EventEmitter<any> = new EventEmitter<any>();
   form:FormGroup;
   get controls(){ return this.config.filter(({type}) => type !== 'button');};
@@ -63,8 +65,21 @@ export class CnDynamicFormComponent implements OnInit, OnChanges {
       return item;
     });
   }
+  setValid(name:string,valid:boolean){
+    if(this.form.controls[name]){
+    }
+  }
+  resetFormValue(){
+    this.form.reset();
+  }
   setValue(name:string, value: any){
-    console.log(this.form.controls);
-    this.form.controls[name].setValue(value, {emitEvent:true})
+    const control = this.form.controls[name];
+    if(control){
+      control.setValue(value, {emitEvent:true})
+    }
+  }
+
+  getControlValue(name:string){
+    return this.form.controls[name].value;
   }
 }

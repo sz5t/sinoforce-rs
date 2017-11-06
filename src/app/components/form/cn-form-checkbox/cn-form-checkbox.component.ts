@@ -10,6 +10,7 @@ import {FormGroup} from "@angular/forms";
   styleUrls: ['./cn-form-checkbox.component.css']
 })
 export class CnFormCheckboxComponent implements IField {
+  submitValid: boolean;
   config:IFieldConfig;
   group:FormGroup;
 

@@ -1,5 +1,4 @@
-import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {IFieldConfig} from "../../components/form/form-models/IFieldConfig";
+import {Component, Input, OnChanges, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Broadcaster} from "../../broadcast/broadcaster";
 import {Subscription} from "rxjs/Subscription";
 import {GridViewTemplateComponent} from "../grid-view-template/grid-view-template.component";
@@ -14,38 +13,27 @@ export class SlaverGridTemplateComponent implements OnInit,OnDestroy {
   @ViewChild(GridViewTemplateComponent)
   gridViewTemplateComponent:GridViewTemplateComponent;
 
-  @Input()
-  slaverFormConfig:IFieldConfig[];
+  // @Input() funcName;
 
-  @Input()
-  slaverButtonsConfig;
-
-  @Input()
-  slaverGridConfig;
-
-  @Input()
-  filterConfig;
-
+  @Input() slaverConfig;
   _broadcastObj:Subscription;
   _selectedItem:any;
-
+  _rowCallback:Function;
   constructor(private broadcast:Broadcaster) {
 
   }
   ngOnInit() {
-    this.registBroadcast();
-    this.slaverGridConfig
-      .rowCallback = (row:Node, data:any[] | Object ,index: number) => {
+    this._rowCallback = (row:Node, data:any[] | Object ,index: number) => {
       $('td',row).unbind('click');
       $('td',row).bind('click',() => {
+        console.log(data);
         this._selectedItem = data;
       });
     };
-  }
-  registBroadcast(){
     this._broadcastObj = this.broadcast.on<string>('master').subscribe(data => {
-      if(this.filterConfig){
-        const filter = this.filterConfig[0];
+
+      if(this.slaverConfig.viewCfg.filterConfig){
+        const filter = this.slaverConfig.viewCfg.filterConfig[0];
         let condition = '' ;
 
         for(let propLink of filter.PropLinks){
@@ -56,9 +44,10 @@ export class SlaverGridTemplateComponent implements OnInit,OnDestroy {
         const url = Configuration.web_api + filter.SlaveClass + '?' + condition.substring(0,condition.length-1);
         this.gridViewTemplateComponent.reload(url)
       }
-    })
-  }
+    });
+  };
   ngOnDestroy(){
     this._broadcastObj.unsubscribe();
   }
+
 }

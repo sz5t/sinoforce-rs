@@ -5,5 +5,6 @@ import {FormGroup} from "@angular/forms";
  */
 export interface IField{
   config:IFieldConfig,
-  group:FormGroup
+  group:FormGroup,
+  submitValid:boolean
 }

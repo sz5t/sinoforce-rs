@@ -9,6 +9,7 @@ import {FormGroup} from "@angular/forms";
   styleUrls: ['./cn-form-textarea.component.css']
 })
 export class CnFormTextareaComponent implements IField {
+  submitValid: boolean;
   config: IFieldConfig;
   group: FormGroup;
 

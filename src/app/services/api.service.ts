@@ -1,12 +1,27 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Configuration} from "../framework/configuration";
+import {Observable} from "rxjs/Observable";
 @Injectable()
 export class ApiService {
   headers = new HttpHeaders();
+  array$:Observable<any[]>;
+  object$:Observable<any>;
   constructor(private httpClient:HttpClient) { }
+  doGetConfig(configUrl){
+
+    this.array$ =  this.httpClient.request(
+      'GET',
+      configUrl,
+      {
+        responseType:'json',
+        headers:this.headers
+      }
+    );
+    return this.array$;
+  }
   doList(url,params?,data?){
-    return this.httpClient.request(
+    return this.httpClient.request<any[]>(
       'GET',
       Configuration.web_api+url,
       {
@@ -59,7 +74,7 @@ export class ApiService {
       }
     );
   }
-  doPost(url,params?,data?){
+  doPost(url,data){
     return this.httpClient.request(
       'POST',
       Configuration.web_api+url,

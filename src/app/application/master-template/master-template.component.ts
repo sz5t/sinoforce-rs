@@ -2,6 +2,11 @@ import {Component, Input, OnInit} from '@angular/core';
 import {IFieldConfig} from "../../components/form/form-models/IFieldConfig";
 import {Validators} from "@angular/forms";
 import {Configuration} from "../../framework/configuration";
+import {AppConfigData, ConfigService} from "../../services/config.service";
+import {ActivatedRoute} from "@angular/router";
+import {MasterGridViewResolver, SlaverGridViewResolver} from "../../framework/resolver/gridview.resolver";
+import {LayoutResolver} from "../../framework/resolver/layout.resolver";
+import {ConfigAdapter} from "../../framework/adapter/config.adapter";
 
 @Component({
   selector: 'cn-master-template',
@@ -9,13 +14,18 @@ import {Configuration} from "../../framework/configuration";
   styleUrls: ['./master-template.component.css']
 })
 export class MasterTemplateComponent implements OnInit {
-  masterFormConfig:IFieldConfig[];
-  masterButtonsConfig;
-  masterGridConfig;
-  constructor() { }
+  _masterConfig;
+  constructor(private route:ActivatedRoute,private configService:ConfigService) {
+    this.route.params.subscribe(params => {
+      this._masterConfig = ConfigAdapter.moduleFinder(
+        this.configService.getProjectConfig(),
+        params.name
+      )[0].totalArea.pageConfigs[0];
+    });
+  }
 
   ngOnInit() {
-    this.masterGridConfig = {
+    /*this.masterGridConfig = {
       "language": {
         "processing":   "处理中...",
         "lengthMenu":   "显示 _MENU_ 项结果",
@@ -246,7 +256,7 @@ export class MasterTemplateComponent implements OnInit {
         name:'submit',
         disabled:true
       }
-    ];
+    ];*/
   }
 
 }

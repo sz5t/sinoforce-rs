@@ -38,7 +38,7 @@
       <span *ngIf="m.type==='heading'">{{m.title}}</span>
       <ul *ngIf="m.sub && m.sub.length > 0" class="sub-menu">
         <li *ngFor="let s of m.sub" class="nav-item" routerLinkActive="active">
-          <a [routerLink]="[s.router]" class="nav-link ">
+          <a [routerLink]="[{outlets:{primary:s.router,breadcrumb:'breadcrumb/'+s.name}}]" class="nav-link ">
             <i class="{{s.icon}}"></i>
             <span class="title">{{s.title}}</span>
           </a>

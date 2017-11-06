@@ -9,6 +9,7 @@ import {FormGroup} from "@angular/forms";
   styleUrls: ['./cn-form-select2.component.css']
 })
 export class CnFormSelect2Component implements IField {
+  submitValid: boolean;
   config:IFieldConfig;
   group:FormGroup;
 }

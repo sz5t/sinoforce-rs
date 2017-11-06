@@ -13,6 +13,8 @@ import { CnTopDropdownItemComponent } from './cn-top-dropdown-item/cn-top-dropdo
 import { CnContainerComponent } from './cn-container/cn-container.component';
 import { CnSidebarComponent } from './cn-sidebar/cn-sidebar.component';
 import { CnPageComponent } from './cn-page/cn-page.component';
+import { CnBreadcrumbComponent } from './cn-breadcrumb/cn-breadcrumb.component';
+import { CnRowComponent } from './cn-row/cn-row.component';
 
 @NgModule({
   declarations:[
@@ -25,7 +27,9 @@ import { CnPageComponent } from './cn-page/cn-page.component';
     CnTopDropdownItemComponent,
     CnContainerComponent,
     CnSidebarComponent,
-    CnPageComponent
+    CnPageComponent,
+    CnBreadcrumbComponent,
+    CnRowComponent
   ],
   exports:[
     CnLayoutComponent,
@@ -37,7 +41,9 @@ import { CnPageComponent } from './cn-page/cn-page.component';
     CnTopDropdownItemComponent,
     CnContainerComponent,
     CnSidebarComponent,
-    CnPageComponent
+    CnPageComponent,
+    CnBreadcrumbComponent,
+    CnRowComponent
   ],
   imports: [
     CommonModule,

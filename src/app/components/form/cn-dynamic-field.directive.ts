@@ -29,6 +29,7 @@ const components:{[type:string]:Type<IField>} = {
 export class CnDynamicFieldDirective implements IField, OnChanges,OnInit{
   @Input() config:IFieldConfig;
   @Input() group:FormGroup;
+  @Input() submitValid:boolean;
   component: ComponentRef<IField>;
   constructor(
     private resolver:ComponentFactoryResolver,
@@ -38,6 +39,7 @@ export class CnDynamicFieldDirective implements IField, OnChanges,OnInit{
     if(this.component){
       this.component.instance.config = this.config;
       this.component.instance.group = this.group;
+      this.component.instance.submitValid = this.submitValid;
     }
   }
   ngOnInit(){
@@ -51,7 +53,6 @@ export class CnDynamicFieldDirective implements IField, OnChanges,OnInit{
     this.component = this.container.createComponent(comp);
     this.component.instance.config = this.config;
     this.component.instance.group = this.group;
+    this.component.instance.submitValid = this.submitValid;
   }
-
-
 }

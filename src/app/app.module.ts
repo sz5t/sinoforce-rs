@@ -12,6 +12,8 @@ import { MasterSlaverTemplateComponent } from './application/master-slaver-templ
 import { MasterGridTemplateComponent } from './application//master-grid-template/master-grid-template.component';
 import { SlaverGridTemplateComponent } from './application/slaver-grid-template/slaver-grid-template.component';
 import { MasterTemplateComponent } from './application/master-template/master-template.component';
+import {ConfigService} from "./services/config.service";
+import { TreeGridTemplateComponent } from './application/tree-grid-template/tree-grid-template.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +21,8 @@ import { MasterTemplateComponent } from './application/master-template/master-te
     MasterSlaverTemplateComponent,
     MasterGridTemplateComponent,
     SlaverGridTemplateComponent,
-    MasterTemplateComponent
+    MasterTemplateComponent,
+    TreeGridTemplateComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,17 @@ import { MasterTemplateComponent } from './application/master-template/master-te
     DataTablesModule,
     HttpClientModule
   ],
-  providers: [ApiService,Broadcaster],
+  providers: [
+    ApiService,
+    ConfigService,
+    {
+      provide:ConfigService,
+      useFactory:(apiService) => {
+        return new ConfigService(apiService);
+      },
+      deps:[ApiService]
+    },
+    Broadcaster],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

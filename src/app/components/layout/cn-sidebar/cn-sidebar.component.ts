@@ -1,5 +1,7 @@
 import {Component, HostBinding, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import { App } from '../cn-layout/cn-layout.component';
+import {ConfigService} from "../../../services/config.service";
+import {SideBarResolver} from "../../../framework/resolver/sidebar.resolver";
 declare let $: any;
 export var Layout = function () {
 
@@ -637,31 +639,16 @@ export class CnSidebarComponent implements OnInit {
   @HostBinding('class.collapse') hascollapse= true;
 
   @Input() isShowSearch: boolean;
-  menu = SideBarData.data;
-  constructor() { }
-
+  menu:any[];
+  constructor(private configService:ConfigService) {
+    this.menu = this.configService.getProjectConfig();
+   /* this.configService.getConfig().then(response =>{
+      this.menu = new SideBarResolver(response).config;
+    });*/
+  }
   ngOnInit() {
     Layout.init();
   }
 }
 
-export class SideBarData {
-  public static data = [
-    {
-      icon:'icon-home', title: '看板', type: 'nav-item', sub: [
-        { icon:'icon-bar-chart', title: '分析 1', router: 'grid-view' },
-        { icon:'icon-bulb', title: '单表', router: 'grid-view2' },
-        { icon:'icon-graph', title: '主子表', router: 'master-slaver' },
-      ]
-    },
-    { icon: 'icon-folder', title: '组件', type: 'heading' },
-    {
-      icon:'icon-puzzle', title: '常用组件', type: 'nav-item',active: false, sub: [
-        { icon:'fa fa-plus', title: '按钮', router: 'grid-view/view4'},
-        { icon:'fa fa-cogs', title: '下拉列表', router: 'grid-view/view5' },
-        { icon:'icon-settings', title: '项目模块', router: 'grid-view/view6'},
-      ]
-    }
 
-  ]
-}

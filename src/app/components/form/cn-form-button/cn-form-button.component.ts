@@ -10,6 +10,7 @@ import {FormGroup} from "@angular/forms";
   styleUrls: ['./cn-form-button.component.css']
 })
 export class CnFormButtonComponent implements IField {
+  submitValid: boolean;
   config:IFieldConfig;
   group:FormGroup;
 }

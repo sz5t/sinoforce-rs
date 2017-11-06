@@ -1,11 +1,12 @@
+<!--
 <cn-master-grid-template
-  [masterFormConfig]="masterFormConfig"
-  [masterButtonsConfig]="masterButtonsConfig"
-  [masterGridConfig]="masterGridConfig"
+  [funcName]="funcName"
 ></cn-master-grid-template>
 <cn-slaver-grid-template
-  [slaverFormConfig]="slaverFormConfig"
-  [slaverButtonsConfig]="slaverButtonsConfig"
-  [slaverGridConfig]="slaverGridConfig"
-  [filterConfig]="filterConfig"
+  [funcName]="funcName"
 ></cn-slaver-grid-template>
+-->
+<cn-master-grid-template [masterConfig]="_masterConfig">
+</cn-master-grid-template>
+<cn-slaver-grid-template [slaverConfig]="_slaverConfig">
+</cn-slaver-grid-template>

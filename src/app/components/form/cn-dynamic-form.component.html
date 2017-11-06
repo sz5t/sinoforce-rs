@@ -1,6 +1,4 @@
-<div *ngIf="form.valid===false" class="alert alert-danger">
-  <strong>注意!</strong>
-</div>
+
 <form class="form-horizontal" role="form" novalidate
       [formGroup]="form"
       (submit)="handleSubmit($event)">
@@ -8,6 +6,7 @@
     <ng-container
     *ngFor="let field of config"
     cnDynamicField
+    [(submitValid)]="submitValid"
     [config]="field"
     [group]="form"
     ></ng-container>

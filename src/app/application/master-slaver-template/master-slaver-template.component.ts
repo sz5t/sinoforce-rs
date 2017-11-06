@@ -8,6 +8,8 @@ import {ApiService} from "../../services/api.service";
 import {EVENT_TYPE} from "../../framework/event/button-event";
 import {Validators} from "@angular/forms";
 import {Configuration} from "../../framework/configuration";
+import {ConfigService} from "../../services/config.service";
+import {ConfigAdapter} from "../../framework/adapter/config.adapter";
 declare let $:any;
 @Component({
   selector: 'cn-master-slaver-template',
@@ -16,98 +18,28 @@ declare let $:any;
   styleUrls: ['./master-slaver-template.component.css']
 })
 export class MasterSlaverTemplateComponent implements OnInit {
-  masterFormConfig:IFieldConfig[];
+  /*masterFormConfig:IFieldConfig[];
   slaverFormConfig:IFieldConfig[];
 
   masterButtonsConfig;
   slaverButtonsConfig;
 
   masterGridConfig;
-  slaverGridConfig;
-
-  filterConfig;
-
+  slaverGridConfig;*/
+  _masterConfig;
+  _slaverConfig;
+  constructor(private route:ActivatedRoute,private configService:ConfigService) {
+    this.route.params.subscribe(params => {
+      const data = ConfigAdapter.moduleFinder(
+        this.configService.getProjectConfig(),
+        params.name
+      );
+      this._masterConfig = data[0].totalArea.pageConfigs[0];
+      this._slaverConfig = data[0].totalArea.pageConfigs[1];
+    });
+  }
   ngOnInit(){
-    this.masterFormConfig = [
-      {
-        type:'input',
-        inputType:'text',
-        name:'code',
-        label:'程序集名称：',
-        helpText:'动态读取程序集名称',
-        inputClass:'input-inline input-medium',
-        placeholder:'例如：Company.cn.app',
-        helpClass:'help-inline',
-        validation:[Validators.required,Validators.minLength(6)]
-      },
-      {
-        type:'input',
-        inputType:'text',
-        name:'text',
-        label:'上下文名称：',
-        icon:'fa fa-book',
-        iconPstn:'left',
-        inputClass:'input-group',
-        validation:[Validators.required]
-      },
-      {
-        type:'input',
-        inputType:'text',
-        name:'shortName',
-        label:'提供者：',
-        inputClass:'input-medium input-group',
-        icon:'fa fa-bookmark-o',
-        iconPstn:'right',
-        helpClass:'help-inline',
-        validation:[Validators.maxLength(20)]
-      },
-      {
-        type:'select',
-        placeholder:'--请选择--',
-        options:[
-          {text:'编译成功',value:'编译成功'},
-          {text:'正在定义',value:'正在定义'}
-        ],
-        name:'shareScope',
-        label:'编译状态：',
-        value:'',
-        inputClass:'input-medium'
-      },
-      {
-        type:'select',
-        placeholder:'--请选择--',
-        options:[
-          {text:'手动',value:'手动'},
-          {text:'自动',value:'自动'}
-        ],
-        name:'shareScope',
-        label:'编译方式：',
-        value:'',
-        inputClass:'input-medium'
-      },
-      {
-        type:'input',
-        inputType:'text',
-        name:'shortName',
-        label:'命名空间：',
-        inputClass:'input-group',
-        icon:'fa fa-bookmark-o',
-        iconPstn:'left',
-        helpClass:'help-inline',
-        helpText:'默认为程序编译后提供的命名空间',
-        validation:[Validators.maxLength(20)]
-      },
-      {
-        type:'textarea',
-        name:'remark',
-        label:'备注：'
-      },
-      {
-        type:'button',
-        name:'submit',
-        disabled:true
-      }
-    ];
+    /*this.masterFormConfig = [];
     this.slaverFormConfig = [
       {
         type:'input',
@@ -194,11 +126,112 @@ export class MasterSlaverTemplateComponent implements OnInit {
         "eventType":"dialog",
         "execution":{
           "api":"DynamicResModule",
-          "method":"get",
+          "method":"post",
           "keyID":"",
           "callback":""
         }
-      }
+      },
+        formConfig:[
+          {
+            type:'input',
+            inputType:'text',
+            name:'AssemblyName',
+            label:'程序集名称：',
+            helpText:'动态读取程序集名称',
+            inputClass:'input-inline input-medium',
+            placeholder:'例如：Company.cn.app',
+            helpClass:'help-inline',
+            validation:[Validators.required,Validators.minLength(6)]
+          },
+          {
+            type:'input',
+            inputType:'text',
+            name:'ContextName',
+            label:'上下文名称：',
+            icon:'fa fa-book',
+            iconPstn:'left',
+            inputClass:'input-group',
+            validation:[Validators.required]
+          },
+          {
+            type:'input',
+            inputType:'text',
+            name:'ProviderName',
+            label:'提供者：',
+            inputClass:'input-medium input-group',
+            icon:'fa fa-bookmark-o',
+            iconPstn:'right',
+            helpClass:'help-inline',
+            validation:[Validators.maxLength(20)]
+          },
+          {
+            type:'select',
+            placeholder:'--请选择--',
+            options:[
+              {text:'编译成功',value:'编译成功'},
+              {text:'正在定义',value:'正在定义'}
+            ],
+            name:'BuildState',
+            label:'编译状态：',
+            value:'',
+            inputClass:'input-medium'
+          },
+          {
+            type:'select',
+            placeholder:'--请选择--',
+            options:[
+              {text:'手动',value:'手动'},
+              {text:'自动',value:'自动'}
+            ],
+            name:'BuildMode',
+            label:'编译方式：',
+            value:'',
+            inputClass:'input-medium'
+          },
+          {
+            type:'input',
+            inputType:'text',
+            name:'DefaultNamespace',
+            label:'命名空间：',
+            inputClass:'input-group',
+            icon:'fa fa-bookmark-o',
+            iconPstn:'left',
+            helpClass:'help-inline',
+            helpText:'默认为程序编译后提供的命名空间',
+            validation:[Validators.required]
+          },
+          {
+            type:'input',
+            inputType:'text',
+            name:'EntitiesName',
+            label:'实体名称：',
+            inputClass:'input-group',
+            icon:'fa fa-bookmark-o',
+            iconPstn:'left',
+            helpClass:'help-inline',
+            helpText:''
+          },
+          {
+            type:'checkbox',
+            options:[
+              {checked:'checked',disabled:false,value:'1',label:'启用'},
+              {checked:'',disabled:false,value:'2',label:'禁用'}
+            ],
+            name:'shareScope',
+            label:'使用范围：',
+            inputClass:'mt-checkbox-inline' // mt-checkbox-list
+          },
+          {
+            type:'textarea',
+            name:'remark',
+            label:'备注：'
+          },
+          {
+            type:'button',
+            name:'submit',
+            disabled:false
+          }
+      ]
     },
       {
         id: 'del', text: '删除', color: 'red', img:'fa fa-remove', type: 'button',
@@ -232,11 +265,122 @@ export class MasterSlaverTemplateComponent implements OnInit {
           "eventType":"dialog",
           "execution":{
             "api":"DynamicResModule",
-            "method":"get",
+            "method":"put",
             "keyID":"DrmId",
             "callback":""
           }
+        },formConfig:[
+        {
+          type:'input',
+          inputType:'text',
+          name:'DrmId',
+          label:'ID：',
+          //helpText:'',
+          inputClass:'input-inline input-medium',
+          placeholder:'例如：Company.cn.app',
+          helpClass:'help-inline',
+          validation:[Validators.required,Validators.minLength(6)]
+        },
+        {
+          type:'input',
+          inputType:'text',
+          name:'AssemblyName',
+          label:'程序集名称：',
+          helpText:'动态读取程序集名称',
+          inputClass:'input-inline input-medium',
+          placeholder:'例如：Company.cn.app',
+          helpClass:'help-inline',
+          validation:[Validators.required,Validators.minLength(6)]
+        },
+        {
+          type:'input',
+          inputType:'text',
+          name:'ContextName',
+          label:'上下文名称：',
+          icon:'fa fa-book',
+          iconPstn:'left',
+          inputClass:'input-group',
+          validation:[Validators.required]
+        },
+        {
+          type:'input',
+          inputType:'text',
+          name:'ProviderName',
+          label:'提供者：',
+          inputClass:'input-medium input-group',
+          icon:'fa fa-bookmark-o',
+          iconPstn:'right',
+          helpClass:'help-inline',
+          validation:[Validators.maxLength(20)]
+        },
+        {
+          type:'select',
+          placeholder:'--请选择--',
+          options:[
+            {text:'编译成功',value:'编译成功'},
+            {text:'正在定义',value:'正在定义'}
+          ],
+          name:'BuildState',
+          label:'编译状态：',
+          value:'',
+          inputClass:'input-medium'
+        },
+        {
+          type:'select',
+          placeholder:'--请选择--',
+          options:[
+            {text:'手动',value:'手动'},
+            {text:'自动',value:'自动'}
+          ],
+          name:'BuildMode',
+          label:'编译方式：',
+          value:'',
+          inputClass:'input-medium'
+        },
+        {
+          type:'input',
+          inputType:'text',
+          name:'DefaultNamespace',
+          label:'命名空间：',
+          inputClass:'input-group',
+          icon:'fa fa-bookmark-o',
+          iconPstn:'left',
+          helpClass:'help-inline',
+          helpText:'默认为程序编译后提供的命名空间',
+          validation:[Validators.required]
+        },
+        {
+          type:'input',
+          inputType:'text',
+          name:'EntitiesName',
+          label:'实体名称：',
+          inputClass:'input-group',
+          icon:'fa fa-bookmark-o',
+          iconPstn:'left',
+          helpClass:'help-inline',
+          helpText:''
+        },
+        {
+          type:'radio',
+          options:[
+            {checked:'checked',disabled:false,value:'true',label:'启用'},
+            {checked:'',disabled:false,value:'false',label:'禁用'}
+          ],
+          name:'shareScope',
+          label:'启用状态：',
+          inputClass:'mt-checkbox-inline' // mt-checkbox-list
+        },
+        {
+          type:'textarea',
+          name:'remark',
+          label:'备注：'
+        },
+        {
+          type:'button',
+          name:'submit',
+          disabled:false
         }
+      ]
       },
       {
         id: 'search', text: '查询',color: 'blue', img:'fa fa-search', type: 'button',
@@ -249,7 +393,8 @@ export class MasterSlaverTemplateComponent implements OnInit {
             "callback":""
           }
         }
-      }];
+      }
+    ];
     this.slaverButtonsConfig = [
       {
       id: 'new', text: '新建', color: 'green-jungle', img:'fa fa-plus', type: 'button',
@@ -569,6 +714,6 @@ export class MasterSlaverTemplateComponent implements OnInit {
           }
         ]
       }
-    ]
+    ]*/
   }
 }

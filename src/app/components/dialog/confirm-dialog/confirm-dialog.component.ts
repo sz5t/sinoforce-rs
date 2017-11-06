@@ -1,4 +1,7 @@
-import {Component, EventEmitter, HostListener, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {
+  Component, EventEmitter, HostListener, Input, OnInit, Output, ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import {ButtonEvent} from "../../../framework/event/button-event";
 import {ApiService} from "../../../services/api.service";
 import {Broadcaster} from "../../../broadcast/broadcaster";
@@ -7,6 +10,7 @@ declare let $:any;
 @Component({
   selector: 'cn-confirm-dialog',
   templateUrl: './confirm-dialog.component.html',
+  encapsulation:ViewEncapsulation.None,
   styleUrls: ['./confirm-dialog.component.css']
 })
 export class ConfirmDialogComponent implements OnInit {
@@ -33,7 +37,7 @@ export class ConfirmDialogComponent implements OnInit {
         this.toastComponent.showToast(ToastType.TOAST_SUCCESS,'success','执行成功');
       },
       error => {
-        // error should be written in operation log
+        // errors should be written in operation system log
         // show error message to user
         this.toastComponent.showToast(ToastType.TOAST_ERROR,'error',error);
         console.error('error',error);

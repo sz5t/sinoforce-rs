@@ -10,6 +10,7 @@ import {FormGroup} from "@angular/forms";
   styleUrls: ['./cn-form-radio.component.css']
 })
 export class CnFormRadioComponent implements IField {
+  submitValid: boolean;
   config:IFieldConfig;
   group:FormGroup;
 }
