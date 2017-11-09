@@ -6,13 +6,16 @@ import {Validators} from "@angular/forms";
  */
 export class MasterGridViewResolver {
   protected _viewCfg;
-
+  private _filterItem;
   constructor(viewCfg) {
     this._viewCfg = viewCfg;
   }
 
+  set filterItem (item){
+    this._filterItem = item;
+  }
   get buttonConfig() {
-    this._viewCfg.toolbarsConfig.forEach(btn =>{
+    this._viewCfg && this._viewCfg.toolbarsConfig.forEach(btn =>{
       if(btn.formConfig){
         btn.formConfig.forEach(tag =>{
           let validation = [];
@@ -38,15 +41,41 @@ export class MasterGridViewResolver {
   };
 
   get gridConfig() {
-    let config: DataTables.Settings = {...this._viewCfg};
-    config.ajax = this._buildAjax();
-    config.columns = this._buildColumns();
-    config.buttons = [];
+
+    let config: DataTables.Settings;
+    this._viewCfg && (()=>{
+      config = {...this._viewCfg};
+      this._filterItem
+        ?this._viewCfg.columnConfigClass && ( config.ajax = this._buildAjaxWithFilter())
+        :this._viewCfg.columnConfigClass && ( config.ajax = this._buildAjax());
+
+      this._viewCfg.columnConfigs && (config.columns = this._buildColumns());
+      config.buttons = [];
+    })();
     return config;
   }
   private _buildAjax(){
     return {
       url:Configuration.web_api + this._viewCfg.columnConfigClass,
+      dataSrc:this._viewCfg.columnFilter
+    }
+  }
+  private _buildAjaxWithFilter(){
+    let condition = "";
+    if(this._viewCfg.filterConfig){
+      this._viewCfg.filterConfig.forEach(filter =>{
+        if(filter){
+          for(let propLink of filter.propLinks){
+            if(this._filterItem){
+              condition += propLink["slaveProp"] +'='+ this._filterItem[propLink.masterProp]+'&';
+            }
+          }
+        }
+      });
+    }
+
+    return {
+      url:Configuration.web_api + this._viewCfg.columnConfigClass+'?'+condition,
       dataSrc:this._viewCfg.columnFilter
     }
   }

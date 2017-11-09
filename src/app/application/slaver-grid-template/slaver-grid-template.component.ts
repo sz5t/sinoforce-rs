@@ -26,28 +26,24 @@ export class SlaverGridTemplateComponent implements OnInit,OnDestroy {
     this._rowCallback = (row:Node, data:any[] | Object ,index: number) => {
       $('td',row).unbind('click');
       $('td',row).bind('click',() => {
-        console.log(data);
         this._selectedItem = data;
       });
     };
     this._broadcastObj = this.broadcast.on<string>('master').subscribe(data => {
-
-      if(this.slaverConfig.viewCfg.filterConfig){
+      if(this.slaverConfig.viewCfg && this.slaverConfig.viewCfg.filterConfig){
         const filter = this.slaverConfig.viewCfg.filterConfig[0];
         let condition = '' ;
-
-        for(let propLink of filter.PropLinks){
+        for(let propLink of filter.propLinks){
           if(data){
-            condition += propLink["SlaveProp"] +'='+ data[propLink.MasterProp]+'&';
+            condition += propLink["slaveProp"] +'='+ data[propLink.masterProp]+'&';
           }
         }
-        const url = Configuration.web_api + filter.SlaveClass + '?' + condition.substring(0,condition.length-1);
-        this.gridViewTemplateComponent.reload(url)
+        const url = Configuration.web_api + filter.slaveClass + '?' + condition.substring(0,condition.length-1);
+        this.gridViewTemplateComponent.reload(url);
       }
     });
   };
   ngOnDestroy(){
     this._broadcastObj.unsubscribe();
   }
-
 }

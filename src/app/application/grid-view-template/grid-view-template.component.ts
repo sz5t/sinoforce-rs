@@ -50,39 +50,86 @@ export class GridViewTemplateComponent implements OnInit, AfterViewInit {
               private configService:ConfigService) {
     this._router = router;
   }
-
   ngOnInit() {
-    let masterResolver = new MasterGridViewResolver(this.viewConfig.viewCfg);
-    this.buttonsConfig = masterResolver.buttonConfig;
-    this.gridConfig = masterResolver.gridConfig;
-    this.gridConfig.rowCallback = this.rowCallback;
-    this.gridConfig.buttons = this.initButton(this.buttonsConfig);
-    this.gridConfig.language = {
-      "processing":   "处理中...",
-      "lengthMenu":   "显示 _MENU_ 项结果",
-      "zeroRecords":  "没有匹配结果",
-      "info":         "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-      "infoEmpty":    "显示第 0 至 0 项结果，共 0 项",
-      "infoFiltered": "(由 _MAX_ 项结果过滤)",
-      "infoPostFix":  "",
-      "search":       "搜索:",
-      "url":          "",
-      "emptyTable":     "表中数据为空",
-      "loadingRecords": "载入中...",
-      "thousands":  ",",
-      "paginate": {
-        "first":    "首页",
-        "previous": "上一页",
-        "next":     "下一页",
-        "last":     "末页"
-      },
-      "aria": {
-        "sortAscending":  ": 以升序排列此列",
-        "sortDescending": ": 以降序排列此列"
-      }
-    };
-    this.layoutConfig = new LayoutResolver(this.viewConfig).config;
-    this.dtOption = this.gridConfig;
+    if(this.viewConfig){
+      this.layoutConfig = this.initLayout(this.viewConfig);
+      this.dtOption = this.initConfig(this.viewConfig);
+    }else{
+      this.layoutConfig = new LayoutResolver({
+        "title":"标题",
+        "titleColor":"blue",
+        "icon":"",
+        "isFullScreen":true,
+        "isCollapse":true,
+        "size":{
+          "xs":{
+            "value":"12",
+            "offset":""
+          },
+          "sm":{
+            "value":"12",
+            "offset":""
+          },
+          "md":{
+            "value":"8",
+            "offset":""
+          },
+          "lg":{
+            "value":"8",
+            "offset":""
+          }
+        }
+      }).config;
+      this.dtOption = {
+        pagingType: 'full_numbers',
+        columns:[
+          {data:'ID'}
+        ]
+      };
+    }
+  }
+
+  initLayout(viewConfig){
+    return new LayoutResolver(viewConfig).config;
+  }
+  initConfig(viewConfig){
+    if(viewConfig){
+      let masterResolver = new MasterGridViewResolver(viewConfig.viewCfg);
+      masterResolver.gridConfig && (() => {
+        this.gridConfig = masterResolver.gridConfig;
+        this.gridConfig.rowCallback = this.rowCallback;
+        this.gridConfig.language = {
+          "processing":   "处理中...",
+          "lengthMenu":   "显示 _MENU_ 项结果",
+          "zeroRecords":  "没有匹配结果",
+          "info":         "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+          "infoEmpty":    "显示第 0 至 0 项结果，共 0 项",
+          "infoFiltered": "(由 _MAX_ 项结果过滤)",
+          "infoPostFix":  "",
+          "search":       "搜索:",
+          "url":          "",
+          "emptyTable":     "表中数据为空",
+          "loadingRecords": "载入中...",
+          "thousands":  ",",
+          "paginate": {
+            "first":    "首页",
+            "previous": "上一页",
+            "next":     "下一页",
+            "last":     "末页"
+          },
+          "aria": {
+            "sortAscending":  ": 以升序排列此列",
+            "sortDescending": ": 以降序排列此列"
+          }
+        };
+
+        const hasButton = masterResolver.buttonConfig
+          && (this.buttonsConfig = masterResolver.buttonConfig);
+
+        hasButton && (this.gridConfig.buttons = this.initButton(this.buttonsConfig));
+      })();
+    }
+    return this.gridConfig;
   }
   ngAfterViewInit(){
     this.dtTrigger.next();

@@ -3,6 +3,7 @@ import {ITreeNode} from "../tree-models/tree-node-model";
 import {CommonUtility, NewSafeObservable} from "../../../framework/utility/common-utility";
 import {ApiService} from "../../../services/api.service";
 import {isNullOrUndefined} from "util";
+import {Broadcaster} from "../../../broadcast/broadcaster";
 
 declare let $:any;
 @Component({
@@ -22,7 +23,7 @@ export class CnTreeComponent implements OnInit {
     DYNAMIC_NODE:"SFDW_Classes.TDynaTreeNodeConfig",
     CHILDREN_NODE:"SFDW_Classes.TTreeNodeChildrenConfig"
   };
-  constructor(private apiService:ApiService) {
+  constructor(private apiService:ApiService,private broadcast:Broadcaster) {
   }
 
   ngOnInit() {
@@ -67,11 +68,11 @@ export class CnTreeComponent implements OnInit {
          }
          }*/
       });
-      this._jsTree = $('#cnTree').jstree(true);
+      this._jsTree =  $('#cnTree').jstree(true);
+
       $('#cnTree').on('open_node.jstree', (event,openNode) => {
         let funcList = [];
         let nodeTypesConfig = openNode.node.data;
-        console.log(openNode);
         // delete openNode children
         this._jsTree.delete_node(this._jsTree.get_children_dom(openNode.node));
 
@@ -98,7 +99,8 @@ export class CnTreeComponent implements OnInit {
                     if(nodeType.nodeTypes){
                       newStaticNode.data = {
                         value:nodeType.nodeTypes,
-                        isRoot:true
+                        isRoot:true,
+                        pageConfigs:nodeType.pageConfigs?nodeType.pageConfigs:null
                       };
                       openChildrenNodes.push({id:'nodeId_' + CommonUtility.uuID(5),text:'',parent:newStaticNode.id});
                     }
@@ -118,7 +120,6 @@ export class CnTreeComponent implements OnInit {
                     nodeType.arameters && nodeType.parameters.forEach(parameter => {
                       nodeCondition += parameter+"&";
                     });
-                    console.log(nodeTypesConfig);
                     nodeType.filters && nodeType.filters.forEach(filter => {
                       filter.propLinks && filter.propLinks.forEach(link => {
                         nodeCondition += link.slaveProp+"="+nodeTypesConfig.parentItemNode[link.masterProp]+"&";
@@ -133,6 +134,7 @@ export class CnTreeComponent implements OnInit {
                             parent : openNode.node.id,
                             text : item[nodeType.textKey],
                           };
+
                           openChildrenNodes.push(newDynamicNode);
                           this._childrenConfigs && this._childrenConfigs.forEach(childConfig =>{
                             if(childConfig.classType === this.NodeFlag.CHILDREN_NODE){
@@ -143,7 +145,9 @@ export class CnTreeComponent implements OnInit {
                                     value : childConfig.nodeTypes,
                                     isRoot : false,
                                     idKey : childConfig.idkey,
-                                    parentItemNode:item
+                                    parentItemNode:item,
+                                    entityClass:childConfig.entityClass,
+                                    pageConfigs:childConfig.pageConfigs?childConfig.pageConfigs:null
                                   };
                                   openChildrenNodes.push({
                                     id:'nodeId_' + CommonUtility.uuID(5),
@@ -220,10 +224,7 @@ export class CnTreeComponent implements OnInit {
                           parent : openNode.node.id,
                           text : item[nodeType.textKey]
                         };
-                        newDynamicNode.data = {
-                          'entityClass':nodeType.entityClass,
-                          'item':item
-                        };
+
                         openChildrenNodes.push(newDynamicNode);
                         this._childrenConfigs && this._childrenConfigs.forEach(childConfig =>{
                           if(childConfig.classType === this.NodeFlag.CHILDREN_NODE){
@@ -238,7 +239,9 @@ export class CnTreeComponent implements OnInit {
                                   data: childConfig.NodeTypes,
                                   isRoot:false,
                                   parentNodeItem:item,
-                                  idKey:nodeType.idKey
+                                  idKey:nodeType.idKey,
+                                  entityClass:childConfig.entityClass,
+                                  pageConfigs:childConfig.pageConfigs?childConfig.pageConfigs:null
                                 };
                                 openChildrenNodes.push(newChildDynamicNode);
                               }
@@ -276,6 +279,9 @@ export class CnTreeComponent implements OnInit {
         const $nodes = this._jsTree.get_json(openNode.node.id).children;
         this._jsTree.delete_node($nodes);
         this._jsTree.create_node(openNode.node.id,'','last',()=>{},true);
+      });
+      $('#cnTree').on('select_node.jstree',(event,node) =>{
+        node.node.data && this.broadcast.broadcast("tree_master",node.node.data);
       })
     });
   }
@@ -298,7 +304,8 @@ export class CnTreeComponent implements OnInit {
       if(root.nodeTypes && root.nodeTypes.length>0){
         rootStaticNode.data = {
           value:root.nodeTypes,
-          isRoot:true
+          isRoot:true,
+          pageConfigs:root.pageConfigs?root.pageConfigs:null
         };
         local._rootNodes.push({id:CommonUtility.uuID(5),parent:rootStaticNode.id,text:''});
       }
