@@ -1147,113 +1147,113 @@ export let ProjectConfig:any[] = [
                       }
                     },
                     "formConfig":[
-                    {
-                      "type":"input",
-                      "inputType":"text",
-                      "name":"code",
-                      "label":"资源名称：",
-                      "helpText":"资源编译后自动生成",
-                      "inputClass":"input-inline input-medium",
-                      "placeholder":"例如：Company.cn.app",
-                      "helpClass":"help-inline",
-                      "validations":[
-                        {
-                          "validator":"required",
-                          "errorMessage":""
-                        },
-                        {
-                          "validator":"minLength",
-                          "length":6,
-                          "errorMessage":""
-                        }
-                      ]
-                    },
-                    {
-                      "type":"input",
-                      "inputType":"text",
-                      "name":"text",
-                      "label":"命名空间：",
-                      "icon":"fa fa-book",
-                      "iconPstn":"left",
-                      "inputClass":"input-group",
-                      "validations":[
-                        {
-                          "validator":"required",
-                          "errorMessage":""
-                        },
-                        {
-                          "validator":"minLength",
-                          "length":6,
-                          "errorMessage":""
-                        }
-                      ]
-                    },
-                    {
-                      "type":"input",
-                      "inputType":"text",
-                      "name":"shortName",
-                      "label":"程序集：",
-                      "inputClass":"input-medium input-group",
-                      "icon":"fa fa-bookmark-o",
-                      "iconPstn":"right",
-                      "helpClass":"help-inline",
-                      "validations":[
-                        {
-                          "validator":"required",
-                          "errorMessage":""
-                        },
-                        {
-                          "validator":"minLength",
-                          "length":6,
-                          "errorMessage":""
-                        }
-                      ]
-                    },
-                    {
-                      "type":"select",
-                      "placeholder":"--请选择--",
-                      "options":[
-                        {"text":"编译成功","value":"编译成功"},
-                        {"text":"正在定义","value":"正在定义"}
-                      ],
-                      "name":"BuildName",
-                      "label":"编译状态：",
-                      "value":"",
-                      "inputClass":"input-medium"
-                    },
-                    {
-                      "type":"select",
-                      "placeholder":"--请选择--",
-                      "options":[
-                        {"text":"手动","value":"手动"},
-                        {"text":"自动","value":"自动"}
-                      ],
-                      "name":"BuildMode",
-                      "label":"编译方式：",
-                      "value":"",
-                      "inputClass":"input-medium"
-                    },
-                    {
-                      "type":"radio",
-                      "options":[
-                        {"checked":"","disabled":false,"value":"1","label":"独立"},
-                        {"checked":"","disabled":false,"value":"2","label":"共享"},
-                        {"checked":"","disabled":false,"value":"3","label":"指定区域"}
-                      ],
-                      "name":"shareScope",
-                      "label":"使用范围：",
-                      "inputClass":"mt-radio-list"
-                    },
-                    {
-                      "type":"textarea",
-                      "name":"Note",
-                      "label":"备注："
-                    },
-                    {
-                      "type":"button",
-                      "name":"submit"
-                    }
-                  ]
+                      {
+                        "type":"input",
+                        "inputType":"text",
+                        "name":"Name",
+                        "label":"资源名称：",
+                        "helpText":"资源编译后自动生成",
+                        "inputClass":"input-inline input-medium",
+                        "placeholder":"例如：Company.cn.app",
+                        "helpClass":"help-inline",
+                        "validations":[
+                          {
+                            "validator":"required",
+                            "errorMessage":""
+                          },
+                          {
+                            "validator":"minLength",
+                            "length":6,
+                            "errorMessage":""
+                          }
+                        ]
+                      },
+                      {
+                        "type":"input",
+                        "inputType":"text",
+                        "name":"OwnerNameSpace",
+                        "label":"命名空间：",
+                        "icon":"fa fa-book",
+                        "iconPstn":"left",
+                        "inputClass":"input-group",
+                        "validations":[
+                          {
+                            "validator":"required",
+                            "errorMessage":""
+                          },
+                          {
+                            "validator":"minLength",
+                            "length":6,
+                            "errorMessage":""
+                          }
+                        ]
+                      },
+                      {
+                        "type":"input",
+                        "inputType":"text",
+                        "name":"OwnerAssembly",
+                        "label":"程序集：",
+                        "inputClass":"input-medium input-group",
+                        "icon":"fa fa-bookmark-o",
+                        "iconPstn":"right",
+                        "helpClass":"help-inline",
+                        "validations":[
+                          {
+                            "validator":"required",
+                            "errorMessage":""
+                          },
+                          {
+                            "validator":"minLength",
+                            "length":6,
+                            "errorMessage":""
+                          }
+                        ]
+                      },
+                      {
+                        "type":"select",
+                        "placeholder":"--请选择--",
+                        "options":[
+                          {"text":"编译成功","value":"编译成功"},
+                          {"text":"正在定义","value":"正在定义"}
+                        ],
+                        "name":"BuildState",
+                        "label":"编译状态：",
+                        "value":"",
+                        "inputClass":"input-medium"
+                      },
+                      {
+                        "type":"select",
+                        "placeholder":"--请选择--",
+                        "options":[
+                          {"text":"手动","value":"手动"},
+                          {"text":"自动","value":"自动"}
+                        ],
+                        "name":"BuildMode",
+                        "label":"编译方式：",
+                        "value":"",
+                        "inputClass":"input-medium"
+                      },
+                      {
+                        "type":"radio",
+                        "options":[
+                          {"checked":"","disabled":false,"value":"1","label":"独立"},
+                          {"checked":"","disabled":false,"value":"2","label":"共享"},
+                          {"checked":"","disabled":false,"value":"3","label":"指定区域"}
+                        ],
+                        "name":"ShareScope",
+                        "label":"使用范围：",
+                        "inputClass":"mt-radio-list"
+                      },
+                      {
+                        "type":"Remark",
+                        "name":"Note",
+                        "label":"备注："
+                      },
+                      {
+                        "type":"button",
+                        "name":"submit"
+                      }
+                    ]
                   },
                   {
                     "id": "del", "text": "删除", "color": "red", "img":"fa fa-remove", "type": "button",
@@ -1295,7 +1295,7 @@ export let ProjectConfig:any[] = [
                       {
                         "type":"input",
                         "inputType":"text",
-                        "name":"code",
+                        "name":"Name",
                         "label":"资源名称：",
                         "helpText":"资源编译后自动生成",
                         "inputClass":"input-inline input-medium",
@@ -1316,7 +1316,7 @@ export let ProjectConfig:any[] = [
                       {
                         "type":"input",
                         "inputType":"text",
-                        "name":"text",
+                        "name":"OwnerNameSpace",
                         "label":"命名空间：",
                         "icon":"fa fa-book",
                         "iconPstn":"left",
@@ -1336,7 +1336,7 @@ export let ProjectConfig:any[] = [
                       {
                         "type":"input",
                         "inputType":"text",
-                        "name":"shortName",
+                        "name":"OwnerAssembly",
                         "label":"程序集：",
                         "inputClass":"input-medium input-group",
                         "icon":"fa fa-bookmark-o",
@@ -1361,7 +1361,7 @@ export let ProjectConfig:any[] = [
                           {"text":"编译成功","value":"编译成功"},
                           {"text":"正在定义","value":"正在定义"}
                         ],
-                        "name":"BuildName",
+                        "name":"BuildState",
                         "label":"编译状态：",
                         "value":"",
                         "inputClass":"input-medium"
@@ -1385,12 +1385,12 @@ export let ProjectConfig:any[] = [
                           {"checked":"","disabled":false,"value":"2","label":"共享"},
                           {"checked":"","disabled":false,"value":"3","label":"指定区域"}
                         ],
-                        "name":"shareScope",
+                        "name":"ShareScope",
                         "label":"使用范围：",
                         "inputClass":"mt-radio-list"
                       },
                       {
-                        "type":"textarea",
+                        "type":"Remark",
                         "name":"Note",
                         "label":"备注："
                       },
@@ -1407,7 +1407,7 @@ export let ProjectConfig:any[] = [
                 "deferRender":true,
                 "columnConfigClass":"ResourceType",
                 "columnFilter":"",
-                "autoWidth":true,
+                "autoWidth":false,
                 "destroy":true,
                 "lengthMenu": [ 5, 10, 20, 30, 40, 50, 100 ],
                 "rowId":"RtId",
@@ -2446,7 +2446,7 @@ export let ProjectConfig:any[] = [
                                 {
                                   "type":"input",
                                   "inputType":"text",
-                                  "name":"code",
+                                  "name":"Name",
                                   "label":"资源名称：",
                                   "helpText":"资源编译后自动生成",
                                   "inputClass":"input-inline input-medium",
@@ -2467,7 +2467,7 @@ export let ProjectConfig:any[] = [
                                 {
                                   "type":"input",
                                   "inputType":"text",
-                                  "name":"text",
+                                  "name":"OwnerNameSpace",
                                   "label":"命名空间：",
                                   "icon":"fa fa-book",
                                   "iconPstn":"left",
@@ -2487,7 +2487,7 @@ export let ProjectConfig:any[] = [
                                 {
                                   "type":"input",
                                   "inputType":"text",
-                                  "name":"shortName",
+                                  "name":"OwnerAssembly",
                                   "label":"程序集：",
                                   "inputClass":"input-medium input-group",
                                   "icon":"fa fa-bookmark-o",
@@ -2512,7 +2512,7 @@ export let ProjectConfig:any[] = [
                                     {"text":"编译成功","value":"编译成功"},
                                     {"text":"正在定义","value":"正在定义"}
                                   ],
-                                  "name":"BuildName",
+                                  "name":"BuildState",
                                   "label":"编译状态：",
                                   "value":"",
                                   "inputClass":"input-medium"
@@ -2536,12 +2536,12 @@ export let ProjectConfig:any[] = [
                                     {"checked":"","disabled":false,"value":"2","label":"共享"},
                                     {"checked":"","disabled":false,"value":"3","label":"指定区域"}
                                   ],
-                                  "name":"shareScope",
+                                  "name":"ShareScope",
                                   "label":"使用范围：",
                                   "inputClass":"mt-radio-list"
                                 },
                                 {
-                                  "type":"textarea",
+                                  "type":"Remark",
                                   "name":"Note",
                                   "label":"备注："
                                 },
@@ -2591,7 +2591,7 @@ export let ProjectConfig:any[] = [
                                 {
                                   "type":"input",
                                   "inputType":"text",
-                                  "name":"code",
+                                  "name":"Name",
                                   "label":"资源名称：",
                                   "helpText":"资源编译后自动生成",
                                   "inputClass":"input-inline input-medium",
@@ -2612,7 +2612,7 @@ export let ProjectConfig:any[] = [
                                 {
                                   "type":"input",
                                   "inputType":"text",
-                                  "name":"text",
+                                  "name":"OwnerNameSpace",
                                   "label":"命名空间：",
                                   "icon":"fa fa-book",
                                   "iconPstn":"left",
@@ -2632,7 +2632,7 @@ export let ProjectConfig:any[] = [
                                 {
                                   "type":"input",
                                   "inputType":"text",
-                                  "name":"shortName",
+                                  "name":"OwnerAssembly",
                                   "label":"程序集：",
                                   "inputClass":"input-medium input-group",
                                   "icon":"fa fa-bookmark-o",
@@ -2657,7 +2657,7 @@ export let ProjectConfig:any[] = [
                                     {"text":"编译成功","value":"编译成功"},
                                     {"text":"正在定义","value":"正在定义"}
                                   ],
-                                  "name":"BuildName",
+                                  "name":"BuildState",
                                   "label":"编译状态：",
                                   "value":"",
                                   "inputClass":"input-medium"
@@ -2681,12 +2681,12 @@ export let ProjectConfig:any[] = [
                                     {"checked":"","disabled":false,"value":"2","label":"共享"},
                                     {"checked":"","disabled":false,"value":"3","label":"指定区域"}
                                   ],
-                                  "name":"shareScope",
+                                  "name":"ShareScope",
                                   "label":"使用范围：",
                                   "inputClass":"mt-radio-list"
                                 },
                                 {
-                                  "type":"textarea",
+                                  "type":"Remark",
                                   "name":"Note",
                                   "label":"备注："
                                 },
