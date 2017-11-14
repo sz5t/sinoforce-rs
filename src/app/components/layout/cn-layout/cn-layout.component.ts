@@ -1030,9 +1030,9 @@ export var App = function() {
   styleUrls: ['./cn-layout.component.css']
 })
 export class CnLayoutComponent implements OnInit{
-  @HostBinding('class.page-header-fixed') hasFixed = true;
+  /*@HostBinding('class.page-header-fixed') hasFixed = true;
   @HostBinding('class.page-sidebar-closed-log') hasSidebarClose = true;
-  @HostBinding('class.page-content-white') _bgColor = true;
+  @HostBinding('class.page-content-white') _bgColor = true;*/
   @HostBinding('class.component') _component = true;
   ngOnInit(){
     App.init();

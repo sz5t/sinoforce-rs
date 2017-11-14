@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import {CnLayoutModule} from "./layout/cn-layout.module";
-import {CnDynamicFormModule} from "./form/cn-dynamic-form.module";
-import {CnDialogModule} from "./dialog/cn-dialog.module";
-import {CnToastModule} from "./toast/cn-toast.module";
-import {CnTreeModule} from "./tree/tree.module";
-import {CnGridModule} from "./grid/cn-grid.module";
+import {CnLayoutModule} from './layout/cn-layout.module';
+import {CnDynamicFormModule} from './form/cn-dynamic-form.module';
+import {CnDialogModule} from './dialog/cn-dialog.module';
+import {CnToastModule} from './toast/cn-toast.module';
+import {CnTreeModule} from './tree/tree.module';
+import {CnGridModule} from './grid/cn-grid.module';
 @NgModule({
-  imports:[
+  imports: [
     CnLayoutModule,
     CnDynamicFormModule,
     CnDialogModule,
@@ -14,7 +14,7 @@ import {CnGridModule} from "./grid/cn-grid.module";
     CnTreeModule,
     CnGridModule
   ],
-  exports:[
+  exports: [
     CnLayoutModule,
     CnDynamicFormModule,
     CnDialogModule,
@@ -24,10 +24,4 @@ import {CnGridModule} from "./grid/cn-grid.module";
   ],
   declarations: [],
 })
-export class CnForceRsModule {
-  static forRoot(){
-    return {
-      ngModule: CnForceRsModule
-    }
-  }
-}
+export class CnForceRsModule {}

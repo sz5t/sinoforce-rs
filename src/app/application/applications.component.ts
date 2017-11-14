@@ -1,13 +1,13 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 
 @Component({
-  selector: 'app-root',
+  selector: 'cn-applications',
   encapsulation: ViewEncapsulation.None,
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './applications.component.html',
+  styleUrls: ['./applications.component.css']
 })
-export class AppComponent {
-  /*title: string = 'Sinoforce';
+export class ApplicationsComponent {
+  title: string = 'Sinoforce';
   name: string = 'sinoforce.com';
   site: string = 'http://www.sinoforce.com';
   copyright: string = 'sinoforce.com';
@@ -17,5 +17,5 @@ export class AppComponent {
     inbox: 'inbox',
     tasks: 'tasks',
     user: 'user'
-  };*/
+  };
 }

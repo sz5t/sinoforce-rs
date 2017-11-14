@@ -18,7 +18,7 @@ export class MasterGridViewResolver {
     this._viewCfg && this._viewCfg.toolbarsConfig.forEach(btn =>{
       if(btn.formConfig){
         btn.formConfig.forEach(tag =>{
-          let validation = [];
+          const validation = [];
           if(tag.validations){
 
             tag.validations.forEach(valid => {
@@ -26,8 +26,7 @@ export class MasterGridViewResolver {
                 validation.push(Validators[valid.validator]);
               }else if(valid.validator === 'minLength' || valid.validator === 'maxLength'){
                 validation.push(Validators[valid.validator](valid.length));
-              }
-              else if(valid.validator === 'pattern'){
+              }else if(valid.validator === 'pattern'){
                 validation.push(Validators[valid.validator](valid.value));
               }
             });

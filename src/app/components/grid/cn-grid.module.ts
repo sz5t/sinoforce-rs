@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {CnGridViewComponent} from "./cn-gridview/cn-gridview.component";
-import {DataTablesModule} from "angular-datatables";
+import {CnGridViewComponent} from './cn-gridview/cn-gridview.component';
+import {DataTablesModule} from 'angular-datatables';
 
 @NgModule({
   imports: [
@@ -11,7 +11,7 @@ import {DataTablesModule} from "angular-datatables";
   declarations: [
     CnGridViewComponent
   ],
-  exports:[
+  exports: [
     CnGridViewComponent
   ]
 })

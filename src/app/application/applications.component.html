@@ -1,0 +1,15 @@
+<cn-layout>
+  <cn-header>
+    <cn-top-menu>
+    </cn-top-menu>
+  </cn-header>
+  <cn-clear-fix></cn-clear-fix>
+  <cn-container>
+    <cn-sidebar [isShowSearch]="'true'"></cn-sidebar>
+    <cn-page>
+      <router-outlet name="breadcrumb"></router-outlet>
+      <router-outlet></router-outlet>
+    </cn-page>
+  </cn-container>
+  <cn-footer [copyright]="copyright" [siteName]="name" [fullSite]="site"></cn-footer>
+</cn-layout>
