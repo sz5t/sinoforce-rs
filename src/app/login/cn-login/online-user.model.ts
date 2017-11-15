@@ -1,7 +1,7 @@
 /**
  * Created by zhaoxinlei on 2017/11/13.
  */
-export class OnlineUser{
+export class OnlineUser {
   Id: string;
   Identify: string;
   IdentifyType: string;
@@ -14,6 +14,7 @@ export class OnlineUser{
   Password: string;
   PlatCustomerId: string;
   PrivId: string;
+  ProjId: string;
   ProjList: any[];
   TryTimes: number;
   RemainTimes: number;
