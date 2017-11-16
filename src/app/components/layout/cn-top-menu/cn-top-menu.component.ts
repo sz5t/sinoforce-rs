@@ -1,6 +1,4 @@
-import {Component, OnInit, ViewEncapsulation, HostBinding, Input, ElementRef, Renderer2} from '@angular/core';
-export type CnDirect = 'pull-right' | 'pull-left';
-
+import {Component, OnInit, ViewEncapsulation, HostBinding, ElementRef, Renderer2} from '@angular/core';
 @Component({
   selector: 'cn-top-menu',
   encapsulation: ViewEncapsulation.None,
@@ -8,15 +6,15 @@ export type CnDirect = 'pull-right' | 'pull-left';
   styleUrls: ['./cn-top-menu.component.css']
 })
 export class CnTopMenuComponent implements OnInit {
-  @HostBinding('class.component') _component = true;
-  @HostBinding('class.top-menu') hasTopMenu = true;
+  // @HostBinding('class.component') _component = true;
+  // @HostBinding('class.top-menu') hasTopMenu = true;
   _el: HTMLElement;
-  constructor(private _elementRef: ElementRef, private _renderer: Renderer2) {
+
+  constructor(private _elementRef: ElementRef) {
     this._el = _elementRef.nativeElement;
   }
   ngOnInit() {
 
   }
-
 
 }

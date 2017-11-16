@@ -117,7 +117,6 @@ export class CnLoginComponent implements OnInit {
       .subscribe(
         response => {
           this.clientStorage.setCookies('onlineUser', response);
-          this.apiService.setHeaders(response['Token']);
           this.apiService.doGet(Configuration.appUser_resource + '/' + this.onlineUser['UserId'])
             .toPromise()
             .then(appUser => {

@@ -11,12 +11,14 @@ import {RouterModule, Routes} from '@angular/router';
 import {CnForceRsModule} from '../components/cn-force-rs.module';
 import {DataTablesModule} from 'angular-datatables';
 import {CnBreadcrumbComponent} from '../components/layout/cn-breadcrumb/cn-breadcrumb.component';
+import {LoginAuthService} from '../services/login-auth.service';
 
 export const CHILDREN_ROUTES: Routes = [
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
   {
-    path: 'app', component: ApplicationsComponent,
+    path: 'app', component: ApplicationsComponent, canActivate: [LoginAuthService],
     children: [
-      {path: 'grid-view-master/:name', component: MasterTemplateComponent},
+      {path: 'grid-view-master/:name', component: MasterTemplateComponent, canActivate: [LoginAuthService]},
       {path: 'grid-view-master-slaver/:name', component: MasterSlaverTemplateComponent},
       {path: 'tree-grid/:name', component: TreeGridTemplateComponent},
       {path: 'breadcrumb/:id', component: CnBreadcrumbComponent, outlet: 'breadcrumb'}

@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {CookiesStorageService} from 'ngx-store';
+import {ClearType} from 'ngx-store/dist/src/config';
 
 @Injectable()
 export class ClientStorageService {
@@ -13,5 +14,9 @@ export class ClientStorageService {
 
   public getCookies(key) {
     return this.cookiesStorage.get(key);
+  }
+
+  public clearCookies() {
+    this.cookiesStorage.clear();
   }
 }

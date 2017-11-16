@@ -1,32 +1,35 @@
-import {Configuration, RenderColumnType} from "../configuration";
+import {Configuration, RenderColumnType} from '../configuration';
 import ColumnSettings = DataTables.ColumnSettings;
-import {Validators} from "@angular/forms";
+import {Validators} from '@angular/forms';
 /**
  * Created by zhaoxinlei on 2017/10/26.
  */
 export class MasterGridViewResolver {
   protected _viewCfg;
+  private _credential;
   private _filterItem;
-  constructor(viewCfg) {
+
+  constructor(viewCfg, credential) {
     this._viewCfg = viewCfg;
+    this._credential = credential;
   }
 
   set filterItem (item){
     this._filterItem = item;
   }
   get buttonConfig() {
-    this._viewCfg && this._viewCfg.toolbarsConfig.forEach(btn =>{
-      if(btn.formConfig){
-        btn.formConfig.forEach(tag =>{
+    this._viewCfg && this._viewCfg.toolbarsConfig.forEach(btn => {
+      if (btn.formConfig) {
+        btn.formConfig.forEach(tag => {
           const validation = [];
-          if(tag.validations){
+          if (tag.validations) {
 
             tag.validations.forEach(valid => {
-              if(valid.validator === 'required' || valid.validator === 'email'){
+              if (valid.validator === 'required' || valid.validator === 'email') {
                 validation.push(Validators[valid.validator]);
-              }else if(valid.validator === 'minLength' || valid.validator === 'maxLength'){
+              } else if (valid.validator === 'minLength' || valid.validator === 'maxLength') {
                 validation.push(Validators[valid.validator](valid.length));
-              }else if(valid.validator === 'pattern'){
+              } else if (valid.validator === 'pattern') {
                 validation.push(Validators[valid.validator](valid.value));
               }
             });
@@ -37,16 +40,16 @@ export class MasterGridViewResolver {
 
     });
     return this._viewCfg.toolbarsConfig;
-  };
+  }
 
   get gridConfig() {
 
-    let config: DataTables.Settings;
-    this._viewCfg && (()=>{
+    let config: any;
+    this._viewCfg && (() => {
       config = {...this._viewCfg};
       this._filterItem
-        ?this._viewCfg.columnConfigClass && ( config.ajax = this._buildAjaxWithFilter())
-        :this._viewCfg.columnConfigClass && ( config.ajax = this._buildAjax());
+        ? this._viewCfg.columnConfigClass && ( config.ajax = this._buildAjaxWithFilter())
+        : this._viewCfg.columnConfigClass && ( config.ajax = this._buildAjax());
 
       this._viewCfg.columnConfigs && (config.columns = this._buildColumns());
       config.buttons = [];
@@ -55,18 +58,21 @@ export class MasterGridViewResolver {
   }
   private _buildAjax(){
     return {
-      url:Configuration.web_api + this._viewCfg.columnConfigClass,
-      dataSrc:this._viewCfg.columnFilter
-    }
+      url: Configuration.web_api + this._viewCfg.columnConfigClass,
+      dataSrc: this._viewCfg.columnFilter,
+      headers: {
+        Credential: this._credential
+      }
+    };
   }
   private _buildAjaxWithFilter(){
-    let condition = "";
-    if(this._viewCfg.filterConfig){
-      this._viewCfg.filterConfig.forEach(filter =>{
-        if(filter){
-          for(let propLink of filter.propLinks){
-            if(this._filterItem){
-              condition += propLink["slaveProp"] +'='+ this._filterItem[propLink.masterProp]+'&';
+    let condition = '';
+    if (this._viewCfg.filterConfig) {
+      this._viewCfg.filterConfig.forEach(filter => {
+        if (filter) {
+          for (const propLink of filter.propLinks) {
+            if (this._filterItem) {
+              condition += propLink['slaveProp'] + '=' + this._filterItem[propLink.masterProp] + '&';
             }
           }
         }
@@ -74,21 +80,25 @@ export class MasterGridViewResolver {
     }
 
     return {
-      url:Configuration.web_api + this._viewCfg.columnConfigClass+'?'+condition,
-      dataSrc:this._viewCfg.columnFilter
-    }
+      url: Configuration.web_api + this._viewCfg.columnConfigClass + '?' + condition.substring(0, condition.length - 1),
+      dataSrc: this._viewCfg.columnFilter,
+      headers: {
+        Credential: this._credential
+      }
+    };
   }
-  private _buildColumns():ColumnSettings[]{
-    let columns:ColumnSettings[] = [];
-    let column:ColumnSettings = {};
-    this._viewCfg.columnConfigs.forEach(col =>{
+
+  private _buildColumns(): ColumnSettings[] {
+    const columns: ColumnSettings[] = [];
+    let column: ColumnSettings = {};
+    this._viewCfg.columnConfigs.forEach(col => {
       column = {...col};
-      if(col.renderName){
+      if (col.renderName) {
         column.render = this._buildRenderFunction(col.renderName);
       }
       columns.push(column);
 
-    })
+    });
     return columns;
   }
   private _buildRenderFunction(renderName){
@@ -96,11 +106,11 @@ export class MasterGridViewResolver {
     //checkAll
     switch (renderName.type){
       case RenderColumnType.RENDER_COLUMN_TYPE.NOT_NULL:
-        return ((data ,type ,row, meta) => {
-          return data == null?"":data;
+        return ((data, type, row, meta) => {
+          return data == null ? '' : data;
         });
       case RenderColumnType.RENDER_COLUMN_TYPE.CHECK_ALL:
-        return ((data ,type ,row, meta) => {
+        return ((data, type, row, meta) => {
           return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"> ' +
           '<input type="checkbox" class="group-checkable" name="checkchild" value=""+data+"" />' +
           ' <span></span> </label>';
@@ -109,8 +119,8 @@ export class MasterGridViewResolver {
   }
 }
 export class SlaverGridViewResolver extends MasterGridViewResolver{
-  constructor(viewCfg){
-    super(viewCfg);
+  constructor(viewCfg, credential) {
+    super(viewCfg, credential);
     this._viewCfg = viewCfg;
   }
   get filterConfig(){

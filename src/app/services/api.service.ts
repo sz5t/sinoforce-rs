@@ -9,127 +9,136 @@ export class ApiService {
   array$: Observable<any[]>;
   object$: Observable<any>;
   constructor(private httpClient: HttpClient, private clientStorage: ClientStorageService) {
+  }
+
+  setHeaders() {
     const userToken = this.clientStorage.getCookies('onlineUser');
-    if(userToken){
-      this.setHeaders(userToken['Token']);
-    }
+    return new HttpHeaders()
+      .set('Credential', userToken['Token'] ? userToken['Token'] : '')
+      .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Cache-Control', 'no-cache');
   }
-  setHeaders(token){
-    this.headers = new HttpHeaders()
-    .set('Credential', token)
-    //.set('X-Requested-With', 'XMLHttpRequest')
-    .set('Cache-Control', 'no-cache');
-  }
-  doGetConfig(configUrl){
+
+  doGetConfig(configUrl) {
     this.array$ =  this.httpClient.request(
       'GET',
       configUrl,
       {
         responseType: 'json',
-        headers: this.headers
+        headers: this.setHeaders()
       }
     );
     return this.array$;
   }
-  doList(url, params?, data?){
+
+  doList(url, params?, data?) {
     return this.httpClient.request<any[]>(
       'GET',
       Configuration.web_api + url,
       {
         responseType: 'json',
         params: this.buildParameters(params),
-        headers: this.headers
+        headers: this.setHeaders()
       }
     );
   }
-  doQuery(url, params?, data?){
+
+  doQuery(url, params?, data?) {
     return this.httpClient.request(
       'GET',
       Configuration.web_api + url,
       {
         responseType: 'json',
         params: this.buildParameters(params),
-        headers: this.headers
+        headers: this.setHeaders()
       }
     );
   }
-  doGet(url, params?, data?){
+
+  doGet(url, params?, data?) {
     return this.httpClient.request(
       'GET',
-      Configuration.web_api_2 + url,
+      Configuration.web_api + url,
       {
         responseType: 'json',
         params: this.buildParameters(params),
-        headers: this.headers
+        headers: this.setHeaders()
       }
     );
   }
-  doGet2<T>(url, params?, data?){
+
+  doGet2<T>(url, params?, data?) {
     return this.httpClient.request<T>(
       'GET',
       Configuration.web_api + url,
       {
         responseType: 'json',
         params: this.buildParameters(params),
-        headers: this.headers
+        headers: this.setHeaders()
       }
     );
   }
-  doPut(url, params?, data?){
+
+  doPut(url, params?, data?) {
     return this.httpClient.request(
       'PUT',
       Configuration.web_api + url,
       {
         body: data,
-        headers: this.headers,
+        headers: this.setHeaders(),
         params: this.buildParameters(params)
       }
     );
   }
-  doDelete(url, params?, data?){
+
+  doDelete(url, params?, data?) {
     return this.httpClient.request(
       'DELETE',
       Configuration.web_api + url,
       {
-        headers: this.headers,
+        headers: this.setHeaders(),
         params: this.buildParameters(params)
       }
     );
   }
-  doPost(url, data){
+
+  doPost(url, data) {
     return this.httpClient.request<any>(
       'POST',
       Configuration.web_api + url,
       {
         body: data,
-        headers: this.headers
+        headers: this.setHeaders()
       }
     );
   }
-  doPost2<T>(url, data){
+
+  doPost2<T>(url, data) {
     return this.httpClient.request<T>(
       'POST',
-      Configuration.web_api_2 + url,
+      Configuration.web_api + url,
       {
         body: data
       }
     );
   }
-  doProc(url, params?, data?){
+
+  doProc(url, params?, data?) {
     return this.httpClient.request(
       'GET',
       Configuration.web_api + url,
       {
         responseType: 'json',
         params: this.buildParameters(params),
-        headers: this.headers
+        headers: this.setHeaders()
       }
     );
   }
-  private buildParameters(params): HttpParams{
+
+  private buildParameters(params): HttpParams {
     let str = '';
     if (params) {
-      for (const p in params){
+      for (const p of params) {
         str += p + '=' + params[p] + '&';
       }
     }

@@ -18,6 +18,7 @@ export class OnlineUser {
   ProjList: any[];
   TryTimes: number;
   RemainTimes: number;
+  Token: string;
   UserId: string;
   ValidCode: string;
   ValidCodeId: string;

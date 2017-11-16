@@ -1,5 +1,4 @@
-
-  <ul class="nav navbar-nav pull-right">
+<ul class="nav navbar-nav pull-right">
     <li cn-top-dropdown [cnDropdownName]="'通知'"
                    [cnDropdownImg]="'icon-bell'"
                    [cnNotificationNum]="4"
@@ -8,17 +7,17 @@
     >
   </li>
   <li cn-top-dropdown [cnDropdownName]="'消息'"
-                   [cnDropdownImg]="'icon-envelope-open'"
-                   [cnNotificationNum]="5"
-                   [cnDropdownType]="'inbox'"
-                   [cnNotificationState]="'等待处理'"
+      [cnDropdownImg]="'icon-envelope-open'"
+      [cnNotificationNum]="5"
+      [cnDropdownType]="'inbox'"
+      [cnNotificationState]="'等待处理'"
   >
   </li>
   <li cn-top-dropdown [cnDropdownName]="'任务'"
-                   [cnDropdownImg]="'icon-calendar'"
-                   [cnNotificationNum]="6"
-                   [cnDropdownType]="'tasks'"
-                   [cnNotificationState]="'等待处理'">
+      [cnDropdownImg]="'icon-calendar'"
+      [cnNotificationNum]="6"
+      [cnDropdownType]="'tasks'"
+      [cnNotificationState]="'等待处理'">
   </li>
     <li class="dropdown dropdown-user">
       <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
@@ -53,7 +52,7 @@
             <i class="icon-lock"></i> Lock Screen </a>
         </li>
         <li>
-          <a href="page_user_login_1.html">
+          <a href="javascript:void(0);" data-toggle="modal" href="#dialog_logout">
             <i class="icon-key"></i> Log Out </a>
         </li>
       </ul>
