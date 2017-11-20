@@ -1,31 +1,31 @@
-import { Component, HostBinding, ViewEncapsulation,OnInit } from '@angular/core';
+import {Component, HostBinding, ViewEncapsulation, OnInit} from '@angular/core';
 declare let $: any;
 declare let jQuery: any;
 declare let toastr: any;
 declare let autosize: any;
 declare let angular: any;
 declare let window: any;
-export var App = function() {
+export let App = function () {
 
   // IE mode
-  var isRTL = false;
-  var isIE8 = false;
-  var isIE9 = false;
-  var isIE10 = false;
+  let isRTL = false;
+  let isIE8 = false;
+  let isIE9 = false;
+  let isIE10 = false;
 
-  var resizeHandlers = [];
+  const resizeHandlers = [];
 
-  var assetsPath = '../assets/';
+  let assetsPath = '../assets/';
 
-  var globalImgPath = 'global/img/';
+  let globalImgPath = 'global/img/';
 
-  var globalPluginsPath = 'global/plugins/';
+  let globalPluginsPath = 'global/plugins/';
 
-  var globalCssPath = 'global/css/';
+  const globalCssPath = 'global/css/';
 
   // theme layout color set
 
-  var brandColors = {
+  const brandColors = {
     'blue': '#89C4F4',
     'red': '#F3565D',
     'green': '#1bbc9b',
@@ -35,7 +35,7 @@ export var App = function() {
   };
 
   // initializes main settings
-  var handleInit = function() {
+  const handleInit = function () {
 
     if ($('body').css('direction') === 'rtl') {
       isRTL = true;
@@ -55,19 +55,19 @@ export var App = function() {
   };
 
   // runs callback functions set by App.addResponsiveHandler().
-  var _runResizeHandlers = function() {
+  const _runResizeHandlers = function () {
     // reinitialize other subscribed elements
-    for (var i = 0; i < resizeHandlers.length; i++) {
-      var each = resizeHandlers[i];
+    for (let i = 0; i < resizeHandlers.length; i++) {
+      const each = resizeHandlers[i];
       each.call();
     }
   };
 
   // handle the layout reinitialization on window resize
-  var handleOnResize = function() {
-    var resize;
+  const handleOnResize = function () {
+    let resize;
     if (isIE8) {
-      var currheight;
+      let currheight;
       $(window).resize(function() {
         if (currheight == document.documentElement.clientHeight) {
           return; //quite event since only body resized not window.
@@ -93,11 +93,11 @@ export var App = function() {
   };
 
   // Handles portlet tools & actions
-  var handlePortletTools = function() {
+  const handlePortletTools = function () {
     // handle portlet remove
     $('body').on('click', '.portlet > .portlet-title > .tools > a.remove', function(e) {
       e.preventDefault();
-      var portlet = $(this).closest(".portlet");
+      const portlet = $(this).closest('.portlet');
 
       if ($('body').hasClass('page-portlet-fullscreen')) {
         $('body').removeClass('page-portlet-fullscreen');
@@ -115,14 +115,14 @@ export var App = function() {
     // handle portlet fullscreen
     $('body').on('click', '.portlet > .portlet-title .fullscreen', function(e) {
       e.preventDefault();
-      var portlet = $(this).closest(".portlet");
+      const portlet = $(this).closest('.portlet');
       if (portlet.hasClass('portlet-fullscreen')) {
         $(this).removeClass('on');
         portlet.removeClass('portlet-fullscreen');
         $('body').removeClass('page-portlet-fullscreen');
         portlet.children('.portlet-body').css('height', 'auto');
       } else {
-        var height = App.getViewPort().height -
+        const height = App.getViewPort().height -
           portlet.children('.portlet-title').outerHeight() -
           parseInt(portlet.children('.portlet-body').css('padding-top')) -
           parseInt(portlet.children('.portlet-body').css('padding-bottom'));
@@ -137,9 +137,9 @@ export var App = function() {
     $('body').on('click', '.portlet > .portlet-title > .tools > a.reload', function(e) {
       e.preventDefault();
       const self = this;
-      const el = $(this).closest(".portlet").children(".portlet-body");
-      const url = $(this).attr("data-url");
-      const error = $(this).attr("data-error-display");
+      const el = $(this).closest('.portlet').children('.portlet-body');
+      const url = $(this).attr('data-url');
+      const error = $(this).attr('data-error-display');
       if (url) {
         App.blockUI({
           target: el,
@@ -147,10 +147,10 @@ export var App = function() {
           overlayColor: 'none'
         });
         $.ajax({
-          type: "GET",
+          type: 'GET',
           cache: false,
           url: url,
-          dataType: "html",
+          dataType: 'html',
           success: function(res) {
             App.unblockUI(el);
             el.html(res);
@@ -158,10 +158,10 @@ export var App = function() {
           },
           error: function(xhr, ajaxOptions, thrownError) {
             App.unblockUI(el);
-            var msg = 'Error on reloading the content. Please check your connection and try again.';
-            if (error === "toastr" && toastr) {
+            const msg = 'Error on reloading the content. Please check your connection and try again.';
+            if (error === 'toastr' && toastr) {
               toastr.error(msg);
-            } else if (error === "notific8" && $.notific8) {
+            } else if (error === 'notific8' && $.notific8) {
               $.notific8('zindex', 11500);
               $.notific8(msg, {
                 theme: 'ruby',
@@ -190,62 +190,62 @@ export var App = function() {
 
     $('body').on('click', '.portlet > .portlet-title > .tools > .collapse, .portlet .portlet-title > .tools > .expand', function(e) {
       e.preventDefault();
-      var el = $(this).closest(".portlet").children(".portlet-body");
-      if ($(this).hasClass("collapse")) {
-        $(this).removeClass("collapse").addClass("expand");
+      const el = $(this).closest('.portlet').children('.portlet-body');
+      if ($(this).hasClass('collapse')) {
+        $(this).removeClass('collapse').addClass('expand');
         el.slideUp(200);
       } else {
-        $(this).removeClass("expand").addClass("collapse");
+        $(this).removeClass('expand').addClass('collapse');
         el.slideDown(200);
       }
     });
   };
 
   // Handlesmaterial design checkboxes
-  var handleMaterialDesign = function() {
+  const handleMaterialDesign = function () {
 
     // Material design ckeckbox and radio effects
     $('body').on('click', '.md-checkbox > label, .md-radio > label', function() {
-      var the = $(this);
+      const the = $(this);
       // find the first span which is our circle/bubble
-      var el = $(this).children('span:first-child');
+      const el = $(this).children('span:first-child');
 
       // add the bubble class (we do this so it doesnt show on page load)
       el.addClass('inc');
 
       // clone it
-      var newone = el.clone(true);
+      const newone = el.clone(true);
 
       // add the cloned version before our original
       el.before(newone);
 
       // remove the original so that it is ready to run on next click
-      $("." + el.attr("class") + ":last", the).remove();
+      $('.' + el.attr('class') + ':last', the).remove();
     });
 
     if ($('body').hasClass('page-md')) {
       // Material design click effect
       // credit where credit's due; http://thecodeplayer.com/walkthrough/ripple-click-effect-google-material-design
-      var element, circle, d, x, y;
+      let element, circle, d, x, y;
       $('body').on('click', 'a.btn, button.btn, input.btn, label.btn', function(e) {
         element = $(this);
 
-        if(element.find(".md-click-circle").length == 0) {
-          element.prepend("<span class='md-click-circle'></span>");
+        if (element.find('.md-click-circle').length == 0) {
+          element.prepend('<span class=\'md-click-circle\'></span>');
         }
 
-        circle = element.find(".md-click-circle");
-        circle.removeClass("md-click-animate");
+        circle = element.find('.md-click-circle');
+        circle.removeClass('md-click-animate');
 
-        if(!circle.height() && !circle.width()) {
+        if (!circle.height() && !circle.width()) {
           d = Math.max(element.outerWidth(), element.outerHeight());
           circle.css({height: d, width: d});
         }
 
-        x = e.pageX - element.offset().left - circle.width()/2;
-        y = e.pageY - element.offset().top - circle.height()/2;
+        x = e.pageX - element.offset().left - circle.width() / 2;
+        y = e.pageY - element.offset().top - circle.height() / 2;
 
-        circle.css({top: y+'px', left: x+'px'}).addClass("md-click-animate");
+        circle.css({top: y + 'px', left: x + 'px'}).addClass('md-click-animate');
 
         setTimeout(function() {
           circle.remove();
@@ -254,13 +254,13 @@ export var App = function() {
     }
 
     // Floating labels
-    var handleInput = function(el) {
-      if (el.val() != "") {
+    const handleInput = function (el) {
+      if (el.val() != '') {
         el.addClass('edited');
       } else {
         el.removeClass('edited');
       }
-    }
+    };
 
     $('body').on('keydown', '.form-md-floating-label .form-control', function(e) {
       handleInput($(this));
@@ -277,20 +277,20 @@ export var App = function() {
   };
 
   // Handles custom checkboxes & radios using jQuery iCheck plugin
-  var handleiCheck = function() {
+  const handleiCheck = function () {
     if (!$().iCheck) {
       return;
     }
 
     $('.icheck').each(function() {
-      var checkboxClass = $(this).attr('data-checkbox') ? $(this).attr('data-checkbox') : 'icheckbox_minimal-grey';
-      var radioClass = $(this).attr('data-radio') ? $(this).attr('data-radio') : 'iradio_minimal-grey';
+      const checkboxClass = $(this).attr('data-checkbox') ? $(this).attr('data-checkbox') : 'icheckbox_minimal-grey';
+      const radioClass = $(this).attr('data-radio') ? $(this).attr('data-radio') : 'iradio_minimal-grey';
 
       if (checkboxClass.indexOf('_line') > -1 || radioClass.indexOf('_line') > -1) {
         $(this).iCheck({
           checkboxClass: checkboxClass,
           radioClass: radioClass,
-          insert: '<div class="icheck_line-icon"></div>' + $(this).attr("data-label")
+          insert: '<div class="icheck_line-icon"></div>' + $(this).attr('data-label')
         });
       } else {
         $(this).iCheck({
@@ -302,7 +302,7 @@ export var App = function() {
   };
 
   // Handles Bootstrap switches
-  var handleBootstrapSwitch = function() {
+  const handleBootstrapSwitch = function () {
     if (!$().bootstrapSwitch) {
       return;
     }
@@ -310,7 +310,7 @@ export var App = function() {
   };
 
   // Handles Bootstrap confirmations
-  var handleBootstrapConfirmation = function() {
+  const handleBootstrapConfirmation = function () {
     if (!$().confirmation) {
       return;
     }
@@ -318,19 +318,19 @@ export var App = function() {
   };
 
   // Handles Bootstrap Accordions.
-  var handleAccordions = function() {
+  const handleAccordions = function () {
     $('body').on('shown.bs.collapse', '.accordion.scrollable', function(e) {
-      App.scrollTo($(e.target),false);
+      App.scrollTo($(e.target), false);
     });
   };
 
   // Handles Bootstrap Tabs.
-  var handleTabs = function() {
+  const handleTabs = function () {
     //activate tab if tab id provided in the URL
     if (location.hash) {
-      var tabid = encodeURI(location.hash.substr(1));
+      const tabid = encodeURI(location.hash.substr(1));
       $('a[href="#' + tabid + '"]').parents('.tab-pane:hidden').each(function() {
-        var tabid = $(this).attr("id");
+        const tabid = $(this).attr('id');
         $('a[href="#' + tabid + '"]').click();
       });
       $('a[href="#' + tabid + '"]').click();
@@ -344,7 +344,7 @@ export var App = function() {
   };
 
   // Handles Bootstrap Modals.
-  var handleModals = function() {
+  const handleModals = function () {
     // fix stackable modal issue: when 2 or more modals opened, closing one of modal will remove .modal-open class.
     $('body').on('hide.bs.modal', function() {
       if ($('.modal:visible').size() > 1 && $('html').hasClass('modal-open') === false) {
@@ -356,14 +356,14 @@ export var App = function() {
 
     // fix page scrollbars issue
     $('body').on('show.bs.modal', '.modal', function() {
-      if ($(this).hasClass("modal-scroll")) {
-        $('body').addClass("modal-open-noscroll");
+      if ($(this).hasClass('modal-scroll')) {
+        $('body').addClass('modal-open-noscroll');
       }
     });
 
     // fix page scrollbars issue
     $('body').on('hidden.bs.modal', '.modal', function() {
-      $('body').removeClass("modal-open-noscroll");
+      $('body').removeClass('modal-open-noscroll');
     });
 
     // remove ajax content and remove cache on modal closed
@@ -373,7 +373,7 @@ export var App = function() {
   };
 
   // Handles Bootstrap Tooltips.
-  var handleTooltips = function() {
+  const handleTooltips = function () {
     // global tooltips
     $('.tooltips').tooltip();
 
@@ -406,7 +406,7 @@ export var App = function() {
   };
 
   // Handles Bootstrap Dropdowns
-  var handleDropdowns = function() {
+  const handleDropdowns = function () {
     /*
      Hold dropdown on click
      */
@@ -415,7 +415,7 @@ export var App = function() {
     });
   };
 
-  var handleAlerts = function() {
+  const handleAlerts = function () {
     $('body').on('click', '[data-close="alert"]', function(e) {
       $(this).parent('.alert').hide();
       $(this).closest('.note').hide();
@@ -434,7 +434,7 @@ export var App = function() {
   };
 
   // Handle Hower Dropdowns
-  var handleDropdownHover = function() {
+  const handleDropdownHover = function () {
     $('[data-hover="dropdown"]').not('.hover-initialized').each(function() {
       $(this).dropdownHover();
       $(this).addClass('hover-initialized');
@@ -442,8 +442,8 @@ export var App = function() {
   };
 
   // Handle textarea autosize
-  var handleTextareaAutosize = function() {
-    if (typeof(autosize) === "function") {
+  const handleTextareaAutosize = function () {
+    if (typeof(autosize) === 'function') {
       autosize(document.querySelector('textarea.autosizeme'));
     }
   };
@@ -451,9 +451,9 @@ export var App = function() {
   // Handles Bootstrap Popovers
 
   // last popep popover
-  var lastPopedPopover;
+  let lastPopedPopover;
 
-  var handlePopovers = function() {
+  const handlePopovers = function () {
     $('.popovers').popover();
 
     // close last displayed popover
@@ -466,18 +466,18 @@ export var App = function() {
   };
 
   // Handles scrollable contents using jQuery SlimScroll plugin.
-  var handleScrollers = function() {
+  const handleScrollers = function () {
     App.initSlimScroll('.scroller');
   };
 
   // Handles Image Preview using jQuery Fancybox plugin
-  var handleFancybox = function() {
+  const handleFancybox = function () {
     if (!jQuery.fancybox) {
       return;
     }
 
-    if ($(".fancybox-button").size() > 0) {
-      $(".fancybox-button").fancybox({
+    if ($('.fancybox-button').size() > 0) {
+      $('.fancybox-button').fancybox({
         groupAttr: 'data-rel',
         prevEffect: 'none',
         nextEffect: 'none',
@@ -492,27 +492,27 @@ export var App = function() {
   };
 
   // Handles counterup plugin wrapper
-  var handleCounterup = function() {
+  const handleCounterup = function () {
     if (!$().counterUp) {
       return;
     }
 
-    $("[data-counter='counterup']").counterUp({
+    $('[data-counter=\'counterup\']').counterUp({
       delay: 10,
       time: 1000
     });
   };
 
   // Fix input placeholder issue for IE8 and IE9
-  var handleFixInputPlaceholderForIE = function() {
+  const handleFixInputPlaceholderForIE = function () {
     //fix html5 placeholder attribute for ie7 & ie8
     if (isIE8 || isIE9) { // ie8 & ie9
       // this is html5 placeholder fix for inputs, inputs with placeholder-no-fix class will be skipped(e.g: we need this for password fields)
       $('input[placeholder]:not(.placeholder-no-fix), textarea[placeholder]:not(.placeholder-no-fix)').each(function() {
-        var input = $(this);
+        const input = $(this);
 
-        if (input.val() === '' && input.attr("placeholder") !== '') {
-          input.addClass("placeholder").val(input.attr('placeholder'));
+        if (input.val() === '' && input.attr('placeholder') !== '') {
+          input.addClass('placeholder').val(input.attr('placeholder'));
         }
 
         input.focus(function() {
@@ -531,11 +531,11 @@ export var App = function() {
   };
 
   // Handle Select2 Dropdowns
-  let handleSelect2 = function() {
+  const handleSelect2 = function () {
     if ($().select2) {
-      $.fn.select2.defaults.set("theme", "bootstrap");
+      $.fn.select2.defaults.set('theme', 'bootstrap');
       $('.select2me').select2({
-        placeholder: "Select",
+        placeholder: 'Select',
         width: 'auto',
         allowClear: true
       });
@@ -543,7 +543,7 @@ export var App = function() {
   };
 
   // handle group element heights
-  let handleHeight = function() {
+  const handleHeight = function () {
     $('[data-auto-height]').each(function() {
       const parent = $(this);
       const items = $('[data-height]', parent);
@@ -552,7 +552,7 @@ export var App = function() {
       const offset = parseInt(parent.attr('data-offset') ? parent.attr('data-offset') : 0);
 
       items.each(function() {
-        if ($(this).attr('data-height') == "height") {
+        if ($(this).attr('data-height') == 'height') {
           $(this).css('height', '');
         } else {
           $(this).css('min-height', '');
@@ -574,7 +574,7 @@ export var App = function() {
         }
       });
 
-      if(parent.attr('data-related')) {
+      if (parent.attr('data-related')) {
         $(parent.attr('data-related')).css('height', parent.height());
       }
     });
@@ -656,7 +656,7 @@ export var App = function() {
 
     // wrApper function to scroll(focus) to an element
     scrollTo: function(el, offeset) {
-      var pos = (el && el.size() > 0) ? el.offset().top : 0;
+      let pos = (el && el.size() > 0) ? el.offset().top : 0;
 
       if (el) {
         if ($('body').hasClass('page-header-fixed')) {
@@ -680,14 +680,14 @@ export var App = function() {
       }
 
       $(el).each(function() {
-        if ($(this).attr("data-initialized")) {
+        if ($(this).attr('data-initialized')) {
           return; // exit
         }
 
-        var height;
+        let height;
 
-        if ($(this).attr("data-height")) {
-          height = $(this).attr("data-height");
+        if ($(this).attr('data-height')) {
+          height = $(this).attr('data-height');
         } else {
           height = $(this).css('height');
         }
@@ -695,17 +695,17 @@ export var App = function() {
         $(this).slimScroll({
           allowPageScroll: true, // allow page scroll when the element scroll is ended
           size: '7px',
-          color: ($(this).attr("data-handle-color") ? $(this).attr("data-handle-color") : '#bbb'),
-          wrapperClass: ($(this).attr("data-wrapper-class") ? $(this).attr("data-wrapper-class") : 'slimScrollDiv'),
-          railColor: ($(this).attr("data-rail-color") ? $(this).attr("data-rail-color") : '#eaeaea'),
+          color: ($(this).attr('data-handle-color') ? $(this).attr('data-handle-color') : '#bbb'),
+          wrapperClass: ($(this).attr('data-wrapper-class') ? $(this).attr('data-wrapper-class') : 'slimScrollDiv'),
+          railColor: ($(this).attr('data-rail-color') ? $(this).attr('data-rail-color') : '#eaeaea'),
           position: isRTL ? 'left' : 'right',
           height: height,
-          alwaysVisible: ($(this).attr("data-always-visible") == "1" ? true : false),
-          railVisible: ($(this).attr("data-rail-visible") == "1" ? true : false),
+          alwaysVisible: ($(this).attr('data-always-visible') === '1' ? true : false),
+          railVisible: ($(this).attr('data-rail-visible') === '1' ? true : false),
           disableFadeOut: true
         });
 
-        $(this).attr("data-initialized", "1");
+        $(this).attr('data-initialized', '1');
       });
     },
 
@@ -715,35 +715,35 @@ export var App = function() {
       }
 
       $(el).each(function() {
-        if ($(this).attr("data-initialized") === "1") { // destroy existing instance before updating the height
-          $(this).removeAttr("data-initialized");
-          $(this).removeAttr("style");
+        if ($(this).attr('data-initialized') === '1') { // destroy existing instance before updating the height
+          $(this).removeAttr('data-initialized');
+          $(this).removeAttr('style');
 
-          var attrList = {};
+          const attrList = {};
 
           // store the custom attribures so later we will reassign.
-          if ($(this).attr("data-handle-color")) {
-            attrList["data-handle-color"] = $(this).attr("data-handle-color");
+          if ($(this).attr('data-handle-color')) {
+            attrList['data-handle-color'] = $(this).attr('data-handle-color');
           }
-          if ($(this).attr("data-wrapper-class")) {
-            attrList["data-wrapper-class"] = $(this).attr("data-wrapper-class");
+          if ($(this).attr('data-wrapper-class')) {
+            attrList['data-wrapper-class'] = $(this).attr('data-wrapper-class');
           }
-          if ($(this).attr("data-rail-color")) {
-            attrList["data-rail-color"] = $(this).attr("data-rail-color");
+          if ($(this).attr('data-rail-color')) {
+            attrList['data-rail-color'] = $(this).attr('data-rail-color');
           }
-          if ($(this).attr("data-always-visible")) {
-            attrList["data-always-visible"] = $(this).attr("data-always-visible");
+          if ($(this).attr('data-always-visible')) {
+            attrList['data-always-visible'] = $(this).attr('data-always-visible');
           }
-          if ($(this).attr("data-rail-visible")) {
-            attrList["data-rail-visible"] = $(this).attr("data-rail-visible");
+          if ($(this).attr('data-rail-visible')) {
+            attrList['data-rail-visible'] = $(this).attr('data-rail-visible');
           }
 
           $(this).slimScroll({
-            wrapperClass: ($(this).attr("data-wrapper-class") ? $(this).attr("data-wrapper-class") : 'slimScrollDiv'),
+            wrapperClass: ($(this).attr('data-wrapper-class') ? $(this).attr('data-wrapper-class') : 'slimScrollDiv'),
             destroy: true
           });
 
-          var the = $(this);
+          const the = $(this);
 
           // reassign custom attributes
           $.each(attrList, function(key, value) {
@@ -756,13 +756,13 @@ export var App = function() {
 
     // function to scroll to the top
     scrollTop: function() {
-      App.scrollTo(undefined,undefined);
+      App.scrollTo(undefined, undefined);
     },
 
     // wrApper function to  block element(indicate loading)
     blockUI: function(options) {
       options = $.extend(true, {}, options);
-      var html = '';
+      let html = '';
       if (options.animate) {
         html = '<div class="loading-message ' + (options.boxed ? 'loading-message-boxed' : '') + '">' + '<div class="block-spinner-bar"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>' + '</div>';
       } else if (options.iconOnly) {
@@ -774,7 +774,7 @@ export var App = function() {
       }
 
       if (options.target) { // element blocking
-        var el = $(options.target);
+        const el = $(options.target);
         if (el.height() <= ($(window).height())) {
           options.cenrerY = true;
         }
@@ -843,20 +843,20 @@ export var App = function() {
     alert: function(options) {
 
       options = $.extend(true, {
-        container: "", // alerts parent container(by default placed after the page breadcrumbs)
-        place: "append", // "append" or "prepend" in container
+        container: '', // alerts parent container(by default placed after the page breadcrumbs)
+        place: 'append', // "append" or "prepend" in container
         type: 'success', // alert's type
-        message: "", // alert's message
+        message: '', // alert's message
         close: true, // make alert closable
         reset: true, // close all previouse alerts first
         focus: true, // auto scroll to the alert after shown
         closeInSeconds: 0, // auto close after defined seconds
-        icon: "" // put icon before the message
+        icon: '' // put icon before the message
       }, options);
 
-      var id = App.getUniqueID("App_alert");
+      const id = App.getUniqueID('App_alert');
 
-      var html = '<div id="' + id + '" class="custom-alerts alert alert-' + options.type + ' fade in">' + (options.close ? '<button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>' : '') + (options.icon !== "" ? '<i class="fa-lg fa fa-' + options.icon + '"></i>  ' : '') + options.message + '</div>';
+      const html = '<div id="' + id + '" class="custom-alerts alert alert-' + options.type + ' fade in">' + (options.close ? '<button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>' : '') + (options.icon !== '' ? '<i class="fa-lg fa fa-' + options.icon + '"></i>  ' : '') + options.message + '</div>';
 
       if (options.reset) {
         $('.custom-alerts').remove();
@@ -865,7 +865,7 @@ export var App = function() {
       if (!options.container) {
         if ($('.page-fixed-main-content').size() === 1) {
           $('.page-fixed-main-content').prepend(html);
-        } else if (($('body').hasClass("page-container-bg-solid") || $('body').hasClass("page-content-white")) && $('.page-head').size() === 0) {
+        } else if (($('body').hasClass('page-container-bg-solid') || $('body').hasClass('page-content-white')) && $('.page-head').size() === 0) {
           $('.page-title').after(html);
         } else {
           if ($('.page-bar').size() > 0) {
@@ -875,7 +875,7 @@ export var App = function() {
           }
         }
       } else {
-        if (options.place == "append") {
+        if (options.place == 'append') {
           $(options.container).append(html);
         } else {
           $(options.container).prepend(html);
@@ -883,7 +883,7 @@ export var App = function() {
       }
 
       if (options.focus) {
-        App.scrollTo($('#' + id),undefined);
+        App.scrollTo($('#' + id), undefined);
       }
 
       if (options.closeInSeconds > 0) {
@@ -903,19 +903,19 @@ export var App = function() {
     //public helper function to get actual input value(used in IE9 and IE8 due to placeholder attribute not supported)
     getActualVal: function(el) {
       el = $(el);
-      if (el.val() === el.attr("placeholder")) {
-        return "";
+      if (el.val() === el.attr('placeholder')) {
+        return '';
       }
       return el.val();
     },
 
     //public function to get a paremeter by name from URL
     getURLParameter: function(paramName) {
-      var searchString = window.location.search.substring(1),
-        i, val, params = searchString.split("&");
+      let searchString = window.location.search.substring(1),
+        i, val, params = searchString.split('&');
 
       for (i = 0; i < params.length; i++) {
-        val = params[i].split("=");
+        val = params[i].split('=');
         if (val[0] == paramName) {
           return window.document.unescape(val[1]);
         }
@@ -926,7 +926,7 @@ export var App = function() {
     // check for device touch support
     isTouchDevice: function() {
       try {
-        document.createEvent("TouchEvent");
+        document.createEvent('TouchEvent');
         return true;
       } catch (e) {
         return false;
@@ -935,7 +935,7 @@ export var App = function() {
 
     // To get the correct viewport width based on  http://andylangton.co.uk/articles/javascript/get-viewport-size-javascript/
     getViewPort: function() {
-      var e = window,
+      let e = window,
         a = 'inner';
       if (!('innerWidth' in window)) {
         a = 'client';
@@ -1011,7 +1011,7 @@ export var App = function() {
 
     getResponsiveBreakpoint: function(size) {
       // bootstrap responsive breakpoints
-      var sizes = {
+      const sizes = {
         'xs' : 480,     // extra small
         'sm' : 768,     // small
         'md' : 992,     // medium

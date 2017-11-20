@@ -9,7 +9,7 @@ declare let $: any;
   styleUrls: ['./cn-page.component.css']
 })
 export class CnPageComponent implements OnInit {
-  @HostBinding('class.page-content') hasPageContent = true;
+  //@HostBinding('class.page-content') hasPageContent = true;
   @HostBinding('class.component') _component = true;
 
   constructor(private clientStorage: ClientStorageService, private router: Router) {

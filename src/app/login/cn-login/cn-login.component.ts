@@ -5,6 +5,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {OnlineUser} from './online-user.model';
 import {ClientStorageService} from '../../services/client-storage.service';
 import {Router} from '@angular/router';
+import {HttpEventType} from '@angular/common/http';
+import {Broadcaster} from '../../broadcast/broadcaster';
 declare let $: any;
 declare let MD5: any;
 @Component({
@@ -28,7 +30,8 @@ export class CnLoginComponent implements OnInit {
   constructor(private apiService: ApiService,
               private formBuilder: FormBuilder,
               private clientStorage: ClientStorageService,
-              private router: Router) {
+              private router: Router,
+              private broadcast: Broadcaster) {
   }
 
   ngOnInit() {
@@ -46,7 +49,7 @@ export class CnLoginComponent implements OnInit {
   }
 
   getValidCode() {
-    this.apiService.doPost2<any>(Configuration.validCode_resource, {})
+    this.apiService.doPost2(Configuration.validCode_resource, {})
       .subscribe(
         response => {
           this.validCode = 'data:image/gif;base64,' + response.Data;
@@ -68,7 +71,7 @@ export class CnLoginComponent implements OnInit {
       this.onlineUser.ValidCode = MD5(this.user.value.validCode.toLowerCase() + this.verfyCode);
       this.onlineUser.ValidCodeId = this.validCodeId;
     }
-    const identityPromise = this.apiService.doPost2<OnlineUser>(Configuration.onlineUser_resource, this.onlineUser);
+    const identityPromise = this.apiService.doPost2(Configuration.onlineUser_resource, this.onlineUser);
     identityPromise.toPromise()
       .then(response => {
         this.onlineUser = {...response};
@@ -113,21 +116,28 @@ export class CnLoginComponent implements OnInit {
 
   entryProject() {
     this.onlineUser.ProjId = this.entryForm.controls['projectName'].value;
-    this.apiService.doPost2<OnlineUser>(Configuration.onlineUser_resource, this.onlineUser)
+    this.apiService.doPost2(Configuration.onlineUser_resource, this.onlineUser)
       .subscribe(
         response => {
+          this.onlineUser = response;
           this.clientStorage.setCookies('onlineUser', response);
           this.apiService.doGet(Configuration.appUser_resource + '/' + this.onlineUser['UserId'])
             .toPromise()
             .then(appUser => {
               this.clientStorage.setCookies('appUser', appUser);
             });
-          this.router.navigate(['/app']);
-        },
-        error2 => {
-          console.log(error2);
-        },
-        () => {
+          this.router.navigate(['/app/dash-broad']).then(() => {
+            this.broadcast.broadcast('loadConfig', 'start');
+            this.apiService.doGetConfig(Configuration.config_resource + '?ProjId=' + this.onlineUser['ProjId'])
+              .subscribe(
+                appModuleConfig => {
+                  this.broadcast.broadcast('loadConfig', 'processing');
+                  this.clientStorage.setSessionStorage('appModuleConfig', appModuleConfig);
+                  this.broadcast.broadcast('loadConfig', 'end');
+                  // setTimeout(() =>{}, 1500);
+                }
+              );
+          });
         }
       );
   }

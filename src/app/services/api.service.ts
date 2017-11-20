@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams, HttpRequest} from '@angular/common/http';
 import {Configuration} from '../framework/configuration';
 import {Observable} from 'rxjs/Observable';
 import {ClientStorageService} from './client-storage.service';
@@ -113,14 +113,15 @@ export class ApiService {
     );
   }
 
-  doPost2<T>(url, data) {
-    return this.httpClient.request<T>(
+  doPost2(url, data?) {
+    const post = this.httpClient.request<any>(
       'POST',
       Configuration.web_api + url,
       {
         body: data
       }
     );
+    return post;
   }
 
   doProc(url, params?, data?) {
@@ -133,6 +134,26 @@ export class ApiService {
         headers: this.setHeaders()
       }
     );
+  }
+
+  doGetWithProgress(url, params?) {
+    const req = new HttpRequest(
+      'GET',
+      Configuration.web_api + url,
+      {headers: this.setHeaders(), params: this.buildParameters(params)},
+      {reportProgress: true}
+    );
+    return this.httpClient.request(req);
+  }
+
+  doPostWithProgress<T>(url, data) {
+    const req = new HttpRequest(
+      'POST',
+      Configuration.web_api + url,
+      {body: data},
+      {reportProgress: true}
+    );
+    return this.httpClient.request<T>(req);
   }
 
   private buildParameters(params): HttpParams {

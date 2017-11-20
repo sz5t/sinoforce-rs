@@ -130,7 +130,6 @@ export class TreeGridTemplateComponent implements OnInit, OnDestroy, OnChanges {
       const masterResolver = new MasterGridViewResolver(config.viewCfg, this.getCredential());
       masterResolver.filterItem = filterItem;
       masterResolver.gridConfig && (() => {
-        debugger;
         gridConfig = masterResolver.gridConfig;
         gridConfig.rowCallback = this._rowCallback;
         gridConfig.language = {

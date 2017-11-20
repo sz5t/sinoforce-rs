@@ -46,7 +46,8 @@
         "assets/global/plugins/bootstrap-toastr/toastr.min.js",
         "assets/global/plugins/jquery-validation/js/jquery.validate.min.js",
         "assets/global/plugins/jquery-validation/js/additional-methods.min.js",
-        "assets/global/plugins/md5.js"
+        "assets/global/plugins/md5.js",
+        "assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

@@ -85,7 +85,7 @@ export class GridViewTemplateComponent implements OnInit, AfterViewInit {
     }
   }
 
-  static initLayout(viewConfig) {
+  initLayout(viewConfig) {
     return new LayoutResolver(viewConfig).config;
   }
 

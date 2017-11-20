@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {ConfigService} from "../../../services/config.service";
-import {Breadcrumb, BreadcrumbResolver} from "../../../framework/resolver/breadcrumb.resovler";
+import {ActivatedRoute} from '@angular/router';
+import {ConfigService} from '../../../services/config.service';
+import {Breadcrumb, BreadcrumbResolver} from '../../../framework/resolver/breadcrumb.resovler';
+import {ClientStorageService} from '../../../services/client-storage.service';
 
 @Component({
   selector: 'cn-breadcrumb',
@@ -9,23 +10,23 @@ import {Breadcrumb, BreadcrumbResolver} from "../../../framework/resolver/breadc
   styleUrls: ['./cn-breadcrumb.component.css']
 })
 export class CnBreadcrumbComponent implements OnInit {
-  title:string;
-  desc:string;
-  breadcrumbs:any[];
-  breadcrumbData: Map<string,Breadcrumb> = new Map<string,Breadcrumb>();
-  constructor(private route:ActivatedRoute,private configService:ConfigService) {
+  title: string;
+  desc: string;
+  breadcrumbs: any[];
+  breadcrumbData: Map<string, Breadcrumb> = new Map<string, Breadcrumb>();
+
+  constructor(private route: ActivatedRoute, private clientStorage: ClientStorageService) {
+    /*this.breadcrumbData =
+     new BreadcrumbResolver(this.configService.getProjectConfig()).config;*/
     this.breadcrumbData =
-      new BreadcrumbResolver(this.configService.getProjectConfig()).config;
-    /*this.configService.getConfig2().toPromise().then(response =>{
-      this.breadcrumbData = new BreadcrumbResolver(response).config;
-    });*/
+      new BreadcrumbResolver(this.clientStorage.getLocalStorage('appModuleConfig')).config;
   }
 
   ngOnInit() {
     // get bread info and set page value
     this.route.params.subscribe((params) => {
-      let bread = this.breadcrumbData.get(params.id);
-      if(bread){
+      const bread = this.breadcrumbData.get(params.id);
+      if (bread) {
         this.title = bread.breadcrumb.title;
         this.desc = bread.breadcrumb.desc;
         this.breadcrumbs = bread.breadcrumb.breadcrumbs;

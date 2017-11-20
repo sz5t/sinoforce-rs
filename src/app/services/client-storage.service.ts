@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
-import {CookiesStorageService} from 'ngx-store';
-import {ClearType} from 'ngx-store/dist/src/config';
+import {CookiesStorageService, LocalStorageService, SessionStorageService} from 'ngx-store';
 
 @Injectable()
 export class ClientStorageService {
 
-  constructor(private cookiesStorage: CookiesStorageService) {
+  constructor(private cookiesStorage: CookiesStorageService,
+              private localStorage: LocalStorageService,
+              private localSession: SessionStorageService) {
   }
 
   public setCookies(key, data) {
@@ -18,5 +19,21 @@ export class ClientStorageService {
 
   public clearCookies() {
     this.cookiesStorage.clear();
+  }
+
+  public setLocalStorage(key, data) {
+    this.localStorage.set(key, data);
+  }
+
+  public getLocalStorage(key) {
+    return this.localStorage.get(key);
+  }
+
+  public setSessionStorage(key, data) {
+    this.localSession.set(key, data);
+  }
+
+  public getSessionStorage(key) {
+    return this.localSession.get(key);
   }
 }

@@ -8,6 +8,7 @@ export class Configuration {
   public static config_resource = '../assets/data/layout.json';
   public static onlineUser_resource = 'OnlineUser';
   public static appUser_resource = 'AppUser';
+  public static appModule_response = 'appModuleConfig';
 }
 export class RenderColumnType{
   public static RENDER_COLUMN_TYPE = {
