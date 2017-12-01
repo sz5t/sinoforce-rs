@@ -14,7 +14,9 @@ import { CnContainerComponent } from './cn-container/cn-container.component';
 import { CnSidebarComponent } from './cn-sidebar/cn-sidebar.component';
 import { CnPageComponent } from './cn-page/cn-page.component';
 import { CnBreadcrumbComponent } from './cn-breadcrumb/cn-breadcrumb.component';
-import { CnRowComponent } from './cn-row/cn-row.component';
+import {CnRowDirective} from './cn-row/cn-row.directive';
+import {CnColumnComponent} from './cn-column/cn-column.component';
+import {CnClearFixDirective} from './cn-clear-fix/cn-clear-fix.directive';
 
 @NgModule({
   declarations:[
@@ -29,7 +31,9 @@ import { CnRowComponent } from './cn-row/cn-row.component';
     CnSidebarComponent,
     CnPageComponent,
     CnBreadcrumbComponent,
-    CnRowComponent
+    CnRowDirective,
+    CnColumnComponent,
+    CnClearFixDirective
   ],
   exports:[
     CnLayoutComponent,
@@ -43,7 +47,9 @@ import { CnRowComponent } from './cn-row/cn-row.component';
     CnSidebarComponent,
     CnPageComponent,
     CnBreadcrumbComponent,
-    CnRowComponent
+    CnRowDirective,
+    CnColumnComponent,
+    CnClearFixDirective
   ],
   imports: [
     CommonModule,

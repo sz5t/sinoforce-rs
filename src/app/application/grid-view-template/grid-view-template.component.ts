@@ -13,6 +13,7 @@ import {CommonUtility} from '../../framework/utility/common-utility';
 import {ConfigService} from '../../services/config.service';
 import {MasterGridViewResolver} from '../../framework/resolver/gridview.resolver';
 import {LayoutResolver} from '../../framework/resolver/layout.resolver';
+import {ClientStorageService} from '../../services/client-storage.service';
 declare let $: any;
 @Component({
   selector: 'cn-grid-view-template',
@@ -43,7 +44,7 @@ export class GridViewTemplateComponent implements OnInit, AfterViewInit {
   formDialogTitle = '表单';
   templateGUID: string = CommonUtility.uuID(6);
 
-  constructor(private router: ActivatedRoute) {
+  constructor(private router: ActivatedRoute, private _clientStorage: ClientStorageService) {
     this._router = router;
   }
   ngOnInit() {
@@ -89,9 +90,14 @@ export class GridViewTemplateComponent implements OnInit, AfterViewInit {
     return new LayoutResolver(viewConfig).config;
   }
 
+  getCredential(): string {
+    const onlineUser = this._clientStorage.getCookies('onlineUser');
+    return onlineUser ? onlineUser.Token : '';
+  }
+
   initConfig(viewConfig) {
     if (viewConfig) {
-      const masterResolver = new MasterGridViewResolver(viewConfig.viewCfg, '');
+      const masterResolver = new MasterGridViewResolver(viewConfig.viewCfg, this.getCredential());
       masterResolver.gridConfig && (() => {
         this.gridConfig = masterResolver.gridConfig;
         this.gridConfig.rowCallback = this.rowCallback;

@@ -486,10 +486,11 @@ div.dt-button-info>div {
 }
 
 button.dt-button,div.dt-button,a.dt-button {
-  position: relative;
+  margin-right: 0.333em;
+  /*position: relative;
   display: inline-block;
   box-sizing: border-box;
-  margin-right: 0.333em;
+
   padding: 0.5em 1em;
   border: 1px solid #999;
   border-radius: 2px;
@@ -510,9 +511,9 @@ button.dt-button,div.dt-button,a.dt-button {
   -ms-user-select: none;
   user-select: none;
   text-decoration: none;
-  outline: none
+  outline: none*/
 }
-
+/*
 button.dt-button.disabled,div.dt-button.disabled,a.dt-button.disabled {
   color: #999;
   border: 1px solid #d0d0d0;
@@ -701,7 +702,7 @@ div.dt-button-background {
   background: -webkit-radial-gradient(center, ellipse farthest-corner, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
   background: radial-gradient(ellipse farthest-corner at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
   z-index: 2001
-}
+}*/
 
 @media screen and (max-width: 640px) {
   div.dt-buttons {

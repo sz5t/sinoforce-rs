@@ -126,7 +126,7 @@ export class CnLoginComponent implements OnInit {
             .then(appUser => {
               this.clientStorage.setCookies('appUser', appUser);
             });
-          this.router.navigate(['/app/dash-broad']).then(() => {
+          this.router.navigate(['/app']).then(() => {
             this.broadcast.broadcast('loadConfig', 'start');
             this.apiService.doGetConfig(Configuration.config_resource + '?ProjId=' + this.onlineUser['ProjId'])
               .subscribe(

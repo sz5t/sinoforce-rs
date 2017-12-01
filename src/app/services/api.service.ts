@@ -92,6 +92,7 @@ export class ApiService {
   }
 
   doDelete(url, params?, data?) {
+    debugger;
     return this.httpClient.request(
       'DELETE',
       Configuration.web_api + url,
@@ -159,10 +160,17 @@ export class ApiService {
   private buildParameters(params): HttpParams {
     let str = '';
     if (params) {
-      for (const p of params) {
-        str += p + '=' + params[p] + '&';
+      for (const p in params) {
+        if (params.hasOwnProperty(p)) {
+          const s = [];
+          s[0] = p;
+          s[1] = '=';
+          s[2] = params[p];
+          s[3] = '&';
+          str += s.join('');
+        }
       }
     }
-    return new HttpParams({fromString: str});
+    return new HttpParams({fromString: str.substring(0, str.length - 1)});
   }
 }

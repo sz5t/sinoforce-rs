@@ -6,8 +6,8 @@ import {Component, OnInit, ViewEncapsulation, HostBinding, ElementRef, Renderer2
   styleUrls: ['./cn-top-menu.component.css']
 })
 export class CnTopMenuComponent implements OnInit {
-  // @HostBinding('class.component') _component = true;
-  // @HostBinding('class.top-menu') hasTopMenu = true;
+  @HostBinding('class.component') _component = true;
+  @HostBinding('class.top-menu') hasTopMenu = true;
   _el: HTMLElement;
 
   constructor(private _elementRef: ElementRef) {

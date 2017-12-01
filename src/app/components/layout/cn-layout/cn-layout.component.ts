@@ -1024,7 +1024,7 @@ export let App = function () {
 
 }();
 @Component({
-  selector: 'cn-layout',
+  selector: '[cn-layout], cn-layout',
   encapsulation: ViewEncapsulation.None,
   template: `<ng-content></ng-content>`,
   styleUrls: ['./cn-layout.component.css']

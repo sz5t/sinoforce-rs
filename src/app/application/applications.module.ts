@@ -13,16 +13,18 @@ import {DataTablesModule} from 'angular-datatables';
 import {CnBreadcrumbComponent} from '../components/layout/cn-breadcrumb/cn-breadcrumb.component';
 import {LoginAuthService} from '../services/login-auth.service';
 import {DashBroadTemplateComponent} from './dash-broad-template/dash-broad-template.component';
+import {FormGridTemplateComponent} from '../application/form-grid-template/form-grid-template.component';
 
 export const CHILDREN_ROUTES: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {
-    path: 'app', component: ApplicationsComponent, canActivate: [LoginAuthService],
+    path: 'app', component: ApplicationsComponent,
     children: [
       {path: 'dash-broad', component: DashBroadTemplateComponent},
       {path: 'grid-view-master/:name', component: MasterTemplateComponent, canActivate: [LoginAuthService]},
       {path: 'grid-view-master-slaver/:name', component: MasterSlaverTemplateComponent, canActivate: [LoginAuthService]},
       {path: 'tree-grid/:name', component: TreeGridTemplateComponent, canActivate: [LoginAuthService]},
+      {path: 'form-grid/:name', component: FormGridTemplateComponent},
       {path: 'breadcrumb/:id', component: CnBreadcrumbComponent, outlet: 'breadcrumb'}
     ]
   }
@@ -43,7 +45,8 @@ export const CHILDREN_ROUTES: Routes = [
     MasterTemplateComponent,
     TreeGridTemplateComponent,
     ApplicationsComponent,
-    DashBroadTemplateComponent
+    DashBroadTemplateComponent,
+    FormGridTemplateComponent
   ]
 })
 export class ApplicationsModule {

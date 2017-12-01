@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, HostBinding } from '@angular/core';
 
 @Component({
-  selector: 'cn-container',
+  selector: '[cn-container],cn-container',
   encapsulation: ViewEncapsulation.None,
   templateUrl: './cn-container.component.html',
   styleUrls: ['./cn-container.component.css']

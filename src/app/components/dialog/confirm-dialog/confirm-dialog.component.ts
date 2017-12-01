@@ -4,7 +4,6 @@ import {
 } from '@angular/core';
 import {ButtonEvent} from '../../../framework/event/button-event';
 import {ApiService} from '../../../services/api.service';
-import {Broadcaster} from '../../../broadcast/broadcaster';
 import {CnToastComponent, ToastType} from '../../toast/cn-toast/cn-toast.component';
 declare let $: any;
 @Component({

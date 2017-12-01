@@ -16,7 +16,10 @@ export class CnDynamicFormComponent implements OnInit, OnChanges {
   form: FormGroup;
 
   get controls() {
-    return this.config.filter(({type}) => type !== 'button');
+    return this.config.filter(({type}) => {
+      //debugger;
+      return type !== 'button';
+    });
   }
 
   get changes() {
@@ -41,6 +44,7 @@ export class CnDynamicFormComponent implements OnInit, OnChanges {
     if (this.form) {
       const controls = Object.keys(this.form.controls);
       const configControls = this.controls.map(item => item.name);
+
       controls
         .filter(control => !configControls.includes(control))
         .forEach(control => this.form.removeControl(control));

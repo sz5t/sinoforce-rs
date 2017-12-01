@@ -23,7 +23,6 @@ export class MasterGridViewResolver {
         btn.formConfig.forEach(tag => {
           const validation = [];
           if (tag.validations) {
-
             tag.validations.forEach(valid => {
               if (valid.validator === 'required' || valid.validator === 'email') {
                 validation.push(Validators[valid.validator]);
@@ -37,11 +36,13 @@ export class MasterGridViewResolver {
           }
         });
       }
-
     });
     return this._viewCfg.toolbarsConfig;
   }
 
+  get filterConfig() {
+    return this._viewCfg.filterConfig;
+  }
   get gridConfig() {
 
     let config: any;
@@ -87,7 +88,6 @@ export class MasterGridViewResolver {
       }
     };
   }
-
   private _buildColumns(): ColumnSettings[] {
     const columns: ColumnSettings[] = [];
     let column: ColumnSettings = {};

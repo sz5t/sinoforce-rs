@@ -1,8 +1,10 @@
-import { Component, HostBinding } from '@angular/core';
+import {Component, HostBinding, ViewEncapsulation} from '@angular/core';
 
 @Component({
-  selector: 'cn-clear-fix',
-  template: `<div></div>`,
+  selector: '[cn-clear], cn-clear',
+  encapsulation: ViewEncapsulation.None,
+  template: `
+    <ng-content></ng-content>`,
   styleUrls: ['./cn-clear-fix.component.css']
 })
 export class CnClearFixComponent {

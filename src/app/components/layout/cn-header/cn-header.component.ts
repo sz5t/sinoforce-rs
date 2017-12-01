@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewEncapsulation, HostBinding } from '@angular/core';
 
 @Component({
-  selector: 'cn-header',
+  selector: '[cn-header],cn-header',
   encapsulation: ViewEncapsulation.None,
   template: `
     <div class="page-header-inner ">

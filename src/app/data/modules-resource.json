@@ -5,6 +5,13 @@
     "type": "nav-item",
     "sub": [
       {
+        "name": "dashbroad",
+        "icon": "icon-bar-chart",
+        "title": "Dashbroad",
+        "description": "综合统计",
+        "router": "dash-broad"
+      },
+      {
         "name": "masterGridView",
         "icon": "icon-bar-chart",
         "title": "单表示例",

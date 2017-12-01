@@ -19,8 +19,10 @@ export class CnPageComponent implements OnInit {
   }
 
   logout() {
-    this.clientStorage.clearCookies();
     $('#dialog_logout').modal('hide');
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login']).then(() => {
+      this.clientStorage.clearCookies();
+      this.clientStorage.clearSessionStorage();
+    });
   }
 }

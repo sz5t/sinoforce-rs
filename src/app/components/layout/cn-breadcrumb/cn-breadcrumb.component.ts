@@ -19,7 +19,7 @@ export class CnBreadcrumbComponent implements OnInit {
     /*this.breadcrumbData =
      new BreadcrumbResolver(this.configService.getProjectConfig()).config;*/
     this.breadcrumbData =
-      new BreadcrumbResolver(this.clientStorage.getLocalStorage('appModuleConfig')).config;
+      new BreadcrumbResolver(this.clientStorage.getSessionStorage('appModuleConfig')).config;
   }
 
   ngOnInit() {

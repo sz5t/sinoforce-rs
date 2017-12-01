@@ -30,21 +30,19 @@ export class ApplicationsComponent implements OnInit, OnDestroy {
 
   constructor(private broadcast: Broadcaster, private clientStorage: ClientStorageService) {
     this.menu = this.clientStorage.getSessionStorage('appModuleConfig');
-    if (!this.menu) {
-      this.broadcastObj = broadcast.on<string>('loadConfig').subscribe(
-        (result) => {
-          if (result === 'start') {
-            $('#large').modal('show');
-            this.setProgress(0.25, ['li_proc1'], 800);
-          } else if (result === 'processing') {
-            this.setProgress(0.75, ['li_proc1', 'li_proc2'], 2000);
-          } else if (result === 'end') {
-            this.menu = this.clientStorage.getSessionStorage('appModuleConfig');
-            this.setProgress(1, ['li_proc1', 'li_proc2', 'li_proc3'], 2500);
-          }
+    this.broadcastObj = broadcast.on<string>('loadConfig').subscribe(
+      (result) => {
+        if (result === 'start') {
+          $('#large').modal('show');
+          this.setProgress(0.25, ['li_proc1'], 800);
+        } else if (result === 'processing') {
+          this.setProgress(0.75, ['li_proc1', 'li_proc2'], 2000);
+        } else if (result === 'end') {
+          this.menu = this.clientStorage.getSessionStorage('appModuleConfig');
+          this.setProgress(1, ['li_proc1', 'li_proc2', 'li_proc3'], 2500);
         }
-      );
-    }
+      }
+    );
   }
 
   /*handleTitle(process, ids) {

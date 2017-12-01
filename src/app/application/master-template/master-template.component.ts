@@ -1,12 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {IFieldConfig} from "../../components/form/form-models/IFieldConfig";
-import {Validators} from "@angular/forms";
-import {Configuration} from "../../framework/configuration";
-import {AppConfigData, ConfigService} from "../../services/config.service";
-import {ActivatedRoute} from "@angular/router";
-import {MasterGridViewResolver, SlaverGridViewResolver} from "../../framework/resolver/gridview.resolver";
-import {LayoutResolver} from "../../framework/resolver/layout.resolver";
-import {ConfigAdapter} from "../../framework/adapter/config.adapter";
+import {IFieldConfig} from '../../components/form/form-models/IFieldConfig';
+import {Validators} from '@angular/forms';
+import {Configuration} from '../../framework/configuration';
+import {AppConfigData, ConfigService} from '../../services/config.service';
+import {ActivatedRoute} from '@angular/router';
+import {MasterGridViewResolver, SlaverGridViewResolver} from '../../framework/resolver/gridview.resolver';
+import {LayoutResolver} from '../../framework/resolver/layout.resolver';
+import {ConfigAdapter} from '../../framework/adapter/config.adapter';
 
 @Component({
   selector: 'cn-master-template',
@@ -15,7 +15,8 @@ import {ConfigAdapter} from "../../framework/adapter/config.adapter";
 })
 export class MasterTemplateComponent implements OnInit {
   _masterConfig;
-  constructor(private route:ActivatedRoute,private configService:ConfigService) {
+
+  constructor(private route: ActivatedRoute, private configService: ConfigService) {
     this.route.params.subscribe(params => {
       this._masterConfig = ConfigAdapter.moduleFinder(
         this.configService.getProjectConfig(),

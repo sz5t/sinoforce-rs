@@ -11,6 +11,7 @@ import {CnTreeComponent} from "./cn-tree/cn-tree.component";
   ],
   exports:[
     CnTreeComponent
-  ]
+  ],
+  entryComponents: [CnTreeComponent]
 })
 export class CnTreeModule { }

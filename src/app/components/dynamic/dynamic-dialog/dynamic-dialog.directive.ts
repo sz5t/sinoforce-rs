@@ -1,0 +1,77 @@
+import {
+  ComponentFactoryResolver, ComponentRef, Directive, EventEmitter, Input, OnChanges, OnInit, Output, Type,
+  ViewContainerRef
+} from '@angular/core';
+import {IDynamicDialog, IDynamicDialogField} from './dynamic-dialog.model';
+import {CommonUtility} from '../../../framework/utility/common-utility';
+import {CnDynamicFormDialogComponent} from './dynamic-form-dialog/dynamic-form-dialog.component';
+import {CnDynamicConfirmDialogComponent} from './dynamic-confirm-dialog/dynamic-confirm-dialog.component';
+const components: { [type: string]: Type<IDynamicDialog> } = {
+  form_dialog: CnDynamicFormDialogComponent,
+  confirm_dialog: CnDynamicConfirmDialogComponent
+};
+
+
+@Directive({
+  selector: '[cnDynamicDialog]'
+})
+export class DynamicDialogDirective implements OnInit, IDynamicDialog, OnChanges {
+  dialogConfigField: IDynamicDialogField;
+  @Input() GUID;
+  @Input() dialogConfig;
+  @Input() handleData;
+  @Output() eventCallback: EventEmitter<any> = new EventEmitter<any>();
+  component: ComponentRef<IDynamicDialog>;
+
+  constructor(private resolver: ComponentFactoryResolver,
+              private container: ViewContainerRef) {
+  }
+
+  ngOnInit(): void {
+
+    this.initField();
+    this.buildComponent();
+  }
+
+  ngOnChanges() {
+    if (this.handleData) {
+      this.component.instance.handleData = this.handleData;
+    }
+
+  }
+
+  initField(): void {
+    const confirmDialog: IDynamicDialogField = {
+      GUID: this.GUID,
+      title: this.dialogConfig.events.title ? this.dialogConfig.events.title : '',
+      text: this.dialogConfig.events.text ? this.dialogConfig.events.text : '',
+      handleData: this.handleData,
+      eventSetting: this.dialogConfig.events.execution ? this.dialogConfig.events.execution : null,
+      dialogConfig: this.dialogConfig.events,
+      eventType: this.dialogConfig.events.eventType,
+      eventCallBack: this.eventCallback
+    };
+    const formDialog: IDynamicDialogField = {
+      GUID: this.GUID,
+      title: this.dialogConfig.events.title ? this.dialogConfig.events.title : '',
+      handleData: this.handleData,
+      eventSetting: this.dialogConfig.events.execution ? this.dialogConfig.events.execution : null,
+      dialogConfig: this.dialogConfig.formConfig,
+      eventType: this.dialogConfig.events.eventType,
+      eventCallBack: this.eventCallback
+    };
+    const dialogConfigCreator: { [type: string]: IDynamicDialogField } = {
+      confirm_dialog: confirmDialog,
+      form_dialog: formDialog,
+    };
+    this.dialogConfigField =
+      dialogConfigCreator[this.dialogConfig.events.eventType];
+  }
+
+  buildComponent(): void {
+    const componentFactory = this.resolver.resolveComponentFactory<IDynamicDialog>(components[this.dialogConfig.events.eventType]);
+    this.component = this.container.createComponent(componentFactory);
+    this.component.instance.dialogConfigField = this.dialogConfigField;
+    this.component.instance.handleData = this.handleData;
+  }
+}

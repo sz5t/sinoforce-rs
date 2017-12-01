@@ -1,18 +1,17 @@
-<cn-layout>
-  <cn-header>
-    <cn-top-menu>
-    </cn-top-menu>
-  </cn-header>
-  <cn-clear-fix></cn-clear-fix>
-  <cn-container>
-    <cn-sidebar [menu]="menu" [isShowSearch]="'true'"></cn-sidebar>
+<div cn-layout></div>
+<div cn-header>
+  <cn-top-menu></cn-top-menu>
+</div>
+<div cn-clear></div>
+<div cn-container>
+  <cn-sidebar [menu]="menu"></cn-sidebar>
     <cn-page>
       <router-outlet name="breadcrumb"></router-outlet>
       <router-outlet></router-outlet>
     </cn-page>
-  </cn-container>
-  <cn-footer [copyright]="copyright" [siteName]="name" [fullSite]="site"></cn-footer>
-</cn-layout>
+</div>
+<div cn-footer [copyright]="copyright" [siteName]="name" [fullSite]="site"></div>
+
 <div class="modal fade bs-modal-lg" id="large" tabindex="-1" role="dialog" data-backdrop="static">
   <div class="modal-dialog modal-lg">
     <div class="modal-content" id="form_wizard_1">

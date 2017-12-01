@@ -29,11 +29,18 @@ export class ClientStorageService {
     return this.localStorage.get(key);
   }
 
+  public clearLocalStorage() {
+    this.localStorage.clear();
+  }
   public setSessionStorage(key, data) {
     this.localSession.set(key, data);
   }
 
   public getSessionStorage(key) {
     return this.localSession.get(key);
+  }
+
+  public clearSessionStorage() {
+    return this.localSession.clear();
   }
 }

@@ -1516,7 +1516,8 @@ Page content
     background-color: #ffffff;
     position: relative;
     padding: 0px 20px;
-    margin: -25px -20px 0 -20px; }
+    margin: -10px -20px 0 -10px;
+  }
     .page-content-white .page-bar .page-breadcrumb,
     .page-container-bg-solid .page-bar .page-breadcrumb {
       padding: 11px 0; }

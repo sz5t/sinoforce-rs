@@ -22,7 +22,7 @@ export class CnGridViewComponent implements OnInit, AfterViewInit, OnChanges {
 
   }
 
-  ngOnChanges(){
+  ngOnChanges() {
     if (this.dtOptions.columns && this.dtElement.dtInstance) {
       this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
         dtInstance.destroy();
@@ -36,7 +36,8 @@ export class CnGridViewComponent implements OnInit, AfterViewInit, OnChanges {
   ngOnInit(){
     this.init();
   }
-  ngAfterViewInit(){
+
+  ngAfterViewInit() {
     this.dtTrigger.next();
   }
 
@@ -56,7 +57,7 @@ export class CnGridViewComponent implements OnInit, AfterViewInit, OnChanges {
       if (newURL) {
         dtInstance.ajax.url(newURL).load();
       }
-      else{
+      else {
         dtInstance.ajax.reload();
       }
     });

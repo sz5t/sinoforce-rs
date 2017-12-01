@@ -1,60 +1,62 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ITreeNode} from "../tree-models/tree-node-model";
-import {CommonUtility, NewSafeObservable} from "../../../framework/utility/common-utility";
-import {ApiService} from "../../../services/api.service";
-import {isNullOrUndefined} from "util";
-import {Broadcaster} from "../../../broadcast/broadcaster";
+import {ITreeNode} from '../tree-models/tree-node-model';
+import {CommonUtility} from '../../../framework/utility/common-utility';
+import {ApiService} from '../../../services/api.service';
+import {Broadcaster} from '../../../broadcast/broadcaster';
+import {ICnComponent} from '../../component-models/component.interface';
 
-declare let $:any;
+declare let $: any;
 @Component({
   selector: 'cn-tree',
   templateUrl: './cn-tree.component.html',
   styleUrls: ['./cn-tree.component.css']
 })
-export class CnTreeComponent implements OnInit {
+export class CnTreeComponent implements OnInit, ICnComponent {
 
-  @Input() treeConfig;
+  @Input() componentConfig;
+  GUID = CommonUtility.uuID(4);
   _rootConfigs;
   _childrenConfigs;
-  _rootNodes:ITreeNode[] = [];
+  _rootNodes: ITreeNode[] = [];
   _jsTree;
   private NodeFlag = {
-    STATIC_NODE:"SFDW_Classes.TStaticTreeNodeConfig",
-    DYNAMIC_NODE:"SFDW_Classes.TDynaTreeNodeConfig",
-    CHILDREN_NODE:"SFDW_Classes.TTreeNodeChildrenConfig"
+    STATIC_NODE: 'SFDW_Classes.TStaticTreeNodeConfig',
+    DYNAMIC_NODE: 'SFDW_Classes.TDynaTreeNodeConfig',
+    CHILDREN_NODE: 'SFDW_Classes.TTreeNodeChildrenConfig'
   };
-  constructor(private apiService:ApiService,private broadcast:Broadcaster) {
+
+  constructor(private apiService: ApiService, private broadcast: Broadcaster) {
   }
 
   ngOnInit() {
     this.buildTree();
   }
   buildTree(){
-    this._rootConfigs = this.treeConfig.viewCfg.rootConfigs;
-    this._childrenConfigs = this.treeConfig.viewCfg.childConfigList;
-    let promiseList = [];
-    this._rootConfigs.forEach(root =>{
-      if(root.classType && root.classType === this.NodeFlag.STATIC_NODE){
-        promiseList.push({'func':this.createRootStaticNode,'param':root});
-      }else if(root.classType && root.classType === this.NodeFlag.DYNAMIC_NODE){
-        promiseList.push({'func':this.createRootDynamicNode,'param':root});
+    this._rootConfigs = this.componentConfig.rootConfigs;
+    this._childrenConfigs = this.componentConfig.childConfigList;
+    const promiseList = [];
+    this._rootConfigs.forEach(root => {
+      if (root.classType && root.classType === this.NodeFlag.STATIC_NODE) {
+        promiseList.push({'func': this.createRootStaticNode, 'param': root});
+      } else if (root.classType && root.classType === this.NodeFlag.DYNAMIC_NODE) {
+        promiseList.push({'func': this.createRootDynamicNode, 'param': root});
       }
     });
     Promise.all((() => {
-      let list:any[] = [];
-      let that = this;
-      promiseList.forEach(item =>{
-        list.push(item.func(item.param,that));
+      const list: any[] = [];
+      const that = this;
+      promiseList.forEach(item => {
+        list.push(item.func(item.param, that));
       });
       return list;
     })()).then(result => {
-      $('#cnTree').jstree({
+      $('#cnTree' + this.GUID).jstree({
         'core': {
           'themes': {
             'responsive': false
           },
           'check_callback': true,
-          'data':result[0]
+          'data': result[0]
         }
         // 暂定不进行一下相关内容的配置解析
         /*'types': NodeType.nodeType,
@@ -68,27 +70,27 @@ export class CnTreeComponent implements OnInit {
          }
          }*/
       });
-      this._jsTree =  $('#cnTree').jstree(true);
+      this._jsTree = $('#cnTree' + this.GUID).jstree(true);
 
-      $('#cnTree').on('open_node.jstree', (event,openNode) => {
-        let funcList = [];
-        let nodeTypesConfig = openNode.node.data;
+      $('#cnTree' + this.GUID).on('open_node.jstree', (event, openNode) => {
+        const funcList = [];
+        const nodeTypesConfig = openNode.node.data;
         // delete openNode children
         this._jsTree.delete_node(this._jsTree.get_children_dom(openNode.node));
 
-        if(nodeTypesConfig.isRoot){
-          nodeTypesConfig.value && nodeTypesConfig.value.forEach(nodeType =>{
-            if(nodeType.classType === this.NodeFlag.STATIC_NODE){
+        if (nodeTypesConfig.isRoot) {
+          nodeTypesConfig.value && nodeTypesConfig.value.forEach(nodeType => {
+            if (nodeType.classType === this.NodeFlag.STATIC_NODE) {
               const createStaticChildNode = () => {
-                return new Promise(resolve =>{
-                  setTimeout(()=>{
-                    let openChildrenNodes:ITreeNode[]=[];
-                    let newStaticNode:ITreeNode = {
+                return new Promise(resolve => {
+                  setTimeout(() => {
+                    const openChildrenNodes: ITreeNode[] = [];
+                    const newStaticNode: ITreeNode = {
                       id:       'nodeId_' + CommonUtility.uuID(5),
                       parent:   openNode.node.id,
                       text:     nodeType.nodeText ? nodeType.nodeText : '未命名节点',
                       icon: nodeType.icon ? nodeType.icon : '',
-                      state: nodeType.state ? nodeType.state: {
+                      state: nodeType.state ? nodeType.state : {
                         opened: false,
                         disabled: false,
                         selected: false,
@@ -96,63 +98,63 @@ export class CnTreeComponent implements OnInit {
                     };
                     openChildrenNodes.push(newStaticNode);
                     // if exists nodeTypes and add a child node as child node flag
-                    if(nodeType.nodeTypes){
+                    if (nodeType.nodeTypes) {
                       newStaticNode.data = {
-                        value:nodeType.nodeTypes,
-                        isRoot:true,
-                        pageConfigs:nodeType.pageConfigs?nodeType.pageConfigs:null
+                        value: nodeType.nodeTypes,
+                        isRoot: true,
+                        pageConfigs: nodeType.pageConfigs ? nodeType.pageConfigs : null
                       };
-                      openChildrenNodes.push({id:'nodeId_' + CommonUtility.uuID(5),text:'',parent:newStaticNode.id});
+                      openChildrenNodes.push({id: 'nodeId_' + CommonUtility.uuID(5), text: '', parent: newStaticNode.id});
                     }
                     // sync write a node to openChildrenNodes
                     resolve(openChildrenNodes);
-                  },0);
+                  }, 0);
                 });
               };
               funcList.push(createStaticChildNode);
             }
-            else if(nodeType.classType === this.NodeFlag.DYNAMIC_NODE){
-              const createDynamicChildNode = () =>{
-                return new Promise(resolve =>{
-                  setTimeout(()=>{
+            else if (nodeType.classType === this.NodeFlag.DYNAMIC_NODE) {
+              const createDynamicChildNode = () => {
+                return new Promise(resolve => {
+                  setTimeout(() => {
                     let nodeCondition = '';
-                    let openChildrenNodes:ITreeNode[]=[];
+                    const openChildrenNodes: ITreeNode[] = [];
                     nodeType.arameters && nodeType.parameters.forEach(parameter => {
-                      nodeCondition += parameter+"&";
+                      nodeCondition += parameter + '&';
                     });
                     nodeType.filters && nodeType.filters.forEach(filter => {
                       filter.propLinks && filter.propLinks.forEach(link => {
-                        nodeCondition += link.slaveProp+"="+nodeTypesConfig.parentItemNode[link.masterProp]+"&";
+                        nodeCondition += link.slaveProp + '=' + nodeTypesConfig.parentItemNode[link.masterProp] + '&';
                       });
                     });
-                    this.apiService.doList(nodeType.entityClass+"?"+nodeCondition)
+                    this.apiService.doList(nodeType.entityClass + '?' + nodeCondition)
                       .toPromise()
-                      .then(response =>{
-                        response.forEach(item =>{
-                          let newDynamicNode:ITreeNode = {
+                      .then(response => {
+                        response.forEach(item => {
+                          const newDynamicNode: ITreeNode = {
                             id : 'nodeId_' + CommonUtility.uuID(5),
                             parent : openNode.node.id,
                             text : item[nodeType.textKey],
                           };
 
                           openChildrenNodes.push(newDynamicNode);
-                          this._childrenConfigs && this._childrenConfigs.forEach(childConfig =>{
-                            if(childConfig.classType === this.NodeFlag.CHILDREN_NODE){
-                              if(childConfig.entityClass === nodeType.entityClass){
+                          this._childrenConfigs && this._childrenConfigs.forEach(childConfig => {
+                            if (childConfig.classType === this.NodeFlag.CHILDREN_NODE) {
+                              if (childConfig.entityClass === nodeType.entityClass) {
                                 // 子节点集合中与根节点集合匹配的动态元素
-                                if(childConfig.nodeTypes){
+                                if (childConfig.nodeTypes) {
                                   newDynamicNode.data = {
                                     value : childConfig.nodeTypes,
                                     isRoot : false,
                                     idKey : childConfig.idkey,
-                                    parentItemNode:item,
-                                    entityClass:childConfig.entityClass,
-                                    pageConfigs:childConfig.pageConfigs?childConfig.pageConfigs:null
+                                    parentItemNode: item,
+                                    entityClass: childConfig.entityClass,
+                                    pageConfigs: childConfig.pageConfigs ? childConfig.pageConfigs : null
                                   };
                                   openChildrenNodes.push({
-                                    id:'nodeId_' + CommonUtility.uuID(5),
-                                    text:'',
-                                    parent:newDynamicNode.id
+                                    id: 'nodeId_' + CommonUtility.uuID(5),
+                                    text: '',
+                                    parent: newDynamicNode.id
                                   });
                                 }
                               }
@@ -161,7 +163,7 @@ export class CnTreeComponent implements OnInit {
                         });
                         resolve(openChildrenNodes);
                       });
-                  },10);
+                  }, 10);
 
                 });
               };
@@ -170,28 +172,28 @@ export class CnTreeComponent implements OnInit {
           });
         }
         else{
-          nodeTypesConfig.value && nodeTypesConfig.value.forEach(nodeType =>{
-            if(nodeType.classType === this.NodeFlag.STATIC_NODE){
+          nodeTypesConfig.value && nodeTypesConfig.value.forEach(nodeType => {
+            if (nodeType.classType === this.NodeFlag.STATIC_NODE) {
               const createStaticChildNode = () => {
-                return new Promise(resolve =>{
-                  let openChildrenNodes:ITreeNode[]=[];
+                return new Promise(resolve => {
+                  const openChildrenNodes: ITreeNode[] = [];
                   //添加新节点
-                  let newStaticNode:ITreeNode = {
+                  const newStaticNode: ITreeNode = {
                     id : 'nodeId_' + CommonUtility.uuID(5),
                     text : nodeType.nodeText ? nodeType.nodeText : '未命名节点',
                     parent : openNode.node.id
                   };
                   openChildrenNodes.push(newStaticNode);
-                  if(nodeType.nodeTypes){
-                    let newChildNode:ITreeNode = {
+                  if (nodeType.nodeTypes) {
+                    const newChildNode: ITreeNode = {
                       id : 'nodeId_' + CommonUtility.uuID(5),
                       text : '',
                       parent : newStaticNode.id
                     };
                     newStaticNode.data = {
-                      value:nodeType.nodeTypes,
-                      isRoot:false,
-                      parentItemNode:nodeTypesConfig.parentItemNode?nodeTypesConfig.parentItemNode:null
+                      value: nodeType.nodeTypes,
+                      isRoot: false,
+                      parentItemNode: nodeTypesConfig.parentItemNode ? nodeTypesConfig.parentItemNode : null
                     };
                     openChildrenNodes.push(newChildNode);
                   }
@@ -200,48 +202,48 @@ export class CnTreeComponent implements OnInit {
               };
               funcList.push(createStaticChildNode);
             }
-            else if(nodeType.classType === this.NodeFlag.DYNAMIC_NODE){
-              const createDynamicChildNode = () =>{
-                return new Promise(resolve =>{
+            else if (nodeType.classType === this.NodeFlag.DYNAMIC_NODE) {
+              const createDynamicChildNode = () => {
+                return new Promise(resolve => {
                   let nodeCondition = '';
-                  let openChildrenNodes:ITreeNode[]=[];
+                  const openChildrenNodes: ITreeNode[] = [];
                   nodeType.arameters && nodeType.parameters.forEach(parameter => {
-                    nodeCondition += parameter+"&";
+                    nodeCondition += parameter + '&';
                   });
                   nodeType.filters && nodeType.filters.forEach(filter => {
                     filter.propLinks && filter.propLinks.forEach(link => {
                       nodeTypesConfig.parentItemNode &&
-                      (nodeCondition += link.slaveProp+"="+nodeTypesConfig.parentItemNode[link.masterProp]+"&");
+                      (nodeCondition += link.slaveProp + '=' + nodeTypesConfig.parentItemNode[link.masterProp] + '&');
                     });
                   });
 
-                  this.apiService.doList(nodeType.entityClass+"?"+nodeCondition)
+                  this.apiService.doList(nodeType.entityClass + '?' + nodeCondition)
                     .toPromise()
-                    .then(response =>{
-                      response.forEach(item =>{
-                        let newDynamicNode:ITreeNode = {
+                    .then(response => {
+                      response.forEach(item => {
+                        const newDynamicNode: ITreeNode = {
                           id : 'nodeId_' + CommonUtility.uuID(5),
                           parent : openNode.node.id,
                           text : item[nodeType.textKey]
                         };
 
                         openChildrenNodes.push(newDynamicNode);
-                        this._childrenConfigs && this._childrenConfigs.forEach(childConfig =>{
-                          if(childConfig.classType === this.NodeFlag.CHILDREN_NODE){
-                            if(childConfig.entityClass === nodeType.entityClass){
-                              if(childConfig.nodeTypes){
-                                let newChildDynamicNode:ITreeNode = {
+                        this._childrenConfigs && this._childrenConfigs.forEach(childConfig => {
+                          if (childConfig.classType === this.NodeFlag.CHILDREN_NODE) {
+                            if (childConfig.entityClass === nodeType.entityClass) {
+                              if (childConfig.nodeTypes) {
+                                const newChildDynamicNode: ITreeNode = {
                                   id: 'nodeId_' + CommonUtility.uuID(5),
                                   parent: item[nodeType.idKey],
                                   text: ''
                                 };
                                 newChildDynamicNode.data = {
                                   data: childConfig.NodeTypes,
-                                  isRoot:false,
-                                  parentNodeItem:item,
-                                  idKey:nodeType.idKey,
-                                  entityClass:childConfig.entityClass,
-                                  pageConfigs:childConfig.pageConfigs?childConfig.pageConfigs:null
+                                  isRoot: false,
+                                  parentNodeItem: item,
+                                  idKey: nodeType.idKey,
+                                  entityClass: childConfig.entityClass,
+                                  pageConfigs: childConfig.pageConfigs ? childConfig.pageConfigs : null
                                 };
                                 openChildrenNodes.push(newChildDynamicNode);
                               }
@@ -250,46 +252,50 @@ export class CnTreeComponent implements OnInit {
                         });
                       });
                       resolve(openChildrenNodes);
-                    })
+                    });
                 });
               };
               funcList.push(createDynamicChildNode);
             }
           });
         }
-        Promise.all((()=>{
-          let list:any[] = [];
-          funcList.forEach(item =>{
+        Promise.all((() => {
+          const list: any[] = [];
+          funcList.forEach(item => {
             list.push(item());
           });
           return list;
         })()).then(result => {
-          setTimeout(()=>{
-            result.forEach(s =>{
-              s.forEach(item =>{
-                this._jsTree.create_node(item.parent,item,'last',()=>{},true);
+          setTimeout(() => {
+            result.forEach(s => {
+              s.forEach(item => {
+                this._jsTree.create_node(item.parent, item, 'last', () => {
+                }, true);
               });
             });
-          },100);
+          }, 100);
 
         });
 
       });
-      $('#cnTree').on('after_close.jstree',(event,openNode) =>{
+      $('#cnTree' + this.GUID).on('after_close.jstree', (event, openNode) => {
         const $nodes = this._jsTree.get_json(openNode.node.id).children;
         this._jsTree.delete_node($nodes);
-        this._jsTree.create_node(openNode.node.id,'','last',()=>{},true);
+        this._jsTree.create_node(openNode.node.id, '', 'last', () => {
+        }, true);
       });
-      $('#cnTree').on('select_node.jstree',(event,node) =>{
-        node.node.data && this.broadcast.broadcast("tree_master",node.node.data);
-      })
+      $('#cnTree' + this.GUID).on('select_node.jstree', (event, node) => {
+        console.log(this.componentConfig.viewId);
+        node.node.data && this.broadcast.broadcast(this.componentConfig.viewId, node.node.data);
+      });
     });
   }
-  createRootStaticNode(root,local){
-    return new Promise(resolve =>{
-      let rootStaticNode:ITreeNode = {
+
+  createRootStaticNode(root, local) {
+    return new Promise(resolve => {
+      const rootStaticNode: ITreeNode = {
         id :       'nodeId_' + CommonUtility.uuID(5),
-        parent : root.parent     ? root.parent   : "#",
+        parent: root.parent ? root.parent : '#',
         text :     root.nodeText ? root.nodeText : '未命名节点',
         icon :     root.icon     ? root.icon     : '',
         li_attr :  root.attr     ? root.attr     : '',
@@ -301,34 +307,35 @@ export class CnTreeComponent implements OnInit {
           selected: false
         }
       };
-      if(root.nodeTypes && root.nodeTypes.length>0){
+      if (root.nodeTypes && root.nodeTypes.length > 0) {
         rootStaticNode.data = {
-          value:root.nodeTypes,
-          isRoot:true,
-          pageConfigs:root.pageConfigs?root.pageConfigs:null
+          value: root.nodeTypes,
+          isRoot: true,
+          pageConfigs: root.pageConfigs ? root.pageConfigs : null
         };
-        local._rootNodes.push({id:CommonUtility.uuID(5),parent:rootStaticNode.id,text:''});
+        local._rootNodes.push({id: CommonUtility.uuID(5), parent: rootStaticNode.id, text: ''});
       }
       local._rootNodes.push(rootStaticNode);
       resolve(local._rootNodes);
     });
 
   }
-  createRootDynamicNode(root,local){
-    return new Promise(resolve =>{
-      local.apiService.doList(root.entityClass,root.parameters)
+
+  createRootDynamicNode(root, local) {
+    return new Promise(resolve => {
+      local.apiService.doList(root.entityClass, root.parameters)
         .toPromise().then(
           response => {
-            response.forEach(item =>{
-              let dyncRootNode:ITreeNode = {
+            response.forEach(item => {
+              const dyncRootNode: ITreeNode = {
                 id :       'nodeId_' + CommonUtility.uuID(5),
-                parent :   item.parent     ? item.parent   : "#",
+                parent: item.parent ? item.parent : '#',
                 text :     item[root.textKey] ? item[root.textKey] : '未命名节点',
                 // icon :     item.img     ? item.img     : '',
                 // li_attr :  item.attr     ? item.attr     : '',
                 // a_attr :   item.href     ? item.href     : '',
                 // readonly : item.readonly ? item.readonly : true,
-                data:[],
+                data: [],
                 state :    item.state    ? item.state    : {
                   opened: false,
                   disabled: false,
@@ -337,16 +344,16 @@ export class CnTreeComponent implements OnInit {
               };
 
               local._childrenConfigs && local._childrenConfigs.forEach(child => {
-                if(child.classType === local.NodeFlag.CHILDREN_NODE){
-                  if(child.entityClass === root.entityClass){
-                    if(child.nodeTypes){
+                if (child.classType === local.NodeFlag.CHILDREN_NODE) {
+                  if (child.entityClass === root.entityClass) {
+                    if (child.nodeTypes) {
                       dyncRootNode.data.push({
-                        value:child.nodeTypes,
-                        isRootNode:true,
-                        parentNodeItem:item,
-                        idKey:root.idKey?root.idKey:''
+                        value: child.nodeTypes,
+                        isRootNode: true,
+                        parentNodeItem: item,
+                        idKey: root.idKey ? root.idKey : ''
                       });
-                      local._rootNodes.push({id:CommonUtility.uuID(5),parent:dyncRootNode.id,text:''});
+                      local._rootNodes.push({id: CommonUtility.uuID(5), parent: dyncRootNode.id, text: ''});
                     }
                   }
                 }

@@ -5,6 +5,7 @@ import {CnDialogModule} from './dialog/cn-dialog.module';
 import {CnToastModule} from './toast/cn-toast.module';
 import {CnTreeModule} from './tree/tree.module';
 import {CnGridModule} from './grid/cn-grid.module';
+import {CnDynamicModule} from './dynamic/dynamic.module';
 @NgModule({
   imports: [
     CnLayoutModule,
@@ -12,7 +13,8 @@ import {CnGridModule} from './grid/cn-grid.module';
     CnDialogModule,
     CnToastModule,
     CnTreeModule,
-    CnGridModule
+    CnGridModule,
+    CnDynamicModule
   ],
   exports: [
     CnLayoutModule,
@@ -20,7 +22,8 @@ import {CnGridModule} from './grid/cn-grid.module';
     CnDialogModule,
     CnToastModule,
     CnTreeModule,
-    CnGridModule
+    CnGridModule,
+    CnDynamicModule
   ],
   declarations: [],
 })
