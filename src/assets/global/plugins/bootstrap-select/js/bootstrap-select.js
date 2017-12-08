@@ -359,7 +359,7 @@
       this.$searchbox = this.$menu.find('input');
 
       if (this.options.dropdownAlignRight)
-        this.$menu.addClass('cn-top-dropdown-right');
+        this.$menu.addClass('dropdown-menu-right');
 
       if (typeof id !== 'undefined') {
         this.$button.attr('data-id', id);
@@ -469,11 +469,11 @@
           this.options.template.caret +
           '</span>' +
           '</button>' +
-          '<div class="cn-top-dropdown open">' +
+          '<div class="dropdown-menu open">' +
           header +
           searchbox +
           actionsbox +
-          '<ul class="cn-top-dropdown inner" role="menu">' +
+          '<ul class="dropdown-menu inner" role="menu">' +
           '</ul>' +
           donebutton +
           '</div>' +
@@ -754,8 +754,8 @@
 
       text.className = 'text';
       newElement.className = this.$menu[0].parentNode.className + ' open';
-      menu.className = 'cn-top-dropdown open';
-      menuInner.className = 'cn-top-dropdown inner';
+      menu.className = 'dropdown-menu open';
+      menuInner.className = 'dropdown-menu inner';
       divider.className = 'divider';
 
       text.appendChild(document.createTextNode('Inner text'));
@@ -1646,7 +1646,7 @@
       var $this = $(this);
       if ($this.is('select')) {
         var data = $this.data('selectpicker'),
-            options = typeof _option == 'object' && _option;
+          options = typeof _option === 'object' && _option;
 
         if (!data) {
           var config = $.extend({}, Selectpicker.DEFAULTS, $.fn.selectpicker.defaults || {}, $this.data(), options);
@@ -1660,7 +1660,7 @@
           }
         }
 
-        if (typeof _option == 'string') {
+        if (typeof _option === 'string') {
           if (data[_option] instanceof Function) {
             value = data[_option].apply(data, args);
           } else {

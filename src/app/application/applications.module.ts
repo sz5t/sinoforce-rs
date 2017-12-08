@@ -13,7 +13,12 @@ import {DataTablesModule} from 'angular-datatables';
 import {CnBreadcrumbComponent} from '../components/layout/cn-breadcrumb/cn-breadcrumb.component';
 import {LoginAuthService} from '../services/login-auth.service';
 import {DashBroadTemplateComponent} from './dash-broad-template/dash-broad-template.component';
-import {FormGridTemplateComponent} from '../application/form-grid-template/form-grid-template.component';
+import {FormGridTemplateComponent} from './form-grid-template/form-grid-template.component';
+import {TabsDemoComponent} from './tabs-demo/tabs-demo.component';
+import {TreeDemoComponent} from './tree-demo/tree-demo.component';
+import {FormDemoComponent} from './form-demo/form-demo.component';
+import {GridDemoComponent} from './grid-demo/grid-demo.component';
+import {TimelineDemoComponent} from './timeline-demo/timeline-demo.component';
 
 export const CHILDREN_ROUTES: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -21,6 +26,11 @@ export const CHILDREN_ROUTES: Routes = [
     path: 'app', component: ApplicationsComponent,
     children: [
       {path: 'dash-broad', component: DashBroadTemplateComponent},
+      {path: 'grid-demo', component: GridDemoComponent},
+      {path: 'tree-demo', component: TreeDemoComponent},
+      {path: 'tabs-demo', component: TabsDemoComponent},
+      {path: 'form-demo', component: FormDemoComponent},
+      {path: 'timeline-demo', component: TimelineDemoComponent},
       {path: 'grid-view-master/:name', component: MasterTemplateComponent, canActivate: [LoginAuthService]},
       {path: 'grid-view-master-slaver/:name', component: MasterSlaverTemplateComponent, canActivate: [LoginAuthService]},
       {path: 'tree-grid/:name', component: TreeGridTemplateComponent, canActivate: [LoginAuthService]},
@@ -46,7 +56,12 @@ export const CHILDREN_ROUTES: Routes = [
     TreeGridTemplateComponent,
     ApplicationsComponent,
     DashBroadTemplateComponent,
-    FormGridTemplateComponent
+    FormGridTemplateComponent,
+    TabsDemoComponent,
+    TreeDemoComponent,
+    FormDemoComponent,
+    GridDemoComponent,
+    TimelineDemoComponent
   ]
 })
 export class ApplicationsModule {

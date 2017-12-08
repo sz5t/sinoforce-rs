@@ -1,8 +1,7 @@
-import {Component, ViewEncapsulation, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {Broadcaster} from '../broadcast/broadcaster';
 import {Subscription} from 'rxjs/Subscription';
 import {ClientStorageService} from '../services/client-storage.service';
-import {Layout} from '../components/layout/cn-sidebar/cn-sidebar.component';
 declare let $: any;
 
 @Component({
@@ -28,7 +27,8 @@ export class ApplicationsComponent implements OnInit, OnDestroy {
   loadTimer = 0;
   loopTimer;
 
-  constructor(private broadcast: Broadcaster, private clientStorage: ClientStorageService) {
+  constructor(private broadcast: Broadcaster,
+              private clientStorage: ClientStorageService) {
     this.menu = this.clientStorage.getSessionStorage('appModuleConfig');
     this.broadcastObj = broadcast.on<string>('loadConfig').subscribe(
       (result) => {

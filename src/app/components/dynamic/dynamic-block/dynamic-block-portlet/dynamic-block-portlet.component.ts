@@ -1,10 +1,5 @@
-import {Component, ComponentFactoryResolver, ComponentRef, Input, OnInit, Type, ViewContainerRef, ViewEncapsulation} from '@angular/core';
+import {Component, ComponentFactoryResolver, Input, OnInit, ViewContainerRef, ViewEncapsulation} from '@angular/core';
 import {IDynamicBlock, IDynamicBlockModel} from '../dynamic-block.model';
-import {MasterTemplateComponent} from '../../../../application/master-template/master-template.component';
-import {ICnComponent} from '../../../component-models/component.interface';
-import {CnGridViewComponent} from '../../../grid/cn-gridview/cn-gridview.component';
-import {CnTreeComponent} from '../../../tree/cn-tree/cn-tree.component';
-import {ComponentConfigFactory} from '../../../../framework/factory/component-config.factory';
 import {ClientStorageService} from '../../../../services/client-storage.service';
 @Component({
   selector: 'cn-dynamic-block-portlet',
@@ -15,7 +10,6 @@ import {ClientStorageService} from '../../../../services/client-storage.service'
 export class CnDynamicBlockPortletComponent implements OnInit, IDynamicBlock {
   dynamicBlockField: IDynamicBlockModel;
   @Input() templateConfig;
-  component: ComponentRef<ICnComponent>;
 
   constructor(private resolver: ComponentFactoryResolver,
               private container: ViewContainerRef,

@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /******************************
- 3RD PARTY PLUGIN CUSTOMIZATION 
+ 3RD PARTY PLUGIN CUSTOMIZATION
 ******************************/
 /* Cubic Bezier Transition */
 /***
@@ -343,7 +343,7 @@ Bootstrap Select
   z-index: 9999 !important; }
 
 /***
-Bootstrap Switch 
+Bootstrap Switch
 ***/
 .bootstrap-switch {
   border-color: #c2cad8; }
@@ -1052,11 +1052,14 @@ a.dt-button {
     margin-right: 0; }
 
 .dataTables_wrapper .dt-buttons {
-  float: right; }
+  float: left;
+}
   .portlet.light .dataTables_wrapper .dt-buttons {
-    margin-top: -64px; }
+    /*margin-top: -64px;*/
+  }
   .portlet.box .dataTables_wrapper .dt-buttons {
-    margin-top: -50px; }
+    /*margin-top: -50px;*/
+  }
 
 /***
 Rot Details

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams, HttpRequest} from '@angular/common/http';
 import {Configuration} from '../framework/configuration';
 import {Observable} from 'rxjs/Observable';
@@ -39,6 +39,18 @@ export class ApiService {
         responseType: 'json',
         params: this.buildParameters(params),
         headers: this.setHeaders()
+      }
+    );
+  }
+
+  doListWithoutAuth(url, params?, data?) {
+    console.log(Configuration.mock_api + url);
+    return this.httpClient.request<any[]>(
+      'GET',
+      Configuration.mock_api + url,
+      {
+        responseType: 'json',
+        params: this.buildParameters(params)
       }
     );
   }

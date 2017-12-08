@@ -26,12 +26,10 @@
         "assets/global/plugins/excanvas.min.js",
         "assets/global/plugins/jquery.min.js",
         "assets/global/plugins/bootstrap/js/bootstrap.min.js",
-        "assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js",
         "assets/global/plugins/js.cookie.min.js",
         "assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js",
         "assets/global/plugins/jquery-slimscroll/jquery.slimscroll.js",
         "assets/global/plugins/jquery.blockui.min.js",
-        "assets/global/plugins/bootstrap-switch/js/bootstrap-switch.js",
         "assets/global/plugins/jquery-validation/js/jquery.validate.js",
         "assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.js",
         "assets/global/plugins/select2/js/select2.full.min.js",
@@ -42,6 +40,7 @@
         "assets/bower_components/datatables.net-select/js/dataTables.select.js",
         "assets/bower_components/datatables.net-buttons/js/dataTables.buttons.js",
         "assets/bower_components/datatables.net-responsive/js/dataTables.responsive.js",
+        "assets/bower_components/mockjs/dist/mock-min.js",
         "assets/bower_components/pdfmake/build/pdfmake.js",
         "assets/global/plugins/bootstrap-toastr/toastr.min.js",
         "assets/global/plugins/jquery-validation/js/jquery.validate.min.js",
@@ -49,7 +48,11 @@
         "assets/global/plugins/md5.js",
         "assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js",
         "assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
-        "assets/global/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"
+        "assets/global/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js",
+        "assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js",
+        "assets/global/plugins/counterup/jquery.waypoints.min.js",
+        "assets/global/plugins/counterup/jquery.counterup.min.js",
+        "assets/global/plugins/echarts/echarts.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

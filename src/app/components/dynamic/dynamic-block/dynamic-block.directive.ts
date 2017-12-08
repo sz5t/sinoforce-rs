@@ -1,4 +1,4 @@
-import {ComponentFactoryResolver, Directive, Input, ViewContainerRef, OnInit, Type, ComponentRef} from '@angular/core';
+import {ComponentFactoryResolver, ComponentRef, Directive, Input, OnInit, Type, ViewContainerRef} from '@angular/core';
 import {IDynamicBlock, IDynamicBlockModel} from './dynamic-block.model';
 import {CnDynamicBlockPortletComponent} from './dynamic-block-portlet/dynamic-block-portlet.component';
 import {CnDynamicBlockPortletTabsComponent} from './dynamic-block-portlet-tabs/dynamic-block-portlet-tabs.component';
@@ -6,7 +6,7 @@ import {CnDynamicBlockAccordionComponent} from './dynamic-block-accordion/dynami
 const components: { [type: string]: Type<IDynamicBlock> } = {
   portlet: CnDynamicBlockPortletComponent,
   portletTabs: CnDynamicBlockPortletTabsComponent,
-  accordion: CnDynamicBlockAccordionComponent
+  portletAccordion: CnDynamicBlockAccordionComponent
 };
 @Directive({
   selector: '[cnDynamicBlock]'

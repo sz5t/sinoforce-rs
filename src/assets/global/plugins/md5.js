@@ -65,37 +65,33 @@ var MD5 = function (string) {
 
         return AddUnsigned(RotateLeft(a, s), b);
 
-    };
+    }
 
-
-    function GG(a, b, c, d, x, s, ac) {
+  function GG(a, b, c, d, x, s, ac) {
 
         a = AddUnsigned(a, AddUnsigned(AddUnsigned(G(b, c, d), x), ac));
 
         return AddUnsigned(RotateLeft(a, s), b);
 
-    };
+  }
 
-
-    function HH(a, b, c, d, x, s, ac) {
+  function HH(a, b, c, d, x, s, ac) {
 
         a = AddUnsigned(a, AddUnsigned(AddUnsigned(H(b, c, d), x), ac));
 
         return AddUnsigned(RotateLeft(a, s), b);
 
-    };
+  }
 
-
-    function II(a, b, c, d, x, s, ac) {
+  function II(a, b, c, d, x, s, ac) {
 
         a = AddUnsigned(a, AddUnsigned(AddUnsigned(I(b, c, d), x), ac));
 
         return AddUnsigned(RotateLeft(a, s), b);
 
-    };
+  }
 
-
-    function ConvertToWordArray(string) {
+  function ConvertToWordArray(string) {
 
         var lWordCount;
 
@@ -137,10 +133,9 @@ var MD5 = function (string) {
 
         return lWordArray;
 
-    };
+  }
 
-
-    function WordToHex(lValue) {
+  function WordToHex(lValue) {
 
         var WordToHexValue = "", WordToHexValue_temp = "", lByte, lCount;
 
@@ -156,10 +151,9 @@ var MD5 = function (string) {
 
         return WordToHexValue;
 
-    };
+  }
 
-
-    function Utf8Encode(string) {
+  function Utf8Encode(string) {
 
         string = string.replace(/\r\n/g, "\n");
 
@@ -202,10 +196,9 @@ var MD5 = function (string) {
 
         return utftext;
 
-    };
+  }
 
-
-    var x = Array();
+  var x = Array();
 
     var k, AA, BB, CC, DD, a, b, c, d;
 
@@ -374,4 +367,4 @@ var MD5 = function (string) {
 
 
     return temp.toUpperCase();
-}
+};

@@ -9,6 +9,8 @@ export class Configuration {
   public static onlineUser_resource = 'OnlineUser';
   public static appUser_resource = 'AppUser';
   public static appModule_response = 'appModuleConfig';
+
+  public static mock_api = 'http://category.cn';
 }
 export class RenderColumnType{
   public static RENDER_COLUMN_TYPE = {

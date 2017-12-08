@@ -19,6 +19,12 @@ import {CnDynamicFormsComponent} from './dynamic-component/cn-dynamic-form/cn-dy
 import {CnDynamicFieldsDirective} from './dynamic-component/cn-dynamic-form/cn-dynamic-fields.directive';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CnDynamicGridviewMultiComponent} from './dynamic-component/cn-dynamic-gridview/cn-dynamic-gridview-multi.component';
+import {DynamicChartDirective} from './dynamic-charts/dynamic-chart.directive';
+import {CnDynamicChartCounterComponent} from './dynamic-charts/dynamic-chart-counters/dynamic-chart-counter/dynamic-chart-counter.component';
+import {CnDynamicChartCountersComponent} from './dynamic-charts/dynamic-chart-counters/dynamic-chart-counters.component';
+import {DynamicChartCountersDirective} from './dynamic-charts/dynamic-chart-counters/dynamic-chart-counters.directive';
+import {CnDynamicChartBarComponent} from './dynamic-charts/dynamic-chart-bar/dynamic-chart-bar.component';
+import {CnDynamicTimelineHorizontalComponent} from './dynamic-component/dynamic-timeline-horizontal/dynamic-timeline-horizontal.component';
 
 @NgModule({
   imports: [
@@ -44,7 +50,13 @@ import {CnDynamicGridviewMultiComponent} from './dynamic-component/cn-dynamic-gr
     CnDynamicGridviewComponent,
     CnDynamicGridviewMultiComponent,
     CnDynamicFormsComponent,
-    CnDynamicFieldsDirective
+    CnDynamicFieldsDirective,
+    CnDynamicChartCounterComponent,
+    DynamicChartDirective,
+    DynamicChartCountersDirective,
+    CnDynamicChartCountersComponent,
+    CnDynamicChartBarComponent,
+    CnDynamicTimelineHorizontalComponent
   ],
   exports: [
     CnDynamicLayoutComponent,
@@ -55,7 +67,11 @@ import {CnDynamicGridviewMultiComponent} from './dynamic-component/cn-dynamic-gr
     CnDynamicConfirmDialogComponent,
     CnDynamicGridviewComponent,
     CnDynamicGridviewMultiComponent,
-    CnDynamicFormsComponent
+    CnDynamicFormsComponent,
+    CnDynamicChartCounterComponent,
+    CnDynamicChartCountersComponent,
+    CnDynamicChartBarComponent,
+    CnDynamicTimelineHorizontalComponent
   ],
   entryComponents: [
     CnDynamicColumnComponent,
@@ -66,7 +82,11 @@ import {CnDynamicGridviewMultiComponent} from './dynamic-component/cn-dynamic-gr
     CnDynamicConfirmDialogComponent,
     CnDynamicGridviewComponent,
     CnDynamicGridviewMultiComponent,
-    CnDynamicFormsComponent
+    CnDynamicFormsComponent,
+    CnDynamicChartCounterComponent,
+    CnDynamicChartCountersComponent,
+    CnDynamicChartBarComponent,
+    CnDynamicTimelineHorizontalComponent
   ]
 })
 export class CnDynamicModule {

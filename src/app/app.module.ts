@@ -1,6 +1,6 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {AppComponent} from './app.component';
 import {CnRouter} from './routes/cn.router';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ApiService} from './services/api.service';
@@ -12,6 +12,7 @@ import {WebStorageModule} from 'ngx-store';
 import {ClientStorageService} from './services/client-storage.service';
 import {TokenInterceptor} from './services/interceptor/token.interceptor';
 import {LoginAuthService} from './services/login-auth.service';
+import {MockDataService} from './services/mock-data.service';
 @NgModule({
   declarations: [
     AppComponent
@@ -29,6 +30,7 @@ import {LoginAuthService} from './services/login-auth.service';
     ConfigService,
     ClientStorageService,
     LoginAuthService,
+    MockDataService,
     Broadcaster,
     {
       provide: HTTP_INTERCEPTORS,

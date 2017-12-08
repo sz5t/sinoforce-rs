@@ -8,8 +8,36 @@
         "name": "dashbroad",
         "icon": "icon-bar-chart",
         "title": "Dashbroad",
-        "description": "综合统计",
+        "description": "综合图表统计",
         "router": "dash-broad"
+      },
+      {
+        "name": "gridDemo",
+        "icon": "icon-bar-chart",
+        "title": "Data Tables",
+        "description": "数据表格组件",
+        "router": "grid-demo"
+      },
+      {
+        "name": "treeDemo",
+        "icon": "icon-bar-chart",
+        "title": "Tree",
+        "description": "动态树组件",
+        "router": "tree-demo"
+      },
+      {
+        "name": "tabsDemo",
+        "icon": "icon-bar-chart",
+        "title": "Tabs",
+        "description": "标签页组件",
+        "router": "tabs-demo"
+      },
+      {
+        "name": "timelineDemo",
+        "icon": "icon-bar-chart",
+        "title": "Timeline",
+        "description": "时间线组件",
+        "router": "timeline-demo"
       },
       {
         "name": "masterGridView",

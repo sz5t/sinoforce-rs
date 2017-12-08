@@ -1,7 +1,5 @@
 import {Type} from '@angular/core';
 import {MasterGridViewResolver} from '../resolver/gridview.resolver';
-import {EVENT_TYPE} from '../event/button-event';
-import {CommonUtility} from '../utility/common-utility';
 import {Validators} from '@angular/forms';
 declare let $: any;
 
@@ -10,10 +8,7 @@ interface IConfigResolver {
 }
 
 class GridViewConfigResolver implements IConfigResolver {
-  _confirmConfig;
   _gridConfig;
-  _formConfig;
-  _formEventSetting;
 
   resolve(config: any, credential, filterItem = null): any {
     if (config) {
@@ -109,11 +104,32 @@ class FormViewConfigResolver implements IConfigResolver {
     return config.formConfig;
   }
 }
+
+class ChartCounterResolver implements IConfigResolver {
+  resolve(config: any): any {
+    return config;
+  }
+}
+
+class TimelineResolver implements IConfigResolver {
+  resolve(config: any, credential?: string, filterItem?): any {
+    return config;
+  }
+}
+
+class ChartBarResolver implements IConfigResolver {
+  resolve(config: any): any {
+    return config;
+  }
+}
 const components: { [type: string]: Type<IConfigResolver> } = {
   grid_view: GridViewConfigResolver,
   grid_multi_view: GridViewConfigResolver,
   tree_view: TreeViewConfigResolver,
-  form_view: FormViewConfigResolver
+  form_view: FormViewConfigResolver,
+  chart_counter: ChartCounterResolver,
+  chart_bar: ChartBarResolver,
+  timeline_horizontal: TimelineResolver
 };
 
 export class ComponentConfigFactory {

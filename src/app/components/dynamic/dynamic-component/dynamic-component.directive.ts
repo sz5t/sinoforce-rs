@@ -1,4 +1,4 @@
-import {ComponentFactoryResolver, Directive, Input, ViewContainerRef, OnInit, ComponentRef} from '@angular/core';
+import {ComponentFactoryResolver, ComponentRef, Directive, Input, OnInit, ViewContainerRef} from '@angular/core';
 import {CnTreeComponent} from '../../tree/cn-tree/cn-tree.component';
 import {ICnComponent} from '../../component-models/component.interface';
 import {ComponentConfigFactory} from '../../../framework/factory/component-config.factory';
@@ -6,11 +6,17 @@ import {ClientStorageService} from '../../../services/client-storage.service';
 import {CnDynamicGridviewComponent} from './cn-dynamic-gridview/cn-dynamic-gridview.component';
 import {CnDynamicFormsComponent} from './cn-dynamic-form/cn-dynamic-forms.component';
 import {CnDynamicGridviewMultiComponent} from './cn-dynamic-gridview/cn-dynamic-gridview-multi.component';
+import {CnDynamicChartCountersComponent} from '../dynamic-charts/dynamic-chart-counters/dynamic-chart-counters.component';
+import {CnDynamicChartBarComponent} from '../dynamic-charts/dynamic-chart-bar/dynamic-chart-bar.component';
+import {CnDynamicTimelineHorizontalComponent} from './dynamic-timeline-horizontal/dynamic-timeline-horizontal.component';
 const components: { [type: string]: any } = {
   grid_view: CnDynamicGridviewComponent,
   grid_multi_view: CnDynamicGridviewMultiComponent,
   tree_view: CnTreeComponent,
-  form_view: CnDynamicFormsComponent
+  form_view: CnDynamicFormsComponent,
+  chart_counter: CnDynamicChartCountersComponent,
+  chart_bar: CnDynamicChartBarComponent,
+  timeline_horizontal: CnDynamicTimelineHorizontalComponent
 };
 @Directive({
   selector: '[cnDynamicComponent]'

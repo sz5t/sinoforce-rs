@@ -285,7 +285,6 @@ export class CnTreeComponent implements OnInit, ICnComponent {
         }, true);
       });
       $('#cnTree' + this.GUID).on('select_node.jstree', (event, node) => {
-        console.log(this.componentConfig.viewId);
         node.node.data && this.broadcast.broadcast(this.componentConfig.viewId, node.node.data);
       });
     });

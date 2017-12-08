@@ -1,7 +1,4 @@
-import {
-  ComponentFactoryResolver, ComponentRef, Directive, Input, OnChanges, OnInit, Type,
-  ViewContainerRef
-} from '@angular/core';
+import {ComponentFactoryResolver, ComponentRef, Directive, Input, OnChanges, OnInit, Type, ViewContainerRef} from '@angular/core';
 import {IField} from './form-models/IField';
 import {CnFormButtonComponent} from './cn-form-button/cn-form-button.component';
 import {CnFormInputComponent} from './cn-form-input/cn-form-input.component';
@@ -15,6 +12,7 @@ import {CnFormTextareaComponent} from './cn-form-textarea/cn-form-textarea.compo
 import {CnDatePickerComponent} from './cn-date-picker/cn-date-picker.component';
 import {CnDateRangePickerComponent} from './cn-date-range-picker/cn-date-range-picker.component';
 import {CnDatetimePickerComponent} from './cn-datetime-picker/cn-datetime-picker.component';
+import {CnFormDropdownComponent} from './cn-form-dropdown/cn-form-dropdown.component';
 
 const components: { [type: string]: Type<IField> } = {
   button: CnFormButtonComponent,
@@ -27,6 +25,7 @@ const components: { [type: string]: Type<IField> } = {
   datepicker: CnDatePickerComponent,
   daterangepicker: CnDateRangePickerComponent,
   datetimepicker: CnDatetimePickerComponent,
+  asyndropdown: CnFormDropdownComponent,
 };
 
 @Directive({
@@ -41,14 +40,16 @@ export class CnDynamicFieldDirective implements IField, OnChanges, OnInit {
   constructor(private resolver: ComponentFactoryResolver,
               private container: ViewContainerRef
   ) { }
-  ngOnChanges(){
+
+  ngOnChanges() {
     if (this.component) {
       this.component.instance.config = this.config;
       this.component.instance.group = this.group;
       this.component.instance.submitValid = this.submitValid;
     }
   }
-  ngOnInit(){
+
+  ngOnInit() {
     if (!components[this.config.type]) {
       const supportedTypes = Object.keys(components).join(', ');
       throw new Error(

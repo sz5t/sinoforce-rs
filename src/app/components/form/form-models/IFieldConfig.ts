@@ -18,5 +18,6 @@ export interface IFieldConfig{
   icon?: string;
   iconPstn?: string;
   ajax?: any;
+  multiple?: string;
   validation?: ValidatorFn[];
 }
