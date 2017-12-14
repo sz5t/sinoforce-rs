@@ -53,7 +53,7 @@ export class CnDynamicFieldDirective implements IField, OnChanges, OnInit {
     if (!components[this.config.type]) {
       const supportedTypes = Object.keys(components).join(', ');
       throw new Error(
-        `Trying to use an unsupported type (${this.config.type}).Supported types: ${supportedTypes}`
+        `Trying to use an unsupported types (${this.config.type}).Supported types: ${supportedTypes}`
       );
     }
     const comp = this.resolver.resolveComponentFactory<IField>(components[this.config.type]);
