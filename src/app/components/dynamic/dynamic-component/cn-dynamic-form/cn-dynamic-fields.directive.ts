@@ -15,6 +15,8 @@ import {IFieldConfig} from '../../../form/form-models/IFieldConfig';
 import {CnDatePickerComponent} from '../../../form/cn-date-picker/cn-date-picker.component';
 import {CnDateRangePickerComponent} from '../../../form/cn-date-range-picker/cn-date-range-picker.component';
 import {CnDatetimePickerComponent} from '../../../form/cn-datetime-picker/cn-datetime-picker.component';
+import {CnFormDropdownComponent} from "../../../form/cn-form-dropdown/cn-form-dropdown.component";
+import {CnFormSpinComponent} from "../../../form/cn-form-spin/cn-form-spin.component";
 
 const components: { [type: string]: Type<IField> } = {
   button: CnFormButtonComponent,
@@ -27,6 +29,8 @@ const components: { [type: string]: Type<IField> } = {
   datepicker: CnDatePickerComponent,
   daterangepicker: CnDateRangePickerComponent,
   datetimepicker: CnDatetimePickerComponent,
+  asyndropdown: CnFormDropdownComponent,
+  touchspin: CnFormSpinComponent
 };
 
 @Directive({

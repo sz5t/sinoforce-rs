@@ -2,12 +2,15 @@
  * Created by zhaoxinlei on 2017/10/9.
  */
 export class Configuration {
-  public static web_api_2 = 'http://192.168.8.8:9595/f2771e4c90db29439e3c986d9859dc74/Res/';
-  public static web_api = 'http://192.168.8.8:9595/add8f868178b4cd18a10d45de7b8ebc8/Res/'; // 化建
+  public static web_api_2 = 'http://192.168.8.8:8005/f2771e4c90db29439e3c986d9859dc74/Res/';
+  public static web_api = 'http://192.168.8.8:8005/add8f868178b4cd18a10d45de7b8ebc8/Res/'; // 化建
+  public static web_platCustomer = 'add8f868178b4cd18a10d45de7b8ebc8';
+  public static commonCode_code = 'sinoforce_web';
   public static validCode_resource = 'ValidCode';
   public static config_resource = '../assets/data/layout.json';
   public static onlineUser_resource = 'OnlineUser';
   public static appUser_resource = 'AppUser';
+  public static commonCode_resource = 'CommonCode';
   public static appModule_response = 'appModuleConfig';
 
   public static mock_api = 'http://category.cn';

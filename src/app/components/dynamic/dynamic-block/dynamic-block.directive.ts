@@ -3,10 +3,12 @@ import {IDynamicBlock, IDynamicBlockModel} from './dynamic-block.model';
 import {CnDynamicBlockPortletComponent} from './dynamic-block-portlet/dynamic-block-portlet.component';
 import {CnDynamicBlockPortletTabsComponent} from './dynamic-block-portlet-tabs/dynamic-block-portlet-tabs.component';
 import {CnDynamicBlockAccordionComponent} from './dynamic-block-accordion/dynamic-block-accordion.component';
+import {CnDynamicBlockWizardComponent} from './dynamic-block-wizard/dynamic-block-wizard.component';
 const components: { [type: string]: Type<IDynamicBlock> } = {
   portlet: CnDynamicBlockPortletComponent,
   portletTabs: CnDynamicBlockPortletTabsComponent,
-  portletAccordion: CnDynamicBlockAccordionComponent
+  portletAccordion: CnDynamicBlockAccordionComponent,
+  portletWizard: CnDynamicBlockWizardComponent
 };
 @Directive({
   selector: '[cnDynamicBlock]'

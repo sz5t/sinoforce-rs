@@ -25,6 +25,8 @@ import {CnDynamicChartCountersComponent} from './dynamic-charts/dynamic-chart-co
 import {DynamicChartCountersDirective} from './dynamic-charts/dynamic-chart-counters/dynamic-chart-counters.directive';
 import {CnDynamicChartBarComponent} from './dynamic-charts/dynamic-chart-bar/dynamic-chart-bar.component';
 import {CnDynamicTimelineHorizontalComponent} from './dynamic-component/dynamic-timeline-horizontal/dynamic-timeline-horizontal.component';
+import {CnDynamicBlockWizardComponent} from './dynamic-block/dynamic-block-wizard/dynamic-block-wizard.component';
+import {DynamicBlockWizardDirective} from './dynamic-block/dynamic-block-wizard/dynamic-block-wizard.directive';
 
 @NgModule({
   imports: [
@@ -56,7 +58,9 @@ import {CnDynamicTimelineHorizontalComponent} from './dynamic-component/dynamic-
     DynamicChartCountersDirective,
     CnDynamicChartCountersComponent,
     CnDynamicChartBarComponent,
-    CnDynamicTimelineHorizontalComponent
+    CnDynamicTimelineHorizontalComponent,
+    CnDynamicBlockWizardComponent,
+    DynamicBlockWizardDirective
   ],
   exports: [
     CnDynamicLayoutComponent,
@@ -71,6 +75,7 @@ import {CnDynamicTimelineHorizontalComponent} from './dynamic-component/dynamic-
     CnDynamicChartCounterComponent,
     CnDynamicChartCountersComponent,
     CnDynamicChartBarComponent,
+    CnDynamicBlockWizardComponent,
     CnDynamicTimelineHorizontalComponent
   ],
   entryComponents: [
@@ -86,6 +91,7 @@ import {CnDynamicTimelineHorizontalComponent} from './dynamic-component/dynamic-
     CnDynamicChartCounterComponent,
     CnDynamicChartCountersComponent,
     CnDynamicChartBarComponent,
+    CnDynamicBlockWizardComponent,
     CnDynamicTimelineHorizontalComponent
   ]
 })

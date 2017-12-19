@@ -13,8 +13,9 @@ import {CnDatePickerComponent} from './cn-date-picker/cn-date-picker.component';
 import {CnDateRangePickerComponent} from './cn-date-range-picker/cn-date-range-picker.component';
 import {CnDatetimePickerComponent} from './cn-datetime-picker/cn-datetime-picker.component';
 import {CnFormDropdownComponent} from './cn-form-dropdown/cn-form-dropdown.component';
+import {CnFormSpinComponent} from './cn-form-spin/cn-form-spin.component';
 
-const components: { [type: string]: Type<IField> } = {
+const component: { [type: string]: Type<IField> } = {
   button: CnFormButtonComponent,
   input: CnFormInputComponent,
   select: CnFormSelectComponent,
@@ -26,6 +27,7 @@ const components: { [type: string]: Type<IField> } = {
   daterangepicker: CnDateRangePickerComponent,
   datetimepicker: CnDatetimePickerComponent,
   asyndropdown: CnFormDropdownComponent,
+  touchspin: CnFormSpinComponent
 };
 
 @Directive({
@@ -50,13 +52,13 @@ export class CnDynamicFieldDirective implements IField, OnChanges, OnInit {
   }
 
   ngOnInit() {
-    if (!components[this.config.type]) {
-      const supportedTypes = Object.keys(components).join(', ');
+    if (!component[this.config.type]) {
+      const supportedTypes = Object.keys(component).join(', ');
       throw new Error(
         `Trying to use an unsupported types (${this.config.type}).Supported types: ${supportedTypes}`
       );
     }
-    const comp = this.resolver.resolveComponentFactory<IField>(components[this.config.type]);
+    const comp = this.resolver.resolveComponentFactory<IField>(component[this.config.type]);
     this.component = this.container.createComponent(comp);
     this.component.instance.config = this.config;
     this.component.instance.group = this.group;

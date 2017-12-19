@@ -72,20 +72,14 @@ export class FormDemoComponent implements OnInit {
               'inputClass': 'input-medium'
             },
             {
-              'type': 'input',
+              'type': 'touchspin',
               'layout': 'col-md-6 col-lg-6 col-sm-12 col-sx-6',
               'inputType': 'text',
               'name': 'ContextName',
               'label': '上下文名称：',
               'icon': 'fa fa-book',
               'iconPstn': 'left',
-              'inputClass': 'input-group input-medium',
-              'validations': [
-                {
-                  'validator': 'required',
-                  'errorMessage': ''
-                }
-              ]
+              'inputClass': 'input-group input-medium'
             },
             {
               'type': 'input',

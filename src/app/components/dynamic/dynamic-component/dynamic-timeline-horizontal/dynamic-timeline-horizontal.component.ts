@@ -96,7 +96,6 @@ export class CnDynamicTimelineHorizontalComponent implements OnInit, AfterViewIn
   }
 
   showNewContent(timelineComponents, timelineTotWidth, string) {
-    debugger;
     // go from one event to the next/previous one
     const visibleContent = timelineComponents['eventsContent'].find('.selected'),
       newContent = ( string == 'next' ) ? visibleContent.next() : visibleContent.prev();
@@ -115,7 +114,6 @@ export class CnDynamicTimelineHorizontalComponent implements OnInit, AfterViewIn
   }
 
   updateTimelinePosition(string, event, timelineComponents) {
-    debugger;
     // translate timeline to the left/right according to the position of the selected event
     const eventStyle = window.getComputedStyle(event.get(0), null);
     const eventLeft = Number(eventStyle.getPropertyValue('left').replace('px', ''));

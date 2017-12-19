@@ -5,7 +5,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {OnlineUser} from './online-user.model';
 import {ClientStorageService} from '../../services/client-storage.service';
 import {Router} from '@angular/router';
-import {HttpEventType} from '@angular/common/http';
 import {Broadcaster} from '../../broadcast/broadcaster';
 declare let $: any;
 declare let MD5: any;
@@ -96,7 +95,7 @@ export class CnLoginComponent implements OnInit {
           }
         } else {
           this.errorMessage = this.onlineUser.Message;
-          throw new Error('error');
+          console.log(this.errorMessage);
           // show this message
         }
       })
@@ -110,35 +109,67 @@ export class CnLoginComponent implements OnInit {
   backLogin() {
     this.getValidCode();
     this.user.reset();
+    this.orgList = [{name: '--独立用户--', value: []}];
     $('.login-form').show();
     $('.register-form').hide();
   }
 
   entryProject() {
     this.onlineUser.ProjId = this.entryForm.controls['projectName'].value;
-    this.apiService.doPost2(Configuration.onlineUser_resource, this.onlineUser)
-      .subscribe(
-        response => {
-          this.onlineUser = response;
-          this.clientStorage.setCookies('onlineUser', response);
-          this.apiService.doGet(Configuration.appUser_resource + '/' + this.onlineUser['UserId'])
-            .toPromise()
-            .then(appUser => {
-              this.clientStorage.setCookies('appUser', appUser);
-            });
-          this.router.navigate(['/app']).then(() => {
-            this.broadcast.broadcast('loadConfig', 'start');
-            this.apiService.doGetConfig(Configuration.config_resource + '?ProjId=' + this.onlineUser['ProjId'])
-              .subscribe(
-                appModuleConfig => {
-                  this.broadcast.broadcast('loadConfig', 'processing');
-                  this.clientStorage.setSessionStorage('appModuleConfig', appModuleConfig);
-                  this.broadcast.broadcast('loadConfig', 'end');
-                  // setTimeout(() =>{}, 1500);
-                }
-              );
-          });
-        }
-      );
+    const onlineUserRequest = this.apiService.doPost2(Configuration.onlineUser_resource, this.onlineUser);
+    onlineUserRequest
+      .toPromise()
+      .then(onlineUser => {
+        return this.apiService.doPost2(Configuration.onlineUser_resource, onlineUser)
+          .toPromise();
+      }).then(onlineUser => {
+      // console.log('1', onlineUser);
+      this.clientStorage.setCookies('onlineUser', onlineUser);
+      return this.apiService.doGet(Configuration.appUser_resource
+        + '/'
+        + onlineUser['UserId'])
+        .toPromise();
+    }).then(appUser => {
+      console.log('2', appUser);
+      // this.clientStorage.setCookies('appUser', appUser);
+      return this.apiService.doGet(Configuration.commonCode_resource
+        + '?Name='
+        + Configuration.commonCode_code
+        + '&ApplyId=ApplyId')
+        .toPromise();
+    }).then(commonCode => {
+      // console.log('3', commonCode);
+      return this.apiService.doGet(Configuration.appModule_response
+        + '?ProjId='
+        + this.onlineUser['ProjId']
+        + '&ParentId=In(\"\",null)'
+        + '&ApplyId=' + commonCode[0]['Id'])
+        .toPromise();
+    }).then(parentAppModuleConfig => {
+      // console.log('4', parentAppModuleConfig);
+      return this.apiService.doGet(Configuration.appModule_response
+        + '?ProjId='
+        + this.onlineUser['ProjId']
+        + '&ParentId='
+        + parentAppModuleConfig[0]['Id'])
+        .toPromise();
+    }).then(appModuleConfig => {
+      // console.log('5', appModuleConfig);
+      // this.clientStorage.setSessionStorage('appModuleConfig', appModuleConfig);
+      return this.apiService.doGetConfig(Configuration.config_resource).toPromise();
+    }).then(localConfig => {
+      this.router.navigate(['/app']).then(() => {
+        this.clientStorage.setSessionStorage('appModuleConfig', localConfig);
+        // console.log('6');
+        this.broadcast.broadcast('loadConfig', 'start');
+        this.broadcast.broadcast('loadConfig', 'processing');
+        this.broadcast.broadcast('loadConfig', 'end');
+      });
+    });
+    // onlineUser
+    // appUser
+    // commonCode
+    // parent appModuleConfig
+    // appModuleConfig
   }
 }

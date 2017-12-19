@@ -160,7 +160,7 @@ export class TreeGridTemplateComponent implements OnInit, OnDestroy, OnChanges {
         const hasButton = masterResolver.buttonConfig
           && (buttonsConfig = masterResolver.buttonConfig);
 
-        hasButton && (gridConfig.buttons = this.initButton(buttonsConfig));
+        // hasButton && (gridConfig.buttons = this.initButton(buttonsConfig));
       })();
 
     }
