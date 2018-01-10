@@ -46,13 +46,15 @@
         "assets/global/plugins/jquery-validation/js/jquery.validate.min.js",
         "assets/global/plugins/jquery-validation/js/additional-methods.min.js",
         "assets/global/plugins/md5.js",
+        "assets/global/plugins/block.ui.js",
         "assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js",
         "assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
         "assets/global/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js",
         "assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js",
         "assets/global/plugins/counterup/jquery.waypoints.min.js",
         "assets/global/plugins/counterup/jquery.counterup.min.js",
-        "assets/global/plugins/echarts/echarts.min.js"
+        "assets/global/plugins/echarts/echarts.min.js",
+        "assets/global/plugins/bootstrap-confirmation/bootstrap-confirmation.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

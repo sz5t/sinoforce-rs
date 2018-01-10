@@ -26,11 +26,11 @@ export class CnFormDropdownComponent implements OnInit {
     const placeholder = '--请选择--';
     if (this.config.ajax) {
       const url = this.config.ajax.url;
-      this._apiService.doList(url).subscribe(
+      this._apiService.doGet2<any>(url).subscribe(
         response => {
-          this._asyncData = response;
+          this._asyncData = response.Data;
           this._asyncData.forEach(item => {
-            const newOption = new Option(item.text, item.id, false, false);
+            const newOption = new Option(item.text, item.value);
             $(selectID).append(newOption);
           });
         },

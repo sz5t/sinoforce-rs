@@ -3,7 +3,6 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import {IDynamicDialog, IDynamicDialogField} from './dynamic-dialog.model';
-import {CommonUtility} from '../../../framework/utility/common-utility';
 import {CnDynamicFormDialogComponent} from './dynamic-form-dialog/dynamic-form-dialog.component';
 import {CnDynamicConfirmDialogComponent} from './dynamic-confirm-dialog/dynamic-confirm-dialog.component';
 const components: { [type: string]: Type<IDynamicDialog> } = {
@@ -20,6 +19,7 @@ export class DynamicDialogDirective implements OnInit, IDynamicDialog, OnChanges
   @Input() GUID;
   @Input() dialogConfig;
   @Input() handleData;
+  @Input() selectedIds: Map<string, string> = new Map<string, string>();
   @Output() eventCallback: EventEmitter<any> = new EventEmitter<any>();
   component: ComponentRef<IDynamicDialog>;
 
@@ -34,8 +34,11 @@ export class DynamicDialogDirective implements OnInit, IDynamicDialog, OnChanges
   }
 
   ngOnChanges() {
-    if (this.handleData) {
+    if (this.handleData && this.component) {
       this.component.instance.handleData = this.handleData;
+    }
+    if (this.selectedIds && this.component) {
+      this.component.instance.selectedIds = this.selectedIds;
     }
 
   }
@@ -46,6 +49,7 @@ export class DynamicDialogDirective implements OnInit, IDynamicDialog, OnChanges
       title: this.dialogConfig.events.title ? this.dialogConfig.events.title : '',
       text: this.dialogConfig.events.text ? this.dialogConfig.events.text : '',
       handleData: this.handleData,
+      selectedIds: this.selectedIds,
       eventSetting: this.dialogConfig.events.execution ? this.dialogConfig.events.execution : null,
       dialogConfig: this.dialogConfig.events,
       eventType: this.dialogConfig.events.eventType,
@@ -55,6 +59,7 @@ export class DynamicDialogDirective implements OnInit, IDynamicDialog, OnChanges
       GUID: this.GUID,
       title: this.dialogConfig.events.title ? this.dialogConfig.events.title : '',
       handleData: this.handleData,
+      selectedIds: null,
       eventSetting: this.dialogConfig.events.execution ? this.dialogConfig.events.execution : null,
       dialogConfig: this.dialogConfig.formConfig,
       eventType: this.dialogConfig.events.eventType,
@@ -73,5 +78,6 @@ export class DynamicDialogDirective implements OnInit, IDynamicDialog, OnChanges
     this.component = this.container.createComponent(componentFactory);
     this.component.instance.dialogConfigField = this.dialogConfigField;
     this.component.instance.handleData = this.handleData;
+    this.component.instance.selectedIds = this.selectedIds;
   }
 }

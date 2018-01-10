@@ -1649,7 +1649,7 @@ export class GridDemoComponent implements OnInit {
           ]
         }
       }
-    ],
+    ]
   ];
 
   constructor() {

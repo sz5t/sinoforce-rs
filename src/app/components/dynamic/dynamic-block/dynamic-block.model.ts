@@ -5,6 +5,7 @@ export interface IDynamicBlockModel {
   isFullScreen;
   isCollapse;
   actions;
+  note: any;
 }
 
 export interface IDynamicBlock {

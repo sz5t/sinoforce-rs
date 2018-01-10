@@ -1,4 +1,7 @@
-import {ComponentFactoryResolver, ComponentRef, Directive, Input, OnInit, Type, ViewContainerRef} from '@angular/core';
+import {
+  ComponentFactoryResolver, ComponentRef, Directive, ElementRef, Input, OnInit, Type,
+  ViewContainerRef
+} from '@angular/core';
 import {IDynamicBlock, IDynamicBlockModel} from './dynamic-block.model';
 import {CnDynamicBlockPortletComponent} from './dynamic-block-portlet/dynamic-block-portlet.component';
 import {CnDynamicBlockPortletTabsComponent} from './dynamic-block-portlet-tabs/dynamic-block-portlet-tabs.component';
@@ -10,6 +13,7 @@ const components: { [type: string]: Type<IDynamicBlock> } = {
   portletAccordion: CnDynamicBlockAccordionComponent,
   portletWizard: CnDynamicBlockWizardComponent
 };
+declare let $: any;
 @Directive({
   selector: '[cnDynamicBlock]'
 })
@@ -20,7 +24,8 @@ export class DynamicBlockDirective implements OnInit, IDynamicBlock {
   component: ComponentRef<IDynamicBlock>;
 
   constructor(private resolver: ComponentFactoryResolver,
-              private container: ViewContainerRef) {
+              private container: ViewContainerRef,
+              private elementRef: ElementRef) {
   }
 
   ngOnInit() {
@@ -36,6 +41,7 @@ export class DynamicBlockDirective implements OnInit, IDynamicBlock {
       isCollapse: this.templateConfig.isCollapse ? this.templateConfig.isCollapse : '',
       isFullScreen: this.templateConfig.isFullScreen ? this.templateConfig.isFullScreen : '',
       actions: this.templateConfig.actions ? this.templateConfig.actions : [],
+      note: this.templateConfig.note
     };
   }
 

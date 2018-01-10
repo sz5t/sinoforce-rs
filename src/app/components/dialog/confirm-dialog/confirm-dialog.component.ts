@@ -18,7 +18,7 @@ export class ConfirmDialogComponent implements OnInit {
   @Input() message: string;
   @Input() title: string;
   @Input() confirmEventSetting;
-  @Input() handleData;
+  @Input() handleData: Map<string, string>;
   @Input() GUID;
   @Output() eventCallback: EventEmitter<string> = new EventEmitter<string>();
 
@@ -29,26 +29,29 @@ export class ConfirmDialogComponent implements OnInit {
 
     const url: string = this.confirmEventSetting.api || '';
     const method: string = this.confirmEventSetting.method || 'get';
-    const params = this.confirmEventSetting.paramsMap || {};
-    if (this.confirmEventSetting.keyId && this.confirmEventSetting.keyId.trim().length > 0) {
-      params[this.confirmEventSetting.keyId] = this.handleData[this.confirmEventSetting.keyId] || '';
+    let params = this.confirmEventSetting.paramsMap || {};
+    if (method === 'delete') {
+      params = {'_ids': Array.from(this.handleData.values()).join(',')};
     }
-    const event = new ButtonEvent();
-    event.execute(this.apiService, url, method, params, this.handleData).subscribe(
-      result => {
-        this.toastComponent.showToast(ToastType.TOAST_SUCCESS, 'success', '执行成功');
-      },
-      error => {
-        // errors should be written in operation system log
-        // show error message to user
-        this.toastComponent.showToast(ToastType.TOAST_ERROR, 'error', error);
-        console.error('error', error);
-      },
-      () => {
-        $('#basic_dialog_' + this.GUID).modal('hide');
-        this.eventCallback.emit();
-      }
-    );
+    if (this.handleData) {
+      const event = new ButtonEvent();
+      event.execute(this.apiService, url, method, params, this.handleData).subscribe(
+        result => {
+          this.toastComponent.showToast(ToastType.TOAST_SUCCESS, 'success', '执行成功');
+        },
+        error => {
+          // errors should be written in operation system log
+          // show error message to user
+          this.toastComponent.showToast(ToastType.TOAST_ERROR, 'error', error);
+          console.error('error', error);
+        },
+        () => {
+          $('#basic_dialog_' + this.GUID).modal('hide');
+          this.eventCallback.emit();
+        }
+      );
+    }
+
   }
 
   callback() {

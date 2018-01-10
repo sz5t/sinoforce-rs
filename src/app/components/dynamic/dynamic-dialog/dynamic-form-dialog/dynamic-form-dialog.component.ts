@@ -26,6 +26,7 @@ export class CnDynamicFormDialogComponent implements OnInit, IDynamicDialog, Aft
 
   @Input() dialogConfigField: IDynamicDialogField;
   @Input() handleData;
+  @Input() selectedIds;
   _subscribe: Subscription;
   _submitValid = true;
 

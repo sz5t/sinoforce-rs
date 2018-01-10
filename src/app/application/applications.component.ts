@@ -77,23 +77,7 @@ export class ApplicationsComponent implements OnInit, OnDestroy {
   }
 
   formWizard() {
-    $('#form_wizard_1').bootstrapWizard({
-      'nextSelector': '.button-next',
-      'previousSelector': '.button-previous',
-      onTabClick: function (tab, navigation, index, clickedIndex) {
-        //return false;
-        //ApplicationsComponent.handleTitle(tab, navigation, clickedIndex);
-      },
-      onNext: function (tab, navigation, index) {
-        //ApplicationsComponent.handleTitle(tab, navigation, index);
-      },
-      onPrevious: function (tab, navigation, index) {
-        //ApplicationsComponent.handleTitle(tab, navigation, index);
-      },
-      onTabShow: function (tab, navigation, index) {
-        const total = navigation.find('li').length;
-      }
-    });
+    $('#form_wizard_1').bootstrapWizard({});
   }
 
   ngOnDestroy() {

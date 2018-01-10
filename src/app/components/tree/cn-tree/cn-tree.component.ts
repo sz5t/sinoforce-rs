@@ -112,8 +112,7 @@ export class CnTreeComponent implements OnInit, ICnComponent {
                 });
               };
               funcList.push(createStaticChildNode);
-            }
-            else if (nodeType.classType === this.NodeFlag.DYNAMIC_NODE) {
+            } else if (nodeType.classType === this.NodeFlag.DYNAMIC_NODE) {
               const createDynamicChildNode = () => {
                 return new Promise(resolve => {
                   setTimeout(() => {
@@ -127,10 +126,10 @@ export class CnTreeComponent implements OnInit, ICnComponent {
                         nodeCondition += link.slaveProp + '=' + nodeTypesConfig.parentItemNode[link.masterProp] + '&';
                       });
                     });
-                    this.apiService.doList(nodeType.entityClass + '?' + nodeCondition)
+                    this.apiService.doGet2<any>(nodeType.entityClass + '?' + nodeCondition)
                       .toPromise()
                       .then(response => {
-                        response.forEach(item => {
+                        response.Data.forEach(item => {
                           const newDynamicNode: ITreeNode = {
                             id : 'nodeId_' + CommonUtility.uuID(5),
                             parent : openNode.node.id,
@@ -217,10 +216,10 @@ export class CnTreeComponent implements OnInit, ICnComponent {
                     });
                   });
 
-                  this.apiService.doList(nodeType.entityClass + '?' + nodeCondition)
+                  this.apiService.doGet2<any>(nodeType.entityClass + '?' + nodeCondition)
                     .toPromise()
                     .then(response => {
-                      response.forEach(item => {
+                      response.Data.forEach(item => {
                         const newDynamicNode: ITreeNode = {
                           id : 'nodeId_' + CommonUtility.uuID(5),
                           parent : openNode.node.id,
@@ -325,7 +324,7 @@ export class CnTreeComponent implements OnInit, ICnComponent {
       local.apiService.doList(root.entityClass, root.parameters)
         .toPromise().then(
           response => {
-            response.forEach(item => {
+            response.Data.forEach(item => {
               const dyncRootNode: ITreeNode = {
                 id :       'nodeId_' + CommonUtility.uuID(5),
                 parent: item.parent ? item.parent : '#',

@@ -23,6 +23,7 @@ export class CnPageComponent implements OnInit {
     this.router.navigate(['/login']).then(() => {
       this.clientStorage.clearCookies();
       this.clientStorage.clearSessionStorage();
+      this.clientStorage.clearLocalStorage();
     });
   }
 }

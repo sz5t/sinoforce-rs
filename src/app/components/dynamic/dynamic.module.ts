@@ -27,6 +27,7 @@ import {CnDynamicChartBarComponent} from './dynamic-charts/dynamic-chart-bar/dyn
 import {CnDynamicTimelineHorizontalComponent} from './dynamic-component/dynamic-timeline-horizontal/dynamic-timeline-horizontal.component';
 import {CnDynamicBlockWizardComponent} from './dynamic-block/dynamic-block-wizard/dynamic-block-wizard.component';
 import {DynamicBlockWizardDirective} from './dynamic-block/dynamic-block-wizard/dynamic-block-wizard.directive';
+import {CnToastComponent} from "../toast/cn-toast/cn-toast.component";
 
 @NgModule({
   imports: [

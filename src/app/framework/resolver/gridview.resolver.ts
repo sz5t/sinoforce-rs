@@ -1,6 +1,7 @@
 import {Configuration, RenderColumnType} from '../configuration';
 import ColumnSettings = DataTables.ColumnSettings;
 import {Validators} from '@angular/forms';
+import {CommonUtility} from "../utility/common-utility";
 /**
  * Created by zhaoxinlei on 2017/10/26.
  */
@@ -102,18 +103,91 @@ export class MasterGridViewResolver {
     return columns;
   }
   private _buildRenderFunction(renderName){
-    //notNull
-    //checkAll
     switch (renderName.type){
       case RenderColumnType.RENDER_COLUMN_TYPE.NOT_NULL:
-        return ((data, type, row, meta) => {
+        return (data, type, row, meta) => {
           return data == null ? '' : data;
-        });
+        };
       case RenderColumnType.RENDER_COLUMN_TYPE.CHECK_ALL:
+        return (data, type, row, meta) => {
+          return `<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+          <input type="checkbox" class="checkboxes" value="${data}" />
+          <span></span> </label>`;
+        };
+      case RenderColumnType.RENDER_COLUMN_TYPE.BUTTONS:
+        return (data, type, row, meta) => {
+          const btns = renderName.data;
+          const result = [];
+          if (data && data.length > 0) {
+            btns.forEach((btn, index) => {
+              let btnSet = '';
+              if (btn.type === RenderColumnType.RENDER_COLUMN_TYPE.BUTTON_COMMON) {
+                btnSet = `<button data-name="dtAction"
+                          data-opt=${JSON.stringify(btn.events)}
+                          class="bs-confirmation btn btn-small ${btn.color}">
+                          <i class="${btn.img}"></i>
+                          ${btn.text}
+                        </button>`;
+              } else if (btn.type === RenderColumnType.RENDER_COLUMN_TYPE.BUTTON_CONFIRM) {
+                btnSet = `<button data-name="dtAction"
+                         data-id=${data}
+                         data-opt=${JSON.stringify(btn.events)}
+                         class="bs-confirmation btn ${btn.color}"
+                         data-toggle="confirmation">
+                          <i class="${btn.img}"></i>
+                          ${btn.text}
+                        </button>`;
+              }
+              result.push(btnSet);
+            });
+          }
+          return result.join('');
+        };
+      case RenderColumnType.RENDER_COLUMN_TYPE.BUTTON_COMMON:
         return ((data, type, row, meta) => {
-          return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"> ' +
-          '<input type="checkbox" class="group-checkable" name="checkchild" value=""+data+"" />' +
-          ' <span></span> </label>';
+          return '';
+        });
+      case RenderColumnType.RENDER_COLUMN_TYPE.BUTTON_CONFIRM:
+        return (data, type, row, meta) => {
+          return '<button class="btn green-sharp btn-circle" data-toggle="confirmation" data-popout="true"></button>';
+        };
+      case RenderColumnType.RENDER_COLUMN_TYPE.CELL_STYLE:
+        return (data, type, row, meta) => {
+          if (data && data.length > 0) {
+            const conf = renderName.data;
+            let text = '';
+            let className = '';
+            let icon = '';
+            conf.forEach(c => {
+              if (c.value === data) {
+                text = c.valueas ? c.valueas : data;
+                className = c.className ? c.className : '';
+                icon = c.icon ? c.icon : '';
+              }
+            });
+            return `<span class="${className}"><i class="${icon}"></i> ${text}</span>`;
+          } else {
+            return '';
+          }
+        };
+      case RenderColumnType.RENDER_COLUMN_TYPE.CELL_DATE:
+        return ((data, type, row, meta) => {
+          if (data && data.length > 0) {
+            const conf = renderName.data[0];
+            const date = data.substring(0, 10);
+            return `<span class="${conf.className}"><i class="fa fa-calendar"></i> ${date}</span>`;
+          } else {
+            return '';
+          }
+        });
+      case RenderColumnType.RENDER_COLUMN_TYPE.CELL_NUMBER:
+        return ((data, type, row, meta) => {
+          if (data) {
+            const conf = renderName.data[0];
+            return `<span class="${conf.className}"> ${data}</span>`;
+          } else {
+            return '';
+          }
         });
     }
   }

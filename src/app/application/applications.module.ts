@@ -19,12 +19,14 @@ import {TreeDemoComponent} from './tree-demo/tree-demo.component';
 import {FormDemoComponent} from './form-demo/form-demo.component';
 import {GridDemoComponent} from './grid-demo/grid-demo.component';
 import {TimelineDemoComponent} from './timeline-demo/timeline-demo.component';
+import {ApplicationTemplateComponent} from './application-template/application-template.component';
 
 export const CHILDREN_ROUTES: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {
     path: 'app', component: ApplicationsComponent,
     children: [
+      {path: 'application-template/:name', component: ApplicationTemplateComponent},
       {path: 'dash-broad', component: DashBroadTemplateComponent},
       {path: 'grid-demo', component: GridDemoComponent},
       {path: 'tree-demo', component: TreeDemoComponent},
@@ -61,7 +63,8 @@ export const CHILDREN_ROUTES: Routes = [
     TreeDemoComponent,
     FormDemoComponent,
     GridDemoComponent,
-    TimelineDemoComponent
+    TimelineDemoComponent,
+    ApplicationTemplateComponent
   ]
 })
 export class ApplicationsModule {

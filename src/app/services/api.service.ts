@@ -104,7 +104,6 @@ export class ApiService {
   }
 
   doDelete(url, params?, data?) {
-    debugger;
     return this.httpClient.request(
       'DELETE',
       Configuration.web_api + url,
@@ -115,7 +114,7 @@ export class ApiService {
     );
   }
 
-  doPost(url, data) {
+  doPost(url, param, data) {
     return this.httpClient.request<any>(
       'POST',
       Configuration.web_api + url,

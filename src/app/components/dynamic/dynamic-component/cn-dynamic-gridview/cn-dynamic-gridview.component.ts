@@ -1,13 +1,20 @@
-import {AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {
+  AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import {DataTableDirective} from 'angular-datatables';
 import {Subject} from 'rxjs/Subject';
 import {IDynamicDialogField} from '../../dynamic-dialog/dynamic-dialog.model';
 import {Broadcaster} from '../../../../broadcast/broadcaster';
-import {EVENT_TYPE} from '../../../../framework/event/button-event';
+import {ButtonEvent, EVENT_TYPE} from '../../../../framework/event/button-event';
 import {CommonUtility} from '../../../../framework/utility/common-utility';
 import {ICnComponent} from '../../../component-models/component.interface';
 import {Subscription} from 'rxjs/Subscription';
 import {Configuration} from '../../../../framework/configuration';
+import {OpPermissionResolver} from '../../../../framework/resolver/op.permission.resolver';
+import {ClientStorageService} from '../../../../services/client-storage.service';
+import {CnToastComponent, ToastType} from '../../../toast/cn-toast/cn-toast.component';
+import {ApiService} from '../../../../services/api.service';
 declare let $: any;
 @Component({
   selector: 'cn-dynamic-gridview',
@@ -17,8 +24,14 @@ declare let $: any;
 })
 export class CnDynamicGridviewComponent implements OnInit, ICnComponent, AfterViewInit, OnDestroy {
 
+  @ViewChild('datatable')
+  tableDiv: ElementRef;
+
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
+
+  @ViewChild(CnToastComponent)
+  toastComponent: CnToastComponent;
 
   @Input() componentConfig;
   _GUID: string;
@@ -27,8 +40,11 @@ export class CnDynamicGridviewComponent implements OnInit, ICnComponent, AfterVi
   dtTrigger: Subject<object> = new Subject();
   dialogConfig: IDynamicDialogField;
   _subscribe: Subscription;
-
-  constructor(private _broadcast: Broadcaster) {
+  checkedValue: Map<string, string> = new Map<string, string>();
+;
+  constructor(private _broadcast: Broadcaster,
+              private _localStorage: ClientStorageService,
+              private apiService: ApiService) {
 
   }
 
@@ -49,7 +65,88 @@ export class CnDynamicGridviewComponent implements OnInit, ICnComponent, AfterVi
   }
 
   ngAfterViewInit() {
+    const that = this;
     this.dtTrigger.next();
+    this.dtElement.dtInstance.then((dtInstabce) => {
+      dtInstabce.on('click.dt', (event) => {
+        $(event.target).attr('data-name')
+        && $(event.target).attr('data-name') === 'dtAction'
+        && event.stopPropagation();
+
+        const $btn = $(event.target);
+        let data;
+        const d = $btn.attr('data-opt');
+        const id = $btn.attr('data-id');
+        d && (data = JSON.parse(d));
+        if ($(event.target).attr('data-toggle') === 'confirmation') {
+          const con = $('[data-toggle="confirmation"]').confirmation({
+            placement: 'top',
+            title: data.text ? data.text : '是否继续？',
+            btnOkLabel: '确认',
+            btnCancelLabel: '取消',
+            btnOkClass: 'btn btn-success',
+            btnCancelClass: 'btn btn-default',
+            singleton: true,
+            popout: true,
+            onConfirm: (e) => {
+              e.stopPropagation();
+              this.doConfirm(data.execution, id);
+            },
+            onCancel: (e) => {
+              e.stopPropagation();
+            }
+          });
+        }
+      });
+      const $element = $(this.tableDiv.nativeElement);
+      $element.find('.group-checkable').change(function () {
+        const set = $(this).attr('data-set');
+        const checked = $(this).is(':checked');
+        $element.find('.checkboxes').each(function () {
+          if (checked) {
+            $(this).prop('checked', true);
+            $(this).parents('tr').addClass('active');
+            that.checkedValue.set($(this).val(), $(this).val());
+          } else {
+            $(this).prop('checked', false);
+            $(this).parents('tr').removeClass('active');
+            that.checkedValue.clear();
+          }
+        });
+      });
+      $element.on('change', 'tbody tr .checkboxes', function () {
+        $(this).parents('tr').toggleClass('active');
+        if ($(this).prop('checked') === true) {
+          that.checkedValue.set($(this).val(), $(this).val());
+        } else {
+          that.checkedValue.delete($(this).val());
+        }
+      });
+    });
+  }
+
+  doConfirm(eventSetting, id) {
+    const url: string = eventSetting.api || '';
+    const method: string = eventSetting.method || 'get';
+    const params = eventSetting.paramsMap || {};
+    if (eventSetting.keyId && eventSetting.keyId.trim().length > 0) {
+      params[eventSetting.keyId] = id || '';
+    }
+    const event = new ButtonEvent();
+    event.execute(this.apiService, url, method, params, this.handleData).subscribe(
+      result => {
+        this.toastComponent.showToast(ToastType.TOAST_SUCCESS, '', '执行成功');
+        this.reload();
+      },
+      error => {
+        // errors should be written in operation system log
+        // show error message to user
+        this.toastComponent.showToast(ToastType.TOAST_ERROR, '', error);
+        console.error('出现错误', error);
+      },
+      () => {
+      }
+    );
   }
 
   checkAll() {
@@ -80,10 +177,31 @@ export class CnDynamicGridviewComponent implements OnInit, ICnComponent, AfterVi
             break;
         }
       };
-      btns.push(btn);
+      const permission = this.checkOpPermissions(btn.events.execution);
+      if (permission === Configuration.AppPermissionType.PERMITTED) {
+        btn.enabled = true;
+        btns.push(btn);
+      } else if (permission === Configuration.AppPermissionType.DISABLED) {
+        btn.enabled = false;
+        btns.push(btn);
+      } else if (permission === Configuration.AppPermissionType.INVISIBLE) {
+      } else if (permission === Configuration.AppPermissionType.NOT_SET) {
+        btns.push(btn);
+      } else {
+        btns.push(btn);
+      }
     }
     return btns;
   }
+
+  checkOpPermissions(execution) {
+    return OpPermissionResolver.getResourcePermission(
+      execution.method,
+      execution.api,
+      this._localStorage.getSessionStorage('dataPermissions')
+    );
+  }
+
 
   reload(newURL?: string): void {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {

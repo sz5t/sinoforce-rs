@@ -97,8 +97,8 @@
       <div class="form-group">
         <select title="" formControlName="projectName" name="projectName"
                 class="bootstrap-select bs-select form-control" *ngFor="let org of orgList">
-          <optgroup *ngFor="let proj of org.value" label="{{org.name}}">
-            <option value="{{proj.key}}">
+          <optgroup label="{{org.name}}">
+            <option *ngFor="let proj of org.value" value="{{proj.key}}">
               {{proj.value}}
             </option>
           </optgroup>

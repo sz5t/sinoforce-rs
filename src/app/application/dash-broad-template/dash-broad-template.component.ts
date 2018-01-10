@@ -16,6 +16,11 @@ export class DashBroadTemplateComponent implements OnInit {
         'isFullScreen': true,
         'isCollapse': true,
         'blockType': 'portlet',
+        'note': {
+          'type': 'note-info',
+          'title': '图表数据',
+          'text': '当前数据为固定提供数据类型'
+        },
         'size': {
           'xsCol': {
             'value': '12',

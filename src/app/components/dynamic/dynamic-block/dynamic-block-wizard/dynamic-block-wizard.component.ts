@@ -80,6 +80,7 @@ export class CnDynamicBlockWizardComponent implements OnInit, IDynamicBlock, Aft
       isCollapse: this.templateConfig.isCollapse ? this.templateConfig.isCollapse : '',
       isFullScreen: this.templateConfig.isFullScreen ? this.templateConfig.isFullScreen : '',
       actions: this.templateConfig.actions ? this.templateConfig.actions : [],
+      note: this.templateConfig.note
     };
   }
 

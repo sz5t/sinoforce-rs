@@ -25,7 +25,7 @@ export class CnLoginComponent implements OnInit {
   entryForm: FormGroup;
   onlineUser: OnlineUser;
   errorMessage;
-
+  localConfig;
   constructor(private apiService: ApiService,
               private formBuilder: FormBuilder,
               private clientStorage: ClientStorageService,
@@ -51,10 +51,10 @@ export class CnLoginComponent implements OnInit {
     this.apiService.doPost2(Configuration.validCode_resource, {})
       .subscribe(
         response => {
-          this.validCode = 'data:image/gif;base64,' + response.Data;
-          this.verfyCode = response.VerfyCode;
-          this.validCodeId = response.Id;
-          this.verfyLength = response.Length;
+          this.validCode = 'data:image/gif;base64,' + response.Data.Data;
+          this.verfyCode = response.Data.VerfyCode;
+          this.validCodeId = response.Data.Id;
+          this.verfyLength = response.Data.Length;
         }
       );
   }
@@ -73,8 +73,8 @@ export class CnLoginComponent implements OnInit {
     const identityPromise = this.apiService.doPost2(Configuration.onlineUser_resource, this.onlineUser);
     identityPromise.toPromise()
       .then(response => {
-        this.onlineUser = {...response};
-        if (response.UserId && response.UserId.length > 0) {
+        this.onlineUser = {...response.Data};
+        if (response.Data.UserId && response.Data.UserId.length > 0) {
           $('.login-form').hide();
           $('.register-form').show();
           if (this.onlineUser.OrgList && this.onlineUser.OrgList.length > 0) {
@@ -94,7 +94,7 @@ export class CnLoginComponent implements OnInit {
             });
           }
         } else {
-          this.errorMessage = this.onlineUser.Message;
+          this.errorMessage = this.onlineUser.Message
           console.log(this.errorMessage);
           // show this message
         }
@@ -120,56 +120,157 @@ export class CnLoginComponent implements OnInit {
     onlineUserRequest
       .toPromise()
       .then(onlineUser => {
-        return this.apiService.doPost2(Configuration.onlineUser_resource, onlineUser)
+        return this.apiService.doPost2(Configuration.onlineUser_resource, onlineUser.Data)
           .toPromise();
       }).then(onlineUser => {
       // console.log('1', onlineUser);
-      this.clientStorage.setCookies('onlineUser', onlineUser);
+      this.clientStorage.setCookies('onlineUser', onlineUser.Data);
       return this.apiService.doGet(Configuration.appUser_resource
         + '/'
         + onlineUser['UserId'])
         .toPromise();
     }).then(appUser => {
-      console.log('2', appUser);
+      // console.log('2', appUser);
       // this.clientStorage.setCookies('appUser', appUser);
-      return this.apiService.doGet(Configuration.commonCode_resource
+      return this.apiService.doGet2<any>(Configuration.commonCode_resource
         + '?Name='
         + Configuration.commonCode_code
         + '&ApplyId=ApplyId')
         .toPromise();
     }).then(commonCode => {
       // console.log('3', commonCode);
-      return this.apiService.doGet(Configuration.appModule_response
+      return this.apiService.doGet2<any>(Configuration.appModule_response
         + '?ProjId='
         + this.onlineUser['ProjId']
         + '&ParentId=In(\"\",null)'
-        + '&ApplyId=' + commonCode[0]['Id'])
+        + '&ApplyId=' + commonCode.Data[0]['Id'])
         .toPromise();
     }).then(parentAppModuleConfig => {
       // console.log('4', parentAppModuleConfig);
-      return this.apiService.doGet(Configuration.appModule_response
+      this.localConfig = JSON.parse(parentAppModuleConfig.Data[0].ConfigData);
+      this.clientStorage.setSessionStorage('appModuleConfig', this.localConfig);
+      return this.apiService.doGet2<any>(Configuration.appPermission_response).toPromise();
+      /*const childModuleConfigsURL =
+       Configuration.appModuleTree_response.replace(
+       '{parentId}',
+       parentAppModuleConfig[0]['Id']);
+       return this.apiService.doGet2<any[]>(childModuleConfigsURL
         + '?ProjId='
         + this.onlineUser['ProjId']
-        + '&ParentId='
-        + parentAppModuleConfig[0]['Id'])
+       + '&_recursive=true')
+       .toPromise();*/
+    })
+    /*.then(appModuleConfig => {
+     const modules = [];
+     appModuleConfig.forEach(config => {
+     const module = {
+     title: config.Name,
+     icon: '',
+     type: 'nav-item',
+     active: false,
+     sub: []
+     };
+     config.Rows.forEach(row => {
+     const sub = {
+     name: '',
+     icon: '',
+     title: row.Name,
+     description: '',
+     router: ''
+     };
+     module.sub.push(sub);
+     });
+     modules.push(module);
+     });
+     // 保存异步配置文件
+     this.clientStorage.setSessionStorage('appModuleConfig', modules);
+     return this.apiService.doGetConfig(Configuration.config2_resource).toPromise();
+     })*/
+    /* .then(localConfig => {
+     this.localConfig = localConfig;
+     return this.apiService.doGet2<any>(Configuration.appPermission_response).toPromise();
+     })*/
+      .then(appPermission => {
+        // 加载本地配置文件
+        // const modules = {};
+        // const funcs = {};
+        // const remoteConfig = this.clientStorage.getSessionStorage('appModuleConfig');
+        appPermission.Data
+          .FuncResPermission
+          .SubFuncResPermissions[0]
+          .SubFuncResPermissions[0]
+          .SubFuncResPermissions.forEach(permission => { // 模块权限
+          const p = this.fixModulePermission(permission.OpPermissions[0].Permission);
+          const navItem = this.localConfig.filter(item => item.title === permission.Name)[0];
+          if (navItem) {
+            navItem.type = p;
+          }
+          permission.SubFuncResPermissions.forEach(subFunc => { // 功能权限
+            const d = this.fixFuncPermission(subFunc.OpPermissions[0].Permission);
+            if (navItem && navItem.sub) {
+              const subItem = navItem.sub.filter(sub => sub.title === subFunc.Name)[0];
+              if (subItem) {
+                subItem.display = d;
+              }
+            }
+          });
+        });
+        this.clientStorage.setSessionStorage('opPermissions', appPermission.Data.OpPermissions)
+        this.clientStorage.setSessionStorage('appModuleConfig', this.localConfig);
+        return this.apiService.doGet2<any>(Configuration.dataPermission_response).toPromise();
+      }).then(dataPermission => {
+      this.clientStorage.setSessionStorage('dataPermissions', dataPermission.Data);
+      return this.apiService.doGet2<any>(
+        Configuration.appConfig_resource,
+        {
+          'ProjId': this.onlineUser['ProjId'],
+          'ApplyId': Configuration.HJ_AllAppConfig
+        })
         .toPromise();
-    }).then(appModuleConfig => {
-      // console.log('5', appModuleConfig);
-      // this.clientStorage.setSessionStorage('appModuleConfig', appModuleConfig);
-      return this.apiService.doGetConfig(Configuration.config_resource).toPromise();
-    }).then(localConfig => {
+    }).then((appConfigData) => {
+      const appConfig = JSON.parse(appConfigData.Data[0].Metadata);
+      this.clientStorage.setSessionStorage('appConfig', appConfig);
       this.router.navigate(['/app']).then(() => {
-        this.clientStorage.setSessionStorage('appModuleConfig', localConfig);
-        // console.log('6');
+        // 持久化本地配置文件
+        // this.clientStorage.setSessionStorage('appModuleConfig', localConfig);
         this.broadcast.broadcast('loadConfig', 'start');
         this.broadcast.broadcast('loadConfig', 'processing');
         this.broadcast.broadcast('loadConfig', 'end');
+      }).catch(error => {
+        console.log(error);
       });
     });
-    // onlineUser
-    // appUser
-    // commonCode
-    // parent appModuleConfig
-    // appModuleConfig
+  }
+
+  fixModulePermission(permission) {
+    let result;
+    if (permission === Configuration.AppPermissionType.PERMITTED) {
+      result = Configuration.menuNavItemType;
+    } else if (permission === Configuration.AppPermissionType.DISABLED) {
+      result = '';
+    } else if (permission === Configuration.AppPermissionType.INVISIBLE) {
+      result = '';
+    } else if (permission === Configuration.AppPermissionType.NOT_SET) {
+      result = Configuration.menuNavItemType;
+    } else {
+      result = Configuration.menuNavItemType;
+    }
+    return result;
+  }
+
+  fixFuncPermission(permission) {
+    let result;
+    if (permission === Configuration.AppPermissionType.PERMITTED) {
+      result = true;
+    } else if (permission === Configuration.AppPermissionType.DISABLED) {
+      result = false;
+    } else if (permission === Configuration.AppPermissionType.INVISIBLE) {
+      result = false;
+    } else if (permission === Configuration.AppPermissionType.NOT_SET) {
+      result = true;
+    } else {
+      result = true;
+    }
+    return result;
   }
 }

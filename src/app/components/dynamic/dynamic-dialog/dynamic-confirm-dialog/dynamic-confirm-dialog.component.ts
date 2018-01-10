@@ -11,11 +11,11 @@ declare let $: any;
   styleUrls: ['./dynamic-confirm-dialog.component.css']
 })
 export class CnDynamicConfirmDialogComponent implements OnInit, IDynamicDialog {
-  handleData: any;
   @ViewChild(CnToastComponent)
   toastComponent: CnToastComponent;
   @Input() dialogConfigField: IDynamicDialogField;
-
+  @Input() handleData: any;
+  @Input() selectedIds: Map<string, string>;
   constructor(private apiService: ApiService) {
   }
 
@@ -26,13 +26,14 @@ export class CnDynamicConfirmDialogComponent implements OnInit, IDynamicDialog {
     const config = this.dialogConfigField;
     const url = config.eventSetting.api;
     const method = config.eventSetting.method || 'get';
-    const params = config.eventSetting.paramsMap || {};
+    let params = config.eventSetting.paramsMap || {};
     if (url && url.length > 0) {
-      if (config.eventSetting.keyId && config.eventSetting.keyId.trim().length > 0) {
-        params[config.eventSetting.keyId] = config.handleData[config.eventSetting.keyId] || '';
+      if (method === 'delete') {
+        params = {'_ids': Array.from(this.selectedIds.values()).join(',')};
       }
+
       const event = new ButtonEvent();
-      event.execute(this.apiService, url, method, params, config.handleData)
+      event.execute(this.apiService, url, method, params, this.handleData)
         .subscribe(
           result => {
             this.toastComponent.showToast(ToastType.TOAST_SUCCESS, 'success', '执行成功');

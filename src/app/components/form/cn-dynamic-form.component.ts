@@ -17,7 +17,6 @@ export class CnDynamicFormComponent implements OnInit, OnChanges {
 
   get controls() {
     return this.config.filter(({type}) => {
-      //debugger;
       return type !== 'button';
     });
   }
