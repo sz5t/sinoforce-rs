@@ -37,6 +37,7 @@ export class CnDynamicGridviewComponent implements OnInit, ICnComponent, AfterVi
   _GUID: string;
   handleData;
   gridConfig;
+  searchFormConfig;
   dtTrigger: Subject<object> = new Subject();
   dialogConfig: IDynamicDialogField;
   _subscribe: Subscription;
@@ -51,6 +52,7 @@ export class CnDynamicGridviewComponent implements OnInit, ICnComponent, AfterVi
   ngOnInit() {
     this._GUID = CommonUtility.uuID(4);
     this.gridConfig = this.componentConfig;
+    this.componentConfig.searchForm && (this.searchFormConfig = this.componentConfig.searchForm);
     this.gridConfig.rowCallback = (row: Node, data: any[] | Object, index: number) => {
       $('td', row).unbind('click');
       $('td', row).bind('click', () => {
@@ -203,12 +205,29 @@ export class CnDynamicGridviewComponent implements OnInit, ICnComponent, AfterVi
   }
 
 
-  reload(newURL?: string): void {
+  reload(urlObj?): void {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-      if (newURL) {
-        dtInstance.ajax.url(newURL).load();
-      }
-      else {
+      if (urlObj) {
+        let url = '';
+        if (typeof urlObj === 'object') {
+          const params = [];
+          for (let p in urlObj) {
+            if (urlObj.hasOwnProperty(p) && urlObj[p]) {
+              params.push(`${p}=${urlObj[p]}`);
+            }
+          }
+          const currentUrl = dtInstance.ajax.url();
+          const lastIndex = currentUrl.indexOf('?');
+          if (lastIndex > 0) {
+            url = currentUrl.substring(0, currentUrl.lastIndexOf('?')) + '?' + params.join('&');
+          } else {
+            url = currentUrl + '?' + params.join('&');
+          }
+        } else if (typeof urlObj === 'string') {
+          url = urlObj;
+        }
+        dtInstance.ajax.url(url).load();
+      } else {
         dtInstance.ajax.reload();
       }
     });

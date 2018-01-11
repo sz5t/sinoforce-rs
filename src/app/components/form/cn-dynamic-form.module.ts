@@ -18,6 +18,7 @@ import {CnDateRangePickerComponent} from './cn-date-range-picker/cn-date-range-p
 import {CnFormDropdownComponent} from './cn-form-dropdown/cn-form-dropdown.component';
 import {CnFormSpinDirective} from './cn-form-spin/cn-form-spin.directive';
 import {CnFormSpinComponent} from './cn-form-spin/cn-form-spin.component';
+import {CnFormSearchButtonComponent} from './cn-form-search-button/cn-form-search-button.component';
 
 @NgModule({
   imports: [
@@ -45,7 +46,8 @@ import {CnFormSpinComponent} from './cn-form-spin/cn-form-spin.component';
     CnDateRangePickerComponent,
     CnFormDropdownComponent,
     CnFormSpinDirective,
-    CnFormSpinComponent
+    CnFormSpinComponent,
+    CnFormSearchButtonComponent
   ],
   entryComponents: [
     CnFormInputComponent,
@@ -59,7 +61,8 @@ import {CnFormSpinComponent} from './cn-form-spin/cn-form-spin.component';
     CnDateRangePickerComponent,
     CnDatetimePickerComponent,
     CnFormDropdownComponent,
-    CnFormSpinComponent
+    CnFormSpinComponent,
+    CnFormSearchButtonComponent
   ]
 })
 export class CnDynamicFormModule { }

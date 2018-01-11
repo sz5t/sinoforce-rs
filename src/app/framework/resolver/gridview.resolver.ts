@@ -106,7 +106,7 @@ export class MasterGridViewResolver {
     switch (renderName.type){
       case RenderColumnType.RENDER_COLUMN_TYPE.NOT_NULL:
         return (data, type, row, meta) => {
-          return data == null ? '' : data;
+          return data == null ? `<span class="font-grey Italic">无</span>` : data;
         };
       case RenderColumnType.RENDER_COLUMN_TYPE.CHECK_ALL:
         return (data, type, row, meta) => {

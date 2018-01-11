@@ -14,6 +14,7 @@ import {CnDateRangePickerComponent} from './cn-date-range-picker/cn-date-range-p
 import {CnDatetimePickerComponent} from './cn-datetime-picker/cn-datetime-picker.component';
 import {CnFormDropdownComponent} from './cn-form-dropdown/cn-form-dropdown.component';
 import {CnFormSpinComponent} from './cn-form-spin/cn-form-spin.component';
+import {CnFormSearchButtonComponent} from './cn-form-search-button/cn-form-search-button.component';
 
 const component: { [type: string]: Type<IField> } = {
   button: CnFormButtonComponent,
@@ -27,7 +28,8 @@ const component: { [type: string]: Type<IField> } = {
   daterangepicker: CnDateRangePickerComponent,
   datetimepicker: CnDatetimePickerComponent,
   asyndropdown: CnFormDropdownComponent,
-  touchspin: CnFormSpinComponent
+  touchspin: CnFormSpinComponent,
+  searchbutton: CnFormSearchButtonComponent
 };
 
 @Directive({

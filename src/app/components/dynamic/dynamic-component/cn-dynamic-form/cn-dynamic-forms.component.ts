@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {ICnComponent} from '../../../component-models/component.interface';
 declare let $: any;
 @Component({
+  exportAs: 'cnDynamicForms',
   selector: 'cn-dynamic-forms',
   templateUrl: './cn-dynamic-forms.component.html',
   styleUrls: ['./cn-dynamic-forms.component.css']

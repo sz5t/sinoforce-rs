@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Breadcrumb, BreadcrumbResolver} from '../../../framework/resolver/breadcrumb.resovler';
 import {ClientStorageService} from '../../../services/client-storage.service';
@@ -6,6 +6,7 @@ import {ClientStorageService} from '../../../services/client-storage.service';
 @Component({
   selector: 'cn-breadcrumb',
   templateUrl: './cn-breadcrumb.component.html',
+  encapsulation: ViewEncapsulation.None,
   styleUrls: ['./cn-breadcrumb.component.css']
 })
 export class CnBreadcrumbComponent implements OnInit {
