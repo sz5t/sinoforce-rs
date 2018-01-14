@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {IFieldConfig} from '../../../form/form-models/IFieldConfig';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ICnComponent} from '../../../component-models/component.interface';
@@ -6,6 +6,7 @@ declare let $: any;
 @Component({
   exportAs: 'cnDynamicForms',
   selector: 'cn-dynamic-forms',
+  encapsulation: ViewEncapsulation.None,
   templateUrl: './cn-dynamic-forms.component.html',
   styleUrls: ['./cn-dynamic-forms.component.css']
 })

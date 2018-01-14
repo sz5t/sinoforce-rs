@@ -18,6 +18,7 @@ import {CnDatetimePickerComponent} from '../../../form/cn-datetime-picker/cn-dat
 import {CnFormDropdownComponent} from "../../../form/cn-form-dropdown/cn-form-dropdown.component";
 import {CnFormSpinComponent} from "../../../form/cn-form-spin/cn-form-spin.component";
 import {CnFormSearchButtonComponent} from "../../../form/cn-form-search-button/cn-form-search-button.component";
+import {CnFormRowComponent} from "../../../form/cn-form-row/cn-form-row.component";
 
 const components: { [type: string]: Type<IField> } = {
   button: CnFormButtonComponent,
@@ -32,7 +33,8 @@ const components: { [type: string]: Type<IField> } = {
   datetimepicker: CnDatetimePickerComponent,
   asyndropdown: CnFormDropdownComponent,
   touchspin: CnFormSpinComponent,
-  searchbutton: CnFormSearchButtonComponent
+  searchbutton: CnFormSearchButtonComponent,
+  formrow: CnFormRowComponent
 };
 
 @Directive({

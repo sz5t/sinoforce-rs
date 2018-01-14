@@ -23,6 +23,7 @@ const components: { [type: string]: any } = {
 })
 export class DynamicComponentDirective implements OnInit, ICnComponent {
   @Input() componentConfig;
+  @Input() componentCaption;
   component: ComponentRef<ICnComponent>;
 
   constructor(private resolver: ComponentFactoryResolver,
@@ -42,6 +43,9 @@ export class DynamicComponentDirective implements OnInit, ICnComponent {
         .createComponentConfig(
           this.componentConfig.viewCfg, this.getCredential()
         );
+      if (this.componentConfig.viewCfg.component === 'grid_view') {
+        this.component.instance.componentConfig.componentCaption = this.componentCaption;
+      }
     }
   }
 

@@ -34,6 +34,7 @@ export class CnDynamicGridviewComponent implements OnInit, ICnComponent, AfterVi
   toastComponent: CnToastComponent;
 
   @Input() componentConfig;
+  @Input() captionConfig;
   _GUID: string;
   handleData;
   gridConfig;

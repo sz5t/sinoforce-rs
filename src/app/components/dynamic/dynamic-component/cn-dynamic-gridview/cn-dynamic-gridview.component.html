@@ -1,11 +1,12 @@
-<div *ngIf="searchFormConfig">
+
   <cn-dynamic-search-form
     [searchFormConfig]="searchFormConfig"
+    [captionConfig]="componentConfig.componentCaption"
     (eventCallback)="reload($event)"
   ></cn-dynamic-search-form>
-</div>
 
-<div #datatable>
+
+  <div #datatable>
   <table datatable
          [dtOptions]="gridConfig"
          [dtTrigger]="dtTrigger"
