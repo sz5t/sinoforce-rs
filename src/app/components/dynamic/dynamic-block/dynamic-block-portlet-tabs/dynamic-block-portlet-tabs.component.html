@@ -16,7 +16,7 @@
   <div class="portlet-body">
     <div class="tab-content">
       <div *ngFor="let viewCfg of viewCfgs" class="tab-pane fade {{viewCfg.active}}" id="{{viewCfg.id}}">
-        <ng-container cnDynamicComponent [componentConfig]="viewCfg"
+        <ng-container cnDynamicComponent [componentConfig]="viewCfg" [componentCaption]="dynamicBlockField"
         ></ng-container>
       </div>
     </div>

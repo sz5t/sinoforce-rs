@@ -123,6 +123,8 @@ export class MasterGridViewResolver {
               let btnSet = '';
               if (btn.type === RenderColumnType.RENDER_COLUMN_TYPE.BUTTON_COMMON) {
                 btnSet = `<button data-name="dtAction"
+                          data-id=${data}
+                          data-toggle="detail"
                           data-opt=${JSON.stringify(btn.events)}
                           class="bs-confirmation btn btn-small ${btn.color}">
                           <i class="${btn.img}"></i>

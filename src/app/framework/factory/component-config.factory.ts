@@ -122,6 +122,12 @@ class ChartBarResolver implements IConfigResolver {
     return config;
   }
 }
+
+class DetailViewResolver implements IConfigResolver {
+  resolve(config: any): any {
+    return config;
+  }
+}
 const components: { [type: string]: Type<IConfigResolver> } = {
   grid_view: GridViewConfigResolver,
   grid_multi_view: GridViewConfigResolver,
@@ -129,7 +135,8 @@ const components: { [type: string]: Type<IConfigResolver> } = {
   form_view: FormViewConfigResolver,
   chart_counter: ChartCounterResolver,
   chart_bar: ChartBarResolver,
-  timeline_horizontal: TimelineResolver
+  timeline_horizontal: TimelineResolver,
+  detail_view: DetailViewResolver
 };
 
 export class ComponentConfigFactory {

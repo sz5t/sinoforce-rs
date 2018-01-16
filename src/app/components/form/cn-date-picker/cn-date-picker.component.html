@@ -4,16 +4,13 @@
 >
   <label class="col-md-3 control-label">{{config.label}}</label>
   <div class="col-md-9">
-    <div class="input-group date form_datetime" data-date-format="yyyy-mm-dd " data-link-field="dtp_input1">
+    <div class="input-group date form_datetime" data-date-format="yyyy-mm-dd ">
       <input
         type="text"
-        value=""
-        readonly
         class="form-control"
         placeholder="{{config.placeholder}}"
       />
-      <input type="hidden" formControlName="{{config.name}}" id="dtp_input1"/><br/>
-      <!--<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>-->
+      <input type="text" id="{{_GUID}}" type="hidden" formControlName="{{config.name}}"/>
       <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
     </div>
     <span class="{{config.helpClass}}"

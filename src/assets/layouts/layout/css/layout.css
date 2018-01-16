@@ -1516,7 +1516,7 @@ Page content
     background-color: #ffffff;
     position: relative;
     padding: 0px 20px;
-    margin: -10px -20px 0 -10px;
+    margin: -24px -20px 0 -20px;
   }
     .page-content-white .page-bar .page-breadcrumb,
     .page-container-bg-solid .page-bar .page-breadcrumb {
@@ -1869,7 +1869,7 @@ Theme Panel
   .page-content-white .theme-panel,
   .page-container-bg-solid .theme-panel {
     position: absolute;
-    margin-top: 30px;
+    margin-top: 50px;
     margin-right: 20px;
     right: 0; }
     .page-content-white .theme-panel > .toggler1,
