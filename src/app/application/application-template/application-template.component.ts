@@ -4430,6 +4430,7 @@ export class ApplicationTemplateComponent implements OnInit {
                     ],
                   },
                   'detailConfigClass': 'SinoForce.HJComm.JcDictionaryValue',
+                  'idKey': 'Id'
                 }
               },
               {
@@ -9137,7 +9138,6 @@ export class ApplicationTemplateComponent implements OnInit {
       ],
     ],
   };
-
   constructor(private router: ActivatedRoute, private clientStorage: ClientStorageService) {
     this.configs = this.clientStorage.getSessionStorage('appConfig');
     this.router.params.subscribe(param => {

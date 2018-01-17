@@ -106,8 +106,7 @@ export class CnDynamicGridviewComponent implements OnInit, ICnComponent, AfterVi
         }
         // detail button
         if ($(event.target).attr('data-toggle') === 'detail') {
-          // this.detailConfig = {id: id, config: };
-          console.log(this._GUID);
+          this._broadcast.broadcast(`detail_${this._GUID}`, {'detailId': id});
           $('#detail_dialog_' + this._GUID).modal('show');
         }
       });
@@ -214,7 +213,6 @@ export class CnDynamicGridviewComponent implements OnInit, ICnComponent, AfterVi
       this._localStorage.getSessionStorage('dataPermissions')
     );
   }
-
 
   reload(urlObj?): void {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {

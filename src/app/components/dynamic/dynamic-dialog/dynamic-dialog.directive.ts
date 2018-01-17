@@ -9,7 +9,7 @@ import {CnDynamicDetailDialogComponent} from "./dynamic-detail-dialog/dynamic-de
 const components: { [type: string]: Type<IDynamicDialog> } = {
   form_dialog: CnDynamicFormDialogComponent,
   confirm_dialog: CnDynamicConfirmDialogComponent,
-  detail_dialog: CnDynamicDetailDialogComponent
+  //detail_dialog: CnDynamicDetailDialogComponent
 };
 
 

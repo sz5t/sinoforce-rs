@@ -1,5 +1,5 @@
 import {
-  ComponentFactory, ComponentFactoryResolver, ComponentRef, Directive, HostBinding, Input, OnInit, Type,
+  ComponentFactory, ComponentFactoryResolver, ComponentRef, Directive, HostBinding, Input, OnChanges, OnInit, Type,
   ViewContainerRef
 } from '@angular/core';
 import {ICnDynamicColumn} from '../dynamic-column/cn-dynamic-column.model';
