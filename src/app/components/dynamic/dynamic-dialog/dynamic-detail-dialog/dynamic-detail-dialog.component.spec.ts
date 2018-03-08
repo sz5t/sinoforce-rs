@@ -1,20 +1,20 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {FormGridTemplateComponent} from './form-grid-template.component';
+import {DynamicDetailDialogComponent} from './dynamic-detail-dialog.component';
 
-describe('FormGridTemplateComponent', () => {
-  let component: FormGridTemplateComponent;
-  let fixture: ComponentFixture<FormGridTemplateComponent>;
+describe('DynamicDetailDialogComponent', () => {
+  let component: DynamicDetailDialogComponent;
+  let fixture: ComponentFixture<DynamicDetailDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [FormGridTemplateComponent]
+      declarations: [DynamicDetailDialogComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FormGridTemplateComponent);
+    fixture = TestBed.createComponent(DynamicDetailDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

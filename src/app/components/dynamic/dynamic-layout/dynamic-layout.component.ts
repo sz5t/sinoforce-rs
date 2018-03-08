@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: '[cn-dynamic-layout],cn-dynamic-layout',
@@ -8,7 +8,6 @@ import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 })
 export class CnDynamicLayoutComponent implements OnInit {
   @Input() config;
-
   constructor() {
   }
 

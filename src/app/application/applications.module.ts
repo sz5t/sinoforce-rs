@@ -13,7 +13,6 @@ import {DataTablesModule} from 'angular-datatables';
 import {CnBreadcrumbComponent} from '../components/layout/cn-breadcrumb/cn-breadcrumb.component';
 import {LoginAuthService} from '../services/login-auth.service';
 import {DashBroadTemplateComponent} from './dash-broad-template/dash-broad-template.component';
-import {FormGridTemplateComponent} from './form-grid-template/form-grid-template.component';
 import {TabsDemoComponent} from './tabs-demo/tabs-demo.component';
 import {TreeDemoComponent} from './tree-demo/tree-demo.component';
 import {FormDemoComponent} from './form-demo/form-demo.component';
@@ -33,10 +32,17 @@ export const CHILDREN_ROUTES: Routes = [
       {path: 'tabs-demo', component: TabsDemoComponent},
       {path: 'form-demo', component: FormDemoComponent},
       {path: 'timeline-demo', component: TimelineDemoComponent},
-      {path: 'grid-view-master/:name', component: MasterTemplateComponent, canActivate: [LoginAuthService]},
+<<<<<<< HEAD
+      {path: 'grid-view-master/:name', component: MasterTemplateComponent},
+      {path: 'grid-view-master-slaver/:name', component: MasterSlaverTemplateComponent},
+      {path: 'tree-grid/:name', component: TreeGridTemplateComponent},
+      {path: 'form-grid/:name', component: FormGridTemplateComponent},
+=======
+      /*   {path: 'grid-view-master/:name', component: MasterTemplateComponent, canActivate: [LoginAuthService]},
       {path: 'grid-view-master-slaver/:name', component: MasterSlaverTemplateComponent, canActivate: [LoginAuthService]},
       {path: 'tree-grid/:name', component: TreeGridTemplateComponent, canActivate: [LoginAuthService]},
-      {path: 'form-grid/:name', component: FormGridTemplateComponent},
+       {path: 'form-grid/:name', component: FormGridTemplateComponent},*/
+>>>>>>> 9b7c9ebf74b2ebab1b3f83656929073358104d83
       {path: 'breadcrumb/:id', component: CnBreadcrumbComponent, outlet: 'breadcrumb'}
     ]
   }
@@ -58,7 +64,6 @@ export const CHILDREN_ROUTES: Routes = [
     TreeGridTemplateComponent,
     ApplicationsComponent,
     DashBroadTemplateComponent,
-    FormGridTemplateComponent,
     TabsDemoComponent,
     TreeDemoComponent,
     FormDemoComponent,

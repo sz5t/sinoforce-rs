@@ -3,10 +3,10 @@ import {ICnDynamicColumn, ICnDynamicColumnField, IValueOffset} from '../cn-dynam
 import {MasterTemplateComponent} from '../../../../application/master-template/master-template.component';
 import {IDynamicBlock} from '../../dynamic-block/dynamic-block.model';
 const colClsType: { [type: string]: IValueOffset } = {
-  mdCol: {value: 'col-md-', offset: 'col-md-offset-'},
-  smCol: {value: 'col-sm-', offset: 'col-sm-offset-'},
-  lgCol: {value: 'col-lg-', offset: 'col-lg-offset-'},
-  xsCol: {value: 'col-xs-', offset: 'col-xs-offset-'}
+  md: {value: 'col-md-', offset: 'col-md-offset-'},
+  sm: {value: 'col-sm-', offset: 'col-sm-offset-'},
+  lg: {value: 'col-lg-', offset: 'col-lg-offset-'},
+  xs: {value: 'col-xs-', offset: 'col-xs-offset-'}
 };
 @Component({
   selector: 'cn-dynamic-column',

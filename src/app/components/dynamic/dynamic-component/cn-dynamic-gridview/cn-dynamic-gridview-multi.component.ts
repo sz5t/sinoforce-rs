@@ -24,7 +24,9 @@ export class CnDynamicGridviewMultiComponent implements OnInit, ICnComponent, Af
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
 
+  @Input() captionConfig;
   @Input() componentConfig;
+  searchFormConfig;
   gridConfig;
   _GUID: string;
   handleData;
@@ -32,7 +34,7 @@ export class CnDynamicGridviewMultiComponent implements OnInit, ICnComponent, Af
   _subscribeStruct: Subscription;
   _rowCallback;
   _selectedItem;
-
+  checkedValue: Map<string, string> = new Map<string, string>();
   constructor(private _broadcast: Broadcaster,
               private _clientStorage: ClientStorageService) {
     this.gridConfig = {
@@ -100,6 +102,7 @@ export class CnDynamicGridviewMultiComponent implements OnInit, ICnComponent, Af
 
   ngOnInit() {
     this._GUID = CommonUtility.uuID(4);
+    this.componentConfig.searchForm && (this.searchFormConfig = this.componentConfig.searchForm);
     this._rowCallback = (row: Node, data: any[] | Object, index: number) => {
       $('td', row).unbind('click');
       $('td', row).bind('click', () => {
@@ -172,6 +175,7 @@ export class CnDynamicGridviewMultiComponent implements OnInit, ICnComponent, Af
         const config = this.initGrid(data.pageConfigs[0].viewCfg, data.parentItemNode);
         this.gridConfig = null;
         this.gridConfig = config;
+        this.componentConfig.searchForm && (this.searchFormConfig = this.componentConfig.searchForm);
         this.gridConfig.buttons = this.initButton(this.gridConfig.toolbarsConfig);
         this.gridConfig.rowCallback = (row: Node, data: any[] | Object, index: number) => {
           $('td', row).unbind('click');

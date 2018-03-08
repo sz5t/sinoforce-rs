@@ -5037,9 +5037,10 @@ Form Layouts
 .static-info {
   margin-bottom: 10px; }
   .static-info .name {
-    font-size: 12px; }
+    font-size: 14px;
+  }
   .static-info .value {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600; }
   .static-info.align-reverse .name,
   .static-info.align-reverse .value {
@@ -5155,7 +5156,7 @@ Form Layouts
 .portlet-form .form-section,
 .form .form-section {
   margin: 30px 0px 30px 0px;
-  padding-bottom: 5px;
+  padding-bottom: 15px;
   border-bottom: 1px solid #e7ecf1; }
   .form-fit .portlet-form .form-section, .form-fit
   .form .form-section {
@@ -6832,7 +6833,12 @@ Portlets
     .portlet > .portlet-title > .tools {
       float: right;
       display: inline-block;
-      padding: 12px 0 8px 0; }
+<<<<<<< HEAD
+      padding: 8px 0 8px 0; }
+=======
+      padding: 8px 0 8px 0;
+    }
+>>>>>>> 9b7c9ebf74b2ebab1b3f83656929073358104d83
       .portlet > .portlet-title > .tools > a {
         display: inline-block;
         height: 16px;
@@ -6841,23 +6847,55 @@ Portlets
         filter: alpha(opacity=100) ; }
       .portlet > .portlet-title > .tools > a.remove {
         background-image: url(../img/portlet-remove-icon.png);
-        background-repeat: no-repeat;
         width: 11px; }
       .portlet > .portlet-title > .tools > a.config {
         background-image: url(../img/portlet-config-icon.png);
-        background-repeat: no-repeat;
         width: 12px; }
       .portlet > .portlet-title > .tools > a.reload {
         background-image: url(../img/portlet-reload-icon.png);
         width: 13px; }
       .portlet > .portlet-title > .tools > a.expand {
-        background-image: url(../img/portlet-expand-icon.png);
-        width: 14px;
-        visibility: visible; }
+        /*width: 45px;*/
+        /*padding-left:15px;*/
+        /*background: url(../img/portlet-expand-icon.png) no-repeat;*/
+<<<<<<< HEAD
+        height:30px;
+        visibility: visible;
+      }
+        .portlet > .portlet-title > .tools > a.expand:before {
+          font-family: FontAwesome;
+          content:'\f002';
+        }
+=======
+        height: 30px;
+        visibility: visible;
+      }
+
+.portlet > .portlet-title > .tools > a.expand:before {
+  font-family: FontAwesome;
+  content: '\f002';
+}
+>>>>>>> 9b7c9ebf74b2ebab1b3f83656929073358104d83
       .portlet > .portlet-title > .tools > a.collapse {
-        background-image: url(../img/portlet-collapse-icon.png);
-        width: 14px;
+        /*background: url(../img/portlet-collapse-icon.png) no-repeat;*/
+        /*width: 45px;*/
+        /*padding-left:15px;*/
+<<<<<<< HEAD
+        height:30px;
         visibility: visible; }
+      .portlet > .portlet-title > .tools > a.collapse:before {
+        font-family: FontAwesome;
+        content:'\f078';
+      }
+=======
+        height: 30px;
+        visibility: visible; }
+
+.portlet > .portlet-title > .tools > a.collapse:before {
+  font-family: FontAwesome;
+  content: '\f078';
+}
+>>>>>>> 9b7c9ebf74b2ebab1b3f83656929073358104d83
       .portlet > .portlet-title > .tools > a.fullscreen {
         display: inline-block;
         top: -3px;
