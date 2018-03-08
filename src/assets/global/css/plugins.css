@@ -1056,9 +1056,6 @@ a.dt-button {
 }
   .portlet.light .dataTables_wrapper .dt-buttons {
     /*margin-top: -64px;*/
-    padding-bottom: 3px;
-    border-bottom: 1px solid #e7ecf1;
-    margin-bottom: 3px
   }
   .portlet.box .dataTables_wrapper .dt-buttons {
     /*margin-top: -50px;*/

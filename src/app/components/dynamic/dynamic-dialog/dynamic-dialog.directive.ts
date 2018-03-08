@@ -5,11 +5,9 @@ import {
 import {IDynamicDialog, IDynamicDialogField} from './dynamic-dialog.model';
 import {CnDynamicFormDialogComponent} from './dynamic-form-dialog/dynamic-form-dialog.component';
 import {CnDynamicConfirmDialogComponent} from './dynamic-confirm-dialog/dynamic-confirm-dialog.component';
-import {CnDynamicDetailDialogComponent} from "./dynamic-detail-dialog/dynamic-detail-dialog.component";
 const components: { [type: string]: Type<IDynamicDialog> } = {
   form_dialog: CnDynamicFormDialogComponent,
-  confirm_dialog: CnDynamicConfirmDialogComponent,
-  //detail_dialog: CnDynamicDetailDialogComponent
+  confirm_dialog: CnDynamicConfirmDialogComponent
 };
 
 

@@ -28,8 +28,6 @@ import {CnDynamicTimelineHorizontalComponent} from './dynamic-component/dynamic-
 import {CnDynamicBlockWizardComponent} from './dynamic-block/dynamic-block-wizard/dynamic-block-wizard.component';
 import {DynamicBlockWizardDirective} from './dynamic-block/dynamic-block-wizard/dynamic-block-wizard.directive';
 import {CnDynamicSearchFormComponent} from './dynamic-component/cn-dynamic-search-form/cn-dynamic-search-form.component';
-import {CnDynamicDetailDialogComponent} from './dynamic-dialog/dynamic-detail-dialog/dynamic-detail-dialog.component';
-import {CnDynamicDetailComponent} from './dynamic-component/cn-dynamic-detail/cn-dynamic-detail.component';
 
 @NgModule({
   imports: [
@@ -64,9 +62,7 @@ import {CnDynamicDetailComponent} from './dynamic-component/cn-dynamic-detail/cn
     CnDynamicTimelineHorizontalComponent,
     CnDynamicBlockWizardComponent,
     DynamicBlockWizardDirective,
-    CnDynamicSearchFormComponent,
-    CnDynamicDetailDialogComponent,
-    CnDynamicDetailComponent
+    CnDynamicSearchFormComponent
   ],
   exports: [
     CnDynamicLayoutComponent,
@@ -83,9 +79,7 @@ import {CnDynamicDetailComponent} from './dynamic-component/cn-dynamic-detail/cn
     CnDynamicChartBarComponent,
     CnDynamicBlockWizardComponent,
     CnDynamicTimelineHorizontalComponent,
-    CnDynamicSearchFormComponent,
-    CnDynamicDetailDialogComponent,
-    CnDynamicDetailComponent
+    CnDynamicSearchFormComponent
   ],
   entryComponents: [
     CnDynamicColumnComponent,
@@ -102,9 +96,7 @@ import {CnDynamicDetailComponent} from './dynamic-component/cn-dynamic-detail/cn
     CnDynamicChartBarComponent,
     CnDynamicBlockWizardComponent,
     CnDynamicTimelineHorizontalComponent,
-    CnDynamicSearchFormComponent,
-    CnDynamicDetailDialogComponent,
-    CnDynamicDetailComponent
+    CnDynamicSearchFormComponent
   ]
 })
 export class CnDynamicModule {

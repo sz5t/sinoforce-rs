@@ -39,11 +39,11 @@ export class CnDynamicGridviewComponent implements OnInit, ICnComponent, AfterVi
   handleData;
   gridConfig;
   searchFormConfig;
-  detailConfig;
   dtTrigger: Subject<object> = new Subject();
   dialogConfig: IDynamicDialogField;
   _subscribe: Subscription;
   checkedValue: Map<string, string> = new Map<string, string>();
+;
   constructor(private _broadcast: Broadcaster,
               private _localStorage: ClientStorageService,
               private apiService: ApiService) {
@@ -71,10 +71,7 @@ export class CnDynamicGridviewComponent implements OnInit, ICnComponent, AfterVi
     const that = this;
     this.dtTrigger.next();
     this.dtElement.dtInstance.then((dtInstabce) => {
-      const $element = $(this.tableDiv.nativeElement);
-      // init cell button event
       dtInstabce.on('click.dt', (event) => {
-        // button click and stop propagation
         $(event.target).attr('data-name')
         && $(event.target).attr('data-name') === 'dtAction'
         && event.stopPropagation();
@@ -84,7 +81,6 @@ export class CnDynamicGridviewComponent implements OnInit, ICnComponent, AfterVi
         const d = $btn.attr('data-opt');
         const id = $btn.attr('data-id');
         d && (data = JSON.parse(d));
-        // confirmation button
         if ($(event.target).attr('data-toggle') === 'confirmation') {
           const con = $('[data-toggle="confirmation"]').confirmation({
             placement: 'top',
@@ -104,13 +100,8 @@ export class CnDynamicGridviewComponent implements OnInit, ICnComponent, AfterVi
             }
           });
         }
-        // detail button
-        if ($(event.target).attr('data-toggle') === 'detail') {
-          this._broadcast.broadcast(`detail_${this._GUID}`, {'detailId': id});
-          $('#detail_dialog_' + this._GUID).modal('show');
-        }
       });
-      // init checked all event
+      const $element = $(this.tableDiv.nativeElement);
       $element.find('.group-checkable').change(function () {
         const set = $(this).attr('data-set');
         const checked = $(this).is(':checked');
@@ -213,6 +204,7 @@ export class CnDynamicGridviewComponent implements OnInit, ICnComponent, AfterVi
       this._localStorage.getSessionStorage('dataPermissions')
     );
   }
+
 
   reload(urlObj?): void {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {

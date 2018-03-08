@@ -115,11 +115,6 @@ table.table-bordered.dataTable {
 }
 table.table-bordered.dataTable th, table.table-bordered.dataTable td {
     border-left-width: 0;
-<<<<<<< HEAD
-    vertical-align:middle;
-=======
-  vertical-align: middle;
->>>>>>> 9b7c9ebf74b2ebab1b3f83656929073358104d83
 }
 table.table-bordered.dataTable th:last-child, table.table-bordered.dataTable th:last-child, table.table-bordered.dataTable td:last-child, table.table-bordered.dataTable td:last-child {
     border-right-width: 0;

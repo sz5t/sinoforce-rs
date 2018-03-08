@@ -29,7 +29,7 @@
           Your form validation is successful!
         </div>
         <div *ngFor="let viewCfg of viewCfgs" class="tab-pane fade {{viewCfg.active}}" id="{{viewCfg.id}}">
-          <ng-container cnDynamicComponent [componentConfig]="viewCfg" [componentCaption]="dynamicBlockField"
+          <ng-container cnDynamicComponent [componentConfig]="viewCfg"
           ></ng-container>
         </div>
         <div class="alert alert-success row">

@@ -4,14 +4,18 @@
     [captionConfig]="componentConfig.componentCaption"
     (eventCallback)="reload($event)"
   ></cn-dynamic-search-form>
+
+
   <div #datatable>
-    <table datatable
-           [dtOptions]="gridConfig"
-           [dtTrigger]="dtTrigger"
-           class="table table-striped table-bordered table-hover table-responsive">
-    </table>
-    <cn-toast></cn-toast>
+  <table datatable
+         [dtOptions]="gridConfig"
+         [dtTrigger]="dtTrigger"
+         class="table table-striped table-bordered table-hover table-responsive">
+  </table>
+  <cn-toast></cn-toast>
 </div>
+
+
 <div *ngIf="gridConfig.toolbarsConfig">
   <ng-container *ngFor="let config of gridConfig.toolbarsConfig"
                 cnDynamicDialog
@@ -21,7 +25,3 @@
                 [GUID]="_GUID + config.id" (eventCallback)="reload()"
   ></ng-container>
 </div>
-  <cn-dynamic-detail-dialog *ngIf="gridConfig.detailView"
-                            [dialogConfigField]="gridConfig.detailView"
-                            [GUID]="_GUID"
-  ></cn-dynamic-detail-dialog>

@@ -9,7 +9,6 @@ import {CnDynamicGridviewMultiComponent} from './cn-dynamic-gridview/cn-dynamic-
 import {CnDynamicChartCountersComponent} from '../dynamic-charts/dynamic-chart-counters/dynamic-chart-counters.component';
 import {CnDynamicChartBarComponent} from '../dynamic-charts/dynamic-chart-bar/dynamic-chart-bar.component';
 import {CnDynamicTimelineHorizontalComponent} from './dynamic-timeline-horizontal/dynamic-timeline-horizontal.component';
-import {CnDynamicDetailComponent} from "./cn-dynamic-detail/cn-dynamic-detail.component";
 const components: { [type: string]: any } = {
   grid_view: CnDynamicGridviewComponent,
   grid_multi_view: CnDynamicGridviewMultiComponent,
@@ -17,8 +16,7 @@ const components: { [type: string]: any } = {
   form_view: CnDynamicFormsComponent,
   chart_counter: CnDynamicChartCountersComponent,
   chart_bar: CnDynamicChartBarComponent,
-  timeline_horizontal: CnDynamicTimelineHorizontalComponent,
-  detail_view: CnDynamicDetailComponent
+  timeline_horizontal: CnDynamicTimelineHorizontalComponent
 };
 @Directive({
   selector: '[cnDynamicComponent]'
@@ -45,7 +43,7 @@ export class DynamicComponentDirective implements OnInit, ICnComponent {
         .createComponentConfig(
           this.componentConfig.viewCfg, this.getCredential()
         );
-      if (this.componentConfig.viewCfg.component === 'grid_view' || this.componentConfig.viewCfg.component === 'grid_multi_view') {
+      if (this.componentConfig.viewCfg.component === 'grid_view') {
         this.component.instance.componentConfig.componentCaption = this.componentCaption;
       }
     }

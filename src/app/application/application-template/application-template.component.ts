@@ -12,594 +12,641 @@ export class ApplicationTemplateComponent implements OnInit {
   _config = [];
   configs;
   configs1 = {
-    user: [
-      [{
-        'title': '用户列表',
-        'titleColor': 'font-green',
-        'titleIcon': 'fa fa-cogs',
-        'isFullScreen': true,
-        'isCollapse': true,
-        'blockType': 'portlet',
-        'size': {
-          'xs': {
-            'value': '12',
-            'offset': ''
-          },
-          'sm': {
-            'value': '12',
-            'offset': ''
-          },
-          'md': {
-            'value': '12',
-            'offset': ''
-          },
-          'lg': {
-            'value': '12',
-            'offset': ''
-          }
+    user: [[{
+      'title': '用户列表',
+      'titleColor': 'font-green',
+      'titleIcon': 'fa fa-cogs',
+      'isFullScreen': true,
+      'isCollapse': true,
+      'blockType': 'portlet',
+      'size': {
+        'xsCol': {
+          'value': '12',
+          'offset': ''
         },
-        'viewCfg': {
-          'viewId': 'userList',
-          'component': 'grid_view',
-          'classType': 'GridView',
-          'toolbarsConfig': [
-            {
-              'id': 'new',
-              'text': '新增',
-              'color': 'btn btn-success',
-              'img': 'fa fa-plus',
-              'type': 'button',
-              'events': {
-                'title': '新增用户',
-                'eventType': 'form_dialog',
-                'execution': {
-                  'api': 'SinoForce.Data.AppUser',
-                  'method': 'post',
-                  'keyID': '',
-                  'callback': ''
-                }
-              },
-              'formConfig': [
-                {
-                  'type': 'input',
-                  'inputType': 'text',
-                  'name': 'Name',
-                  'label': '登录名：',
-                  'helpText': '',
-                  'inputClass': 'input-group input-medium',
-                  'placeholder': '',
-                  'helpClass': 'help-inline',
-                  'icon': 'fa fa-user',
-                  'iconPstn': 'right',
-                  'validations': [
-                    {
-                      'validator': 'required',
-                      'errorMessage': ''
-                    },
-                    {
-                      'validator': 'minLength',
-                      'length': 2,
-                      'errorMessage': ''
-                    }
-                  ]
-                },
-                /*{
-                 'type': 'input',
-                 'inputType': 'text',
-                 'name': 'Password',
-                 'label': '密码：',
-                 'helpText': '',
-                 'inputClass': 'input-group input-medium',
-                 'placeholder': '',
-                 'helpClass': 'help-inline',
-                 'icon': 'fa fa-key',
-                 'iconPstn': 'right',
-                 'validations': [
-                 {
-                 'validator': 'required',
-                 'errorMessage': ''
-                 },
-                 {
-                 'validator': 'minLength',
-                 'length': 6,
-                 'errorMessage': ''
-                 }
-                 ]
-                 },*/
-                {
-                  'type': 'input',
-                  'inputType': 'text',
-                  'name': 'MobileNumber',
-                  'label': ' 联系方式：',
-                  'helpText': '',
-                  'inputClass': 'input-group input-medium',
-                  'placeholder': '',
-                  'icon': 'fa fa-phone',
-                  'iconPstn': 'left',
-                  'helpClass': 'help-inline',
-                  'validations': [
-                    {
-                      'validator': 'required',
-                      'errorMessage': ''
-                    }
-                  ]
-                },
-                {
-                  'type': 'input',
-                  'inputType': 'text',
-                  'name': 'RealName',
-                  'label': ' 真实姓名：',
-                  'helpText': '',
-                  'inputClass': 'input-inline input-medium',
-                  'placeholder': '',
-                  'helpClass': 'help-inline',
-                  'validations': [
-                    {
-                      'validator': 'required',
-                      'errorMessage': ''
-                    }
-                  ]
-                },
-                {
-                  'type': 'input',
-                  'inputType': 'text',
-                  'name': 'NickName',
-                  'label': ' 昵称：',
-                  'helpText': '',
-                  'inputClass': 'input-inline input-medium',
-                  'placeholder': '',
-                  'helpClass': 'help-inline',
-                  'validations': [
-                    {
-                      'validator': 'required',
-                      'errorMessage': ''
-                    }
-                  ]
-                },
-                {
-                  'type': 'radio',
-                  'options': [
-                    {
-                      'checked': 'checked',
-                      'disabled': false,
-                      'value': '男',
-                      'label': '男'
-                    },
-                    {
-                      'checked': '',
-                      'disabled': false,
-                      'value': '女',
-                      'label': '女'
-                    }
-                  ],
-                  'name': 'Gender',
-                  'label': '性别：',
-                  'inputClass': 'mt-checkbox-inline'
-                },
-                {
-                  'type': 'datepicker',
-                  'inputType': 'text',
-                  'name': 'Birthday',
-                  'label': ' 出生日期：',
-                  'helpText': '',
-                  'inputClass': 'input-group input-medium',
-                  'placeholder': '',
-                  'helpClass': 'help-inline',
-                  'icon': 'fa fa-calender',
-                  'iconPstn': 'right',
-                },
-                {
-                  'type': 'input',
-                  'inputType': 'text',
-                  'name': 'MailAddress',
-                  'label': ' 邮箱地址：',
-                  'helpText': '',
-                  'inputClass': 'input-group',
-                  'placeholder': '',
-                  'helpClass': 'help-inline',
-                  'icon': 'fa fa-envelope',
-                  'iconPstn': 'left',
-                  'validations': [
-                    {
-                      'validator': 'required',
-                      'errorMessage': ''
-                    },
-                    {
-                      'validator': 'email',
-                      'errorMessage': '邮箱格式从不正确'
-                    }
-                  ]
-                },
-                {
-                  'type': 'input',
-                  'inputType': 'text',
-                  'name': 'IdCardNumber',
-                  'label': ' 身份证号：',
-                  'helpText': '',
-                  'inputClass': 'input-group',
-                  'placeholder': '',
-                  'helpClass': 'help-inline',
-                  'icon': 'fa fa-credit-card',
-                  'iconPstn': 'left',
-                  'validations': [
-                    {
-                      'validator': 'required',
-                      'errorMessage': ''
-                    }
-                  ]
-                },
-                {
-                  'type': 'textarea',
-                  'name': 'remark',
-                  'label': '备注：'
-                },
-                {
-                  'type': 'button',
-                  'name': 'submit',
-                  'disabled': false
-                }
-              ]
-            },
-            {
-              'id': 'modify',
-              'text': '编辑',
-              'color': 'btn btn-success',
-              'img': 'fa fa-edit',
-              'type': 'button',
-              'events': {
-                'eventType': 'form_dialog',
-                'title': '修改程序集信息',
-                'execution': {
-                  'api': 'SinoForce.Data.AppUser',
-                  'method': 'put',
-                  'keyID': 'Id',
-                  'callback': ''
-                }
-              },
-              'formConfig': [
-                {
-                  'type': 'input',
-                  'inputType': 'text',
-                  'name': 'Id',
-                  'label': 'ID：',
-                  'helpText': '',
-                  'inputClass': 'input-inline input-medium',
-                  'readonly': true
-                },
-                {
-                  'type': 'input',
-                  'inputType': 'text',
-                  'name': 'Name',
-                  'label': '登录名：',
-                  'helpText': '',
-                  'inputClass': 'input-group input-medium',
-                  'placeholder': '',
-                  'helpClass': 'help-inline',
-                  'icon': 'fa fa-user',
-                  'iconPstn': 'right',
-                  'validations': [
-                    {
-                      'validator': 'required',
-                      'errorMessage': ''
-                    }
-                  ]
-                },
-                /*{
-                 'type': 'input',
-                 'inputType': 'text',
-                 'name': 'Password',
-                 'label': '密码：',
-                 'helpText': '',
-                 'inputClass': 'input-group input-medium',
-                 'placeholder': '',
-                 'helpClass': 'help-inline',
-                 'icon': 'fa fa-key',
-                 'iconPstn': 'right',
-                 'validations': [
-                 {
-                 'validator': 'required',
-                 'errorMessage': ''
-                 }
-                 ]
-                 },*/
-                {
-                  'type': 'input',
-                  'inputType': 'text',
-                  'name': 'MobileNumber',
-                  'label': ' 联系方式：',
-                  'helpText': '',
-                  'inputClass': 'input-group input-medium',
-                  'placeholder': '',
-                  'icon': 'fa fa-phone',
-                  'iconPstn': 'left',
-                  'helpClass': 'help-inline',
-                  'validations': [
-                    {
-                      'validator': 'required',
-                      'errorMessage': ''
-                    }
-                  ]
-                },
-                {
-                  'type': 'input',
-                  'inputType': 'text',
-                  'name': 'RealName',
-                  'label': ' 真实姓名：',
-                  'helpText': '',
-                  'inputClass': 'input-inline input-medium',
-                  'placeholder': '',
-                  'helpClass': 'help-inline',
-                  'validations': [
-                    {
-                      'validator': 'required',
-                      'errorMessage': ''
-                    }
-                  ]
-                },
-                {
-                  'type': 'input',
-                  'inputType': 'text',
-                  'name': 'NickName',
-                  'label': ' 昵称：',
-                  'helpText': '',
-                  'inputClass': 'input-inline input-medium',
-                  'placeholder': '',
-                  'helpClass': 'help-inline'
-                },
-                {
-                  'type': 'radio',
-                  'options': [
-                    {
-                      'checked': 'checked',
-                      'disabled': false,
-                      'value': '男',
-                      'label': '男'
-                    },
-                    {
-                      'checked': '',
-                      'disabled': false,
-                      'value': '女',
-                      'label': '女'
-                    }
-                  ],
-                  'name': 'Gender',
-                  'label': '性别：',
-                  'inputClass': 'mt-checkbox-inline'
-                },
-                {
-                  'type': 'datepicker',
-                  'inputType': 'text',
-                  'name': 'Birthday',
-                  'label': ' 出生日期：',
-                  'helpText': '',
-                  'inputClass': 'input-inline input-medium',
-                  'placeholder': '',
-                  'helpClass': 'help-inline'
-                },
-                {
-                  'type': 'input',
-                  'inputType': 'text',
-                  'name': 'MailAddress',
-                  'label': ' 邮箱地址：',
-                  'helpText': '',
-                  'inputClass': 'input-group',
-                  'placeholder': '',
-                  'helpClass': 'help-inline',
-                  'icon': 'fa fa-envelope',
-                  'iconPstn': 'left',
-                  'validations': [
-                    {
-                      'validator': 'required',
-                      'errorMessage': ''
-                    },
-                    {
-                      'validator': 'email',
-                      'errorMessage': '邮箱格式从不正确'
-                    }
-                  ]
-                },
-                {
-                  'type': 'input',
-                  'inputType': 'text',
-                  'name': 'IdCardNumber',
-                  'label': ' 身份证号：',
-                  'helpText': '',
-                  'inputClass': 'input-group',
-                  'placeholder': '',
-                  'helpClass': 'help-inline',
-                  'icon': 'fa fa-credit-card',
-                  'iconPstn': 'left',
-                  'validations': [
-                    {
-                      'validator': 'required',
-                      'errorMessage': ''
-                    }
-                  ]
-                },
-                {
-                  'type': 'textarea',
-                  'name': 'remark',
-                  'label': '备注：'
-                },
-                {
-                  'type': 'button',
-                  'name': 'submit',
-                  'disabled': false
-                }
-              ]
-            },
-            {
-              'id': 'del',
-              'text': '批量删除',
-              'color': 'btn btn-warning',
-              'img': 'fa fa-remove',
-              'type': 'button',
-              'events': {
-                'title': '确认提示',
-                'text': '确定要删除选中的记录吗?',
-                'eventType': 'confirm_dialog',
-                'execution': {
-                  'api': 'SinoForce.Data.AppUser',
-                  'method': 'delete',
-                  'keyId': 'Id'
-                }
-              }
-            }
-          ],
-          'ordering': true,
-          'paging': true,
-          'processing': false,
-          'searching': true,
-          'deferRender': true,
-          'columnConfigClass': 'AppUser',
-          'columnFilter': 'Data',
-          'autoWidth': true,
-          'destroy': true,
-          'lengthMenu': [
-            5,
-            10,
-            20,
-            30,
-            40,
-            50,
-            100
-          ],
-          'rowId': 'Id',
-          'pagingType': 'full_numbers',
-          'pageLength': 20,
-          'orderMulti': true,
-          'select': true,
-          'responsive': true,
-          'columnDefs': [
-            {
-              'orderable': false,
-              'targets': [0]
-            }
-          ],
-          'order': [
-            [1, 'asc']
-          ],
-          'dom': 'Bfr<"table-scrollable"t>ip',
-          'columnConfigs': [
-            {
-              'title': `<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-            <input type="checkbox" class="group-checkable" data-set=".checkboxes" />
-            <span></span>
-            </label>`,
-              'data': 'Id',
-              'renderName': {
-                'type': 'checkAll'
-              },
-              'className': 'text-center'
-            },
-            {
-              'title': '用户名',
-              'data': 'Name',
-              'renderName': {
-                'type': 'notNull',
-                'data': {}
+        'smCol': {
+          'value': '12',
+          'offset': ''
+        },
+        'mdCol': {
+          'value': '12',
+          'offset': ''
+        },
+        'lgCol': {
+          'value': '12',
+          'offset': ''
+        }
+      },
+      'viewCfg': {
+        'viewId': 'userList',
+        'component': 'grid_view',
+        'classType': 'GridView',
+        'toolbarsConfig': [
+          {
+            'id': 'new',
+            'text': '新增用户',
+            'color': 'btn btn-success',
+            'img': 'fa fa-plus',
+            'type': 'button',
+            'events': {
+              'title': '新增用户',
+              'eventType': 'form_dialog',
+              'execution': {
+                'api': 'AppUser',
+                'method': 'post',
+                'keyID': '',
+                'callback': ''
               }
             },
-            {
-              'title': '用户名称',
-              'data': 'RealName',
-              'renderName': {
-                'type': 'notNull',
-                'data': {}
-              }
-            },
-            {
-              'title': '编码',
-              'data': 'Code',
-              'renderName': {
-                'type': 'notNull',
-                'data': {}
-              }
-            },
-            {
-              'title': '用户昵称',
-              'data': 'NickName',
-              'renderName': {
-                'type': 'notNull',
-                'data': {}
-              }
-            },
-            {
-              'title': '手机',
-              'data': 'MobileNumber',
-              'renderName': {
-                'type': 'notNull',
-                'data': {}
-              }
-            },
-            {
-              'title': '出生日期',
-              'data': 'Birthday',
-              'renderName': {
-                'type': 'date',
-                'data': [
-                  {'className': 'font-green'},
-                ]
-              }
-            },
-            {
-              'title': '账户状态',
-              'data': 'Status',
-              'renderName': {
-                'type': 'notNull'
-              }
-            },
-            {
-              'title': '用户角色',
-              'data': 'LoginLimitKind',
-              'renderName': {
-                'type': 'notNull'
-              }
-            },
-            {
-              'title': '',
-              'data': 'Id',
-              'renderName': {
-                'type': 'handleButtons',
-                'data': [
+            'formConfig': [
+              {
+                'type': 'input',
+                'inputType': 'text',
+                'name': 'RealName',
+                'label': '用户名：',
+                'helpText': '',
+                'inputClass': 'input-inline input-medium',
+                'placeholder': '',
+                'helpClass': 'help-inline',
+                'validations': [
                   {
-                    'text': '明细',
-                    'img': 'fa fa-search',
-                    'color': 'green-turquoise',
-                    'type': 'commonButton',
-                    'events': {
-                      'execution': {
-                        'api': 'SinoForce.Data.AppUser',
-                        'method': 'delete',
-                        'keyId': 'Id'
-                      }
-                    }
+                    'validator': 'required',
+                    'errorMessage': ''
                   },
                   {
-                    'text': '删除',
-                    'img': 'fa fa-trash',
-                    'color': 'btn-outline red-pink',
-                    'type': 'confirmButton',
-                    'events': {
-                      'title': '确认提示',
-                      'text': '确定要删除当前记录?',
-                      'eventType': 'confirm_dialog',
-                      'execution': {
-                        'api': 'SinoForce.Data.AppUser',
-                        'method': 'delete',
-                        'keyId': 'Id'
-                      }
-                    }
+                    'validator': 'minLength',
+                    'length': 6,
+                    'errorMessage': ''
                   }
                 ]
               },
-              'className': 'text-center',
-              'width': '220'
+              {
+                'type': 'input',
+                'inputType': 'text',
+                'name': 'Code',
+                'label': ' 编码：',
+                'helpText': '',
+                'inputClass': 'input-inline input-medium',
+                'placeholder': '',
+                'helpClass': 'help-inline',
+                'validations': [
+                  {
+                    'validator': 'required',
+                    'errorMessage': ''
+                  },
+                  {
+                    'validator': 'minLength',
+                    'length': 6,
+                    'errorMessage': ''
+                  }
+                ]
+              },
+              {
+                'type': 'input',
+                'inputType': 'text',
+                'name': 'Name',
+                'label': ' 登录名：',
+                'helpText': '',
+                'inputClass': 'input-inline input-medium',
+                'placeholder': '',
+                'helpClass': 'help-inline',
+                'validations': [
+                  {
+                    'validator': 'required',
+                    'errorMessage': ''
+                  },
+                  {
+                    'validator': 'minLength',
+                    'length': 6,
+                    'errorMessage': ''
+                  }
+                ]
+              },
+              {
+                'type': 'input',
+                'inputType': 'text',
+                'name': 'NickName',
+                'label': ' 昵称：',
+                'helpText': '',
+                'inputClass': 'input-inline input-medium',
+                'placeholder': '',
+                'helpClass': 'help-inline',
+                'validations': [
+                  {
+                    'validator': 'required',
+                    'errorMessage': ''
+                  },
+                  {
+                    'validator': 'minLength',
+                    'length': 6,
+                    'errorMessage': ''
+                  }
+                ]
+              },
+              {
+                'type': 'input',
+                'inputType': 'text',
+                'name': 'NickName',
+                'label': ' 联系电话：',
+                'helpText': '',
+                'inputClass': 'input-inline input-medium',
+                'placeholder': '',
+                'helpClass': 'help-inline',
+                'validations': [
+                  {
+                    'validator': 'required',
+                    'errorMessage': ''
+                  },
+                  {
+                    'validator': 'minLength',
+                    'length': 6,
+                    'errorMessage': ''
+                  }
+                ]
+              },
+              {
+                'type': 'select2',
+                'placeholder': '--请选择--',
+                'ajax': {
+                  'url': 'DataCategory?_select=Name as text,Id as value'
+                },
+                'name': 'Caption',
+                'label': '中文名称：',
+                'value': '',
+                'inputClass': 'input-medium'
+              },
+              {
+                'type': 'asyndropdown',
+                'placeholder': '--请选择--',
+                'ajax': {
+                  'url': 'DataCategory?_select=Name as text,Id as id'
+                },
+                'name': 'Caption',
+                'label': '中文名称：',
+                'value': '',
+                'inputClass': 'input-medium',
+                'multiple': ''
+              },
+              {
+                'type': 'asyndropdown',
+                'placeholder': '--请选择--',
+                'ajax': {
+                  'url': 'DataCategory?_select=Name as text,Id as id'
+                },
+                'name': 'Caption',
+                'label': '中文名称：',
+                'value': '',
+                'inputClass': 'input-large',
+                'multiple': 'multiple'
+              },
+              {
+                'type': 'input',
+                'inputType': 'text',
+                'name': 'ContextName',
+                'label': '上下文名称：',
+                'icon': 'fa fa-book',
+                'iconPstn': 'left',
+                'inputClass': 'input-group',
+                'validations': [
+                  {
+                    'validator': 'required',
+                    'errorMessage': ''
+                  }
+                ]
+              },
+              {
+                'type': 'input',
+                'inputType': 'text',
+                'name': 'ProviderName',
+                'label': '提供者：',
+                'inputClass': 'input-medium input-group',
+                'icon': 'fa fa-bookmark-o',
+                'iconPstn': 'right',
+                'helpClass': 'help-inline',
+                'validations': [
+                  {
+                    'validator': 'required',
+                    'errorMessage': ''
+                  },
+                  {
+                    'validator': 'maxLength',
+                    'length': 20,
+                    'errorMessage': ''
+                  }
+                ]
+              },
+              {
+                'type': 'select',
+                'placeholder': '--请选择--',
+                'options': [
+                  {
+                    'text': '编译成功',
+                    'value': '编译成功'
+                  },
+                  {
+                    'text': '正在定义',
+                    'value': '正在定义'
+                  }
+                ],
+                'name': 'BuildState',
+                'label': '编译状态：',
+                'value': '',
+                'inputClass': 'input-medium'
+              },
+              {
+                'type': 'select',
+                'placeholder': '--请选择--',
+                'options': [
+                  {
+                    'text': '手动',
+                    'value': '手动'
+                  },
+                  {
+                    'text': '自动',
+                    'value': '自动'
+                  }
+                ],
+                'name': 'BuildMode',
+                'label': '编译方式：',
+                'value': '',
+                'inputClass': 'input-medium'
+              },
+              {
+                'type': 'input',
+                'inputType': 'text',
+                'name': 'DefaultNamespace',
+                'label': '命名空间：',
+                'inputClass': 'input-group',
+                'icon': 'fa fa-bookmark-o',
+                'iconPstn': 'left',
+                'helpClass': 'help-inline',
+                'helpText': '默认为程序编译后提供的命名空间',
+                'validations': [
+                  {
+                    'validator': 'required',
+                    'errorMessage': ''
+                  }
+                ]
+              },
+              {
+                'type': 'input',
+                'inputType': 'text',
+                'name': 'EntitiesName',
+                'label': '实体名称：',
+                'inputClass': 'input-group',
+                'icon': 'fa fa-bookmark-o',
+                'iconPstn': 'left',
+                'helpClass': 'help-inline',
+                'helpText': ''
+              },
+              {
+                'type': 'checkbox',
+                'options': [
+                  {
+                    'checked': 'checked',
+                    'disabled': false,
+                    'value': '1',
+                    'label': '启用'
+                  },
+                  {
+                    'checked': '',
+                    'disabled': false,
+                    'value': '2',
+                    'label': '禁用'
+                  }
+                ],
+                'name': 'ShareScope',
+                'label': '使用范围：',
+                'inputClass': 'mt-checkbox-inline'
+              },
+              {
+                'type': 'textarea',
+                'name': 'Remark',
+                'label': '备注：'
+              },
+              {
+                'type': 'button',
+                'name': 'submit',
+                'disabled': false
+              }
+            ]
+          },
+          {
+            'id': 'del',
+            'text': '删除',
+            'color': 'btn btn-success',
+            'img': 'fa fa-remove',
+            'type': 'button',
+            'events': {
+              'title': '确认提示',
+              'text': '确定要删除选中的记录吗?',
+              'eventType': 'confirm_dialog',
+              'execution': {
+                'api': 'DynamicResModule',
+                'method': 'delete',
+                'keyId': 'Id'
+              }
+            }
+          },
+          {
+            'id': 'sub',
+            'text': '提交',
+            'color': 'btn btn-success',
+            'img': 'fa fa-save',
+            'type': 'button',
+            'events': {
+              'title': '确认提示',
+              'text': '是否提交当前数据?',
+              'eventType': 'confirm_dialog',
+              'execution': {
+                'api': 'DynamicResModule',
+                'method': 'proc'
+              }
+            }
+          },
+          {
+            'id': 'modify',
+            'text': '修改',
+            'color': 'btn btn-success',
+            'img': 'fa fa-edit',
+            'type': 'button',
+            'events': {
+              'eventType': 'form_dialog',
+              'title': '修改程序集信息',
+              'execution': {
+                'api': 'DynamicResModule',
+                'method': 'put',
+                'keyID': 'Id',
+                'callback': ''
+              }
             },
-          ]
-        }
-      }]
-    ],
+            'formConfig': [
+              {
+                'type': 'input',
+                'inputType': 'text',
+                'name': 'Id',
+                'label': 'ID：',
+                'inputClass': 'input-inline input-medium',
+                'placeholder': '例如：Company.cn.app',
+                'helpClass': 'help-inline'
+              },
+              {
+                'type': 'input',
+                'inputType': 'text',
+                'name': 'AssemblyName',
+                'label': '程序集名称：',
+                'helpText': '动态读取程序集名称',
+                'inputClass': 'input-inline input-medium',
+                'placeholder': '例如：Company.cn.app',
+                'helpClass': 'help-inline',
+                'validations': [
+                  {
+                    'validator': 'required',
+                    'errorMessage': ''
+                  }
+                ]
+              },
+              {
+                'type': 'input',
+                'inputType': 'text',
+                'name': 'ContextName',
+                'label': '上下文名称：',
+                'icon': 'fa fa-book',
+                'iconPstn': 'left',
+                'inputClass': 'input-group',
+                'validations': [
+                  {
+                    'validator': 'required',
+                    'errorMessage': ''
+                  }
+                ]
+              },
+              {
+                'type': 'input',
+                'inputType': 'text',
+                'name': 'ProviderName',
+                'label': '提供者：',
+                'inputClass': 'input-medium input-group',
+                'icon': 'fa fa-bookmark-o',
+                'iconPstn': 'right',
+                'helpClass': 'help-inline',
+                'validations': [
+                  {
+                    'validator': 'required',
+                    'errorMessage': ''
+                  },
+                  {
+                    'validator': 'maxLength',
+                    'length': 20,
+                    'errorMessage': ''
+                  }
+                ]
+              },
+              {
+                'type': 'select',
+                'placeholder': '--请选择--',
+                'options': [
+                  {
+                    'text': '编译成功',
+                    'value': '编译成功'
+                  },
+                  {
+                    'text': '正在定义',
+                    'value': '正在定义'
+                  }
+                ],
+                'name': 'BuildState',
+                'label': '编译状态：',
+                'value': '',
+                'inputClass': 'input-medium'
+              },
+              {
+                'type': 'select',
+                'placeholder': '--请选择--',
+                'options': [
+                  {
+                    'text': '手动',
+                    'value': '手动'
+                  },
+                  {
+                    'text': '自动',
+                    'value': '自动'
+                  }
+                ],
+                'name': 'BuildMode',
+                'label': '编译方式：',
+                'value': '',
+                'inputClass': 'input-medium'
+              },
+              {
+                'type': 'input',
+                'inputType': 'text',
+                'name': 'DefaultNamespace',
+                'label': '命名空间：',
+                'inputClass': 'input-group',
+                'icon': 'fa fa-bookmark-o',
+                'iconPstn': 'left',
+                'helpClass': 'help-inline',
+                'helpText': '默认为程序编译后提供的命名空间',
+                'validations': [
+                  {
+                    'validator': 'required',
+                    'errorMessage': ''
+                  },
+                  {
+                    'validator': 'maxLength',
+                    'length': 20,
+                    'errorMessage': ''
+                  }
+                ]
+              },
+              {
+                'type': 'input',
+                'inputType': 'text',
+                'name': 'EntitiesName',
+                'label': '实体名称：',
+                'inputClass': 'input-group',
+                'icon': 'fa fa-bookmark-o',
+                'iconPstn': 'left',
+                'helpClass': 'help-inline',
+                'helpText': ''
+              },
+              {
+                'type': 'radio',
+                'options': [
+                  {
+                    'checked': 'checked',
+                    'disabled': false,
+                    'value': 'true',
+                    'label': '启用'
+                  },
+                  {
+                    'checked': '',
+                    'disabled': false,
+                    'value': 'false',
+                    'label': '禁用'
+                  }
+                ],
+                'name': 'shareScope',
+                'label': '启用状态：',
+                'inputClass': 'mt-checkbox-inline'
+              },
+              {
+                'type': 'textarea',
+                'name': 'remark',
+                'label': '备注：'
+              },
+              {
+                'type': 'button',
+                'name': 'submit',
+                'disabled': false
+              }
+            ]
+          }
+        ],
+        'ordering': true,
+        'paging': true,
+        'processing': false,
+        'searching': true,
+        'deferRender': true,
+        'columnConfigClass': 'AppUser',
+        'columnFilter': 'Data',
+        'autoWidth': true,
+        'destroy': true,
+        'lengthMenu': [
+          5,
+          10,
+          20,
+          30,
+          40,
+          50,
+          100
+        ],
+        'rowId': 'Id',
+        'pagingType': 'full_numbers',
+        'pageLength': 20,
+        'orderMulti': true,
+        'select': true,
+        'responsive': true,
+        'columnDefs': [
+          {
+            'orderable': false,
+            'targets': [0]
+          }
+        ],
+        'order': [
+          [1, 'asc']
+        ],
+        'dom': 'Bfr<"table-scrollable"t>ip',
+        'columnConfigs': [
+          {
+            'title': `<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+            <input type="checkbox" class="group-checkable" data-set=".checkboxes" />
+            <span></span>
+            </label>`,
+            'data': 'Id',
+            'renderName': {
+              'type': 'checkAll'
+            },
+            'className': 'text-center'
+          },
+          {
+            'title': '用户名',
+            'data': 'Name',
+            'renderName': {
+              'type': 'notNull',
+              'data': {}
+            }
+          },
+          {
+            'title': '用户名称',
+            'data': 'RealName',
+            'renderName': {
+              'type': 'notNull',
+              'data': {}
+            }
+          },
+          {
+            'title': '编码',
+            'data': 'Code',
+            'renderName': {
+              'type': 'notNull',
+              'data': {}
+            }
+          },
+          {
+            'title': '用户昵称',
+            'data': 'NickName',
+            'renderName': {
+              'type': 'notNull',
+              'data': {}
+            }
+          },
+          {
+            'title': '手机',
+            'data': 'MobileNumber',
+            'renderName': {
+              'type': 'notNull',
+              'data': {}
+            }
+          },
+          {
+            'title': '账户状态',
+            'data': 'Status',
+            'renderName': {
+              'type': 'notNull'
+            }
+          },
+          {
+            'title': '用户角色',
+            'data': 'LoginLimitKind',
+            'renderName': {
+              'type': 'notNull'
+            }
+          }
+        ]
+      }
+    }]],
     org: [[{
       'title': '组织机构列表',
       'titleColor': 'font-green',
@@ -608,19 +655,19 @@ export class ApplicationTemplateComponent implements OnInit {
       'isCollapse': true,
       'blockType': 'portlet',
       'size': {
-        'xs': {
+        'xsCol': {
           'value': '12',
           'offset': ''
         },
-        'sm': {
+        'smCol': {
           'value': '12',
           'offset': ''
         },
-        'md': {
+        'mdCol': {
           'value': '12',
           'offset': ''
         },
-        'lg': {
+        'lgCol': {
           'value': '12',
           'offset': ''
         }
@@ -1180,19 +1227,19 @@ export class ApplicationTemplateComponent implements OnInit {
         'isCollapse': true,
         'blockType': 'portlet',
         'size': {
-          'xs': {
+          'xsCol': {
             'value': '12',
             'offset': ''
           },
-          'sm': {
+          'smCol': {
             'value': '12',
             'offset': ''
           },
-          'md': {
+          'mdCol': {
             'value': '3',
             'offset': ''
           },
-          'lg': {
+          'lgCol': {
             'value': '3',
             'offset': ''
           }
@@ -2628,19 +2675,19 @@ export class ApplicationTemplateComponent implements OnInit {
         'isCollapse': true,
         'blockType': 'portlet',
         'size': {
-          'xs': {
+          'xsCol': {
             'value': '12',
             'offset': ''
           },
-          'sm': {
+          'smCol': {
             'value': '12',
             'offset': ''
           },
-          'md': {
+          'mdCol': {
             'value': '9',
             'offset': ''
           },
-          'lg': {
+          'lgCol': {
             'value': '9',
             'offset': ''
           }
@@ -3107,19 +3154,19 @@ export class ApplicationTemplateComponent implements OnInit {
       'isCollapse': true,
       'blockType': 'portlet',
       'size': {
-        'xs': {
+        'xsCol': {
           'value': '12',
           'offset': ''
         },
-        'sm': {
+        'smCol': {
           'value': '12',
           'offset': ''
         },
-        'md': {
+        'mdCol': {
           'value': '12',
           'offset': ''
         },
-        'lg': {
+        'lgCol': {
           'value': '12',
           'offset': ''
         }
@@ -3420,19 +3467,19 @@ export class ApplicationTemplateComponent implements OnInit {
       'isCollapse': true,
       'blockType': 'portlet',
       'size': {
-        'xs': {
+        'xsCol': {
           'value': '12',
           'offset': ''
         },
-        'sm': {
+        'smCol': {
           'value': '12',
           'offset': ''
         },
-        'md': {
+        'mdCol': {
           'value': '12',
           'offset': ''
         },
-        'lg': {
+        'lgCol': {
           'value': '12',
           'offset': ''
         }
@@ -3697,19 +3744,19 @@ export class ApplicationTemplateComponent implements OnInit {
         'isCollapse': true,
         'blockType': 'portlet',
         'size': {
-          'xs': {
+          'xsCol': {
             'value': '12',
             'offset': ''
           },
-          'sm': {
+          'smCol': {
             'value': '12',
             'offset': ''
           },
-          'md': {
+          'mdCol': {
             'value': '12',
             'offset': ''
           },
-          'lg': {
+          'lgCol': {
             'value': '12',
             'offset': ''
           }
@@ -4021,19 +4068,19 @@ export class ApplicationTemplateComponent implements OnInit {
         'isCollapse': true,
         'blockType': 'portlet',
         'size': {
-          'xs': {
+          'xsCol': {
             'value': '12',
             'offset': ''
           },
-          'sm': {
+          'smCol': {
             'value': '12',
             'offset': ''
           },
-          'md': {
+          'mdCol': {
             'value': '12',
             'offset': ''
           },
-          'lg': {
+          'lgCol': {
             'value': '12',
             'offset': ''
           }
@@ -4314,713 +4361,6 @@ export class ApplicationTemplateComponent implements OnInit {
               'layout': 'col-md-12 col-lg-12 col-sm-12 col-sx-12',
             }
           ],
-          'detailView': [
-            [
-              {
-                'title': '数据字典值',
-                'titleColor': 'font-green',
-                'titleIcon': 'fa fa-cogs',
-                'isFullScreen': true,
-                'isCollapse': true,
-                'blockType': 'portlet',
-                'size': {
-                  'xs': {
-                    'value': '12',
-                    'offset': ''
-                  },
-                  'sm': {
-                    'value': '12',
-                    'offset': ''
-                  },
-                  'md': {
-                    'value': '12',
-                    'offset': ''
-                  },
-                  'lg': {
-                    'value': '12',
-                    'offset': ''
-                  }
-                },
-                'viewCfg': {
-                  'viewId': 'areaSUZDZ',
-                  'parentViewId': 'areaSJZDLX',
-                  'component': 'detail_view',
-                  'classType': 'DetailView',
-                  'detailViewCfg': {
-                    'title': '数据字典值明细',
-                    'fields': [
-                      [
-                        {
-                          'name': 'Id',
-                          'label': '字典值编号',
-                          'icon': '',
-                          'size': {
-                            'md': {
-                              'value': '6',
-                              'offset': ''
-                            }
-                          },
-                          'className': ''
-                        },
-                        {
-                          'name': 'DictionaryValueCode',
-                          'label': '字典值编码',
-                          'icon': '',
-                          'size': {
-                            'md': {
-                              'value': '6',
-                              'offset': ''
-                            }
-                          },
-                          'className': ''
-                        }
-                      ],
-                      [
-                        {
-                          'name': 'DictionaryValueName',
-                          'label': '字典值名称',
-                          'icon': '',
-                          'size': {
-                            'md': {
-                              'value': '6',
-                              'offset': ''
-                            }
-                          },
-                          'className': ''
-                        },
-                        {
-                          'name': 'CreateTime',
-                          'label': '创建时间',
-                          'icon': '',
-                          'size': {
-                            'md': {
-                              'value': '6',
-                              'offset': ''
-                            }
-                          },
-                          'className': ''
-                        }
-                      ],
-                      [
-                        {
-                          'name': 'UsedState',
-                          'label': '启用状态',
-                          'icon': '',
-                          'size': {
-                            'md': {
-                              'value': '6',
-                              'offset': ''
-                            }
-                          },
-                          'className': ''
-                        },
-                        {
-                          'name': 'CreateUserName',
-                          'label': '创建人',
-                          'icon': '',
-                          'size': {
-                            'md': {
-                              'value': '6',
-                              'offset': ''
-                            }
-                          },
-                          'className': ''
-                        }
-                      ]
-                    ],
-                  },
-                  'detailConfigClass': 'SinoForce.HJComm.JcDictionaryValue',
-                  'idKey': 'Id'
-                }
-              },
-              {
-                'title': '用户列表',
-                'titleColor': 'font-green',
-                'titleIcon': 'fa fa-cogs',
-                'isFullScreen': true,
-                'isCollapse': true,
-                'blockType': 'portlet',
-                'size': {
-                  'xs': {
-                    'value': '12',
-                    'offset': ''
-                  },
-                  'sm': {
-                    'value': '12',
-                    'offset': ''
-                  },
-                  'md': {
-                    'value': '12',
-                    'offset': ''
-                  },
-                  'lg': {
-                    'value': '12',
-                    'offset': ''
-                  }
-                },
-                'viewCfg': {
-                  'viewId': 'userList',
-                  'component': 'grid_view',
-                  'classType': 'GridView',
-                  'toolbarsConfig': [
-                    {
-                      'id': 'new',
-                      'text': '新增',
-                      'color': 'btn btn-success',
-                      'img': 'fa fa-plus',
-                      'type': 'button',
-                      'events': {
-                        'title': '新增用户',
-                        'eventType': 'form_dialog',
-                        'execution': {
-                          'api': 'SinoForce.Data.AppUser',
-                          'method': 'post',
-                          'keyID': '',
-                          'callback': ''
-                        }
-                      },
-                      'formConfig': [
-                        {
-                          'type': 'input',
-                          'inputType': 'text',
-                          'name': 'Name',
-                          'label': '登录名：',
-                          'helpText': '',
-                          'inputClass': 'input-group input-medium',
-                          'placeholder': '',
-                          'helpClass': 'help-inline',
-                          'icon': 'fa fa-user',
-                          'iconPstn': 'right',
-                          'validations': [
-                            {
-                              'validator': 'required',
-                              'errorMessage': ''
-                            },
-                            {
-                              'validator': 'minLength',
-                              'length': 2,
-                              'errorMessage': ''
-                            }
-                          ]
-                        },
-                        /*{
-                         'type': 'input',
-                         'inputType': 'text',
-                         'name': 'Password',
-                         'label': '密码：',
-                         'helpText': '',
-                         'inputClass': 'input-group input-medium',
-                         'placeholder': '',
-                         'helpClass': 'help-inline',
-                         'icon': 'fa fa-key',
-                         'iconPstn': 'right',
-                         'validations': [
-                         {
-                         'validator': 'required',
-                         'errorMessage': ''
-                         },
-                         {
-                         'validator': 'minLength',
-                         'length': 6,
-                         'errorMessage': ''
-                         }
-                         ]
-                         },*/
-                        {
-                          'type': 'input',
-                          'inputType': 'text',
-                          'name': 'MobileNumber',
-                          'label': ' 联系方式：',
-                          'helpText': '',
-                          'inputClass': 'input-group input-medium',
-                          'placeholder': '',
-                          'icon': 'fa fa-phone',
-                          'iconPstn': 'left',
-                          'helpClass': 'help-inline',
-                          'validations': [
-                            {
-                              'validator': 'required',
-                              'errorMessage': ''
-                            }
-                          ]
-                        },
-                        {
-                          'type': 'input',
-                          'inputType': 'text',
-                          'name': 'RealName',
-                          'label': ' 真实姓名：',
-                          'helpText': '',
-                          'inputClass': 'input-inline input-medium',
-                          'placeholder': '',
-                          'helpClass': 'help-inline',
-                          'validations': [
-                            {
-                              'validator': 'required',
-                              'errorMessage': ''
-                            }
-                          ]
-                        },
-                        {
-                          'type': 'input',
-                          'inputType': 'text',
-                          'name': 'NickName',
-                          'label': ' 昵称：',
-                          'helpText': '',
-                          'inputClass': 'input-inline input-medium',
-                          'placeholder': '',
-                          'helpClass': 'help-inline',
-                          'validations': [
-                            {
-                              'validator': 'required',
-                              'errorMessage': ''
-                            }
-                          ]
-                        },
-                        {
-                          'type': 'radio',
-                          'options': [
-                            {
-                              'checked': 'checked',
-                              'disabled': false,
-                              'value': '男',
-                              'label': '男'
-                            },
-                            {
-                              'checked': '',
-                              'disabled': false,
-                              'value': '女',
-                              'label': '女'
-                            }
-                          ],
-                          'name': 'Gender',
-                          'label': '性别：',
-                          'inputClass': 'mt-checkbox-inline'
-                        },
-                        {
-                          'type': 'datepicker',
-                          'inputType': 'text',
-                          'name': 'Birthday',
-                          'label': ' 出生日期：',
-                          'helpText': '',
-                          'inputClass': 'input-group input-medium',
-                          'placeholder': '',
-                          'helpClass': 'help-inline',
-                          'icon': 'fa fa-calender',
-                          'iconPstn': 'right',
-                        },
-                        {
-                          'type': 'input',
-                          'inputType': 'text',
-                          'name': 'MailAddress',
-                          'label': ' 邮箱地址：',
-                          'helpText': '',
-                          'inputClass': 'input-group',
-                          'placeholder': '',
-                          'helpClass': 'help-inline',
-                          'icon': 'fa fa-envelope',
-                          'iconPstn': 'left',
-                          'validations': [
-                            {
-                              'validator': 'required',
-                              'errorMessage': ''
-                            },
-                            {
-                              'validator': 'email',
-                              'errorMessage': '邮箱格式从不正确'
-                            }
-                          ]
-                        },
-                        {
-                          'type': 'input',
-                          'inputType': 'text',
-                          'name': 'IdCardNumber',
-                          'label': ' 身份证号：',
-                          'helpText': '',
-                          'inputClass': 'input-group',
-                          'placeholder': '',
-                          'helpClass': 'help-inline',
-                          'icon': 'fa fa-credit-card',
-                          'iconPstn': 'left',
-                          'validations': [
-                            {
-                              'validator': 'required',
-                              'errorMessage': ''
-                            }
-                          ]
-                        },
-                        {
-                          'type': 'textarea',
-                          'name': 'remark',
-                          'label': '备注：'
-                        },
-                        {
-                          'type': 'button',
-                          'name': 'submit',
-                          'disabled': false
-                        }
-                      ]
-                    },
-                    {
-                      'id': 'modify',
-                      'text': '编辑',
-                      'color': 'btn btn-success',
-                      'img': 'fa fa-edit',
-                      'type': 'button',
-                      'events': {
-                        'eventType': 'form_dialog',
-                        'title': '修改程序集信息',
-                        'execution': {
-                          'api': 'SinoForce.Data.AppUser',
-                          'method': 'put',
-                          'keyID': 'Id',
-                          'callback': ''
-                        }
-                      },
-                      'formConfig': [
-                        {
-                          'type': 'input',
-                          'inputType': 'text',
-                          'name': 'Id',
-                          'label': 'ID：',
-                          'helpText': '',
-                          'inputClass': 'input-inline input-medium',
-                          'readonly': true
-                        },
-                        {
-                          'type': 'input',
-                          'inputType': 'text',
-                          'name': 'Name',
-                          'label': '登录名：',
-                          'helpText': '',
-                          'inputClass': 'input-group input-medium',
-                          'placeholder': '',
-                          'helpClass': 'help-inline',
-                          'icon': 'fa fa-user',
-                          'iconPstn': 'right',
-                          'validations': [
-                            {
-                              'validator': 'required',
-                              'errorMessage': ''
-                            }
-                          ]
-                        },
-                        /*{
-                         'type': 'input',
-                         'inputType': 'text',
-                         'name': 'Password',
-                         'label': '密码：',
-                         'helpText': '',
-                         'inputClass': 'input-group input-medium',
-                         'placeholder': '',
-                         'helpClass': 'help-inline',
-                         'icon': 'fa fa-key',
-                         'iconPstn': 'right',
-                         'validations': [
-                         {
-                         'validator': 'required',
-                         'errorMessage': ''
-                         }
-                         ]
-                         },*/
-                        {
-                          'type': 'input',
-                          'inputType': 'text',
-                          'name': 'MobileNumber',
-                          'label': ' 联系方式：',
-                          'helpText': '',
-                          'inputClass': 'input-group input-medium',
-                          'placeholder': '',
-                          'icon': 'fa fa-phone',
-                          'iconPstn': 'left',
-                          'helpClass': 'help-inline',
-                          'validations': [
-                            {
-                              'validator': 'required',
-                              'errorMessage': ''
-                            }
-                          ]
-                        },
-                        {
-                          'type': 'input',
-                          'inputType': 'text',
-                          'name': 'RealName',
-                          'label': ' 真实姓名：',
-                          'helpText': '',
-                          'inputClass': 'input-inline input-medium',
-                          'placeholder': '',
-                          'helpClass': 'help-inline',
-                          'validations': [
-                            {
-                              'validator': 'required',
-                              'errorMessage': ''
-                            }
-                          ]
-                        },
-                        {
-                          'type': 'input',
-                          'inputType': 'text',
-                          'name': 'NickName',
-                          'label': ' 昵称：',
-                          'helpText': '',
-                          'inputClass': 'input-inline input-medium',
-                          'placeholder': '',
-                          'helpClass': 'help-inline'
-                        },
-                        {
-                          'type': 'radio',
-                          'options': [
-                            {
-                              'checked': 'checked',
-                              'disabled': false,
-                              'value': '男',
-                              'label': '男'
-                            },
-                            {
-                              'checked': '',
-                              'disabled': false,
-                              'value': '女',
-                              'label': '女'
-                            }
-                          ],
-                          'name': 'Gender',
-                          'label': '性别：',
-                          'inputClass': 'mt-checkbox-inline'
-                        },
-                        {
-                          'type': 'datepicker',
-                          'inputType': 'text',
-                          'name': 'Birthday',
-                          'label': ' 出生日期：',
-                          'helpText': '',
-                          'inputClass': 'input-inline input-medium',
-                          'placeholder': '',
-                          'helpClass': 'help-inline'
-                        },
-                        {
-                          'type': 'input',
-                          'inputType': 'text',
-                          'name': 'MailAddress',
-                          'label': ' 邮箱地址：',
-                          'helpText': '',
-                          'inputClass': 'input-group',
-                          'placeholder': '',
-                          'helpClass': 'help-inline',
-                          'icon': 'fa fa-envelope',
-                          'iconPstn': 'left',
-                          'validations': [
-                            {
-                              'validator': 'required',
-                              'errorMessage': ''
-                            },
-                            {
-                              'validator': 'email',
-                              'errorMessage': '邮箱格式从不正确'
-                            }
-                          ]
-                        },
-                        {
-                          'type': 'input',
-                          'inputType': 'text',
-                          'name': 'IdCardNumber',
-                          'label': ' 身份证号：',
-                          'helpText': '',
-                          'inputClass': 'input-group',
-                          'placeholder': '',
-                          'helpClass': 'help-inline',
-                          'icon': 'fa fa-credit-card',
-                          'iconPstn': 'left',
-                          'validations': [
-                            {
-                              'validator': 'required',
-                              'errorMessage': ''
-                            }
-                          ]
-                        },
-                        {
-                          'type': 'textarea',
-                          'name': 'remark',
-                          'label': '备注：'
-                        },
-                        {
-                          'type': 'button',
-                          'name': 'submit',
-                          'disabled': false
-                        }
-                      ]
-                    },
-                    {
-                      'id': 'del',
-                      'text': '批量删除',
-                      'color': 'btn btn-warning',
-                      'img': 'fa fa-remove',
-                      'type': 'button',
-                      'events': {
-                        'title': '确认提示',
-                        'text': '确定要删除选中的记录吗?',
-                        'eventType': 'confirm_dialog',
-                        'execution': {
-                          'api': 'SinoForce.Data.AppUser',
-                          'method': 'delete',
-                          'keyId': 'Id'
-                        }
-                      }
-                    }
-                  ],
-                  'ordering': true,
-                  'paging': true,
-                  'processing': false,
-                  'searching': true,
-                  'deferRender': true,
-                  'columnConfigClass': 'AppUser',
-                  'columnFilter': 'Data',
-                  'autoWidth': true,
-                  'destroy': true,
-                  'lengthMenu': [
-                    5,
-                    10,
-                    20,
-                    30,
-                    40,
-                    50,
-                    100
-                  ],
-                  'rowId': 'Id',
-                  'pagingType': 'full_numbers',
-                  'pageLength': 20,
-                  'orderMulti': true,
-                  'select': true,
-                  'responsive': true,
-                  'columnDefs': [
-                    {
-                      'orderable': false,
-                      'targets': [0]
-                    }
-                  ],
-                  'order': [
-                    [1, 'asc']
-                  ],
-                  'dom': 'Bfr<"table-scrollable"t>ip',
-                  'columnConfigs': [
-                    {
-                      'title': `<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-            <input type="checkbox" class="group-checkable" data-set=".checkboxes" />
-            <span></span>
-            </label>`,
-                      'data': 'Id',
-                      'renderName': {
-                        'type': 'checkAll'
-                      },
-                      'className': 'text-center'
-                    },
-                    {
-                      'title': '用户名',
-                      'data': 'Name',
-                      'renderName': {
-                        'type': 'notNull',
-                        'data': {}
-                      }
-                    },
-                    {
-                      'title': '用户名称',
-                      'data': 'RealName',
-                      'renderName': {
-                        'type': 'notNull',
-                        'data': {}
-                      }
-                    },
-                    {
-                      'title': '编码',
-                      'data': 'Code',
-                      'renderName': {
-                        'type': 'notNull',
-                        'data': {}
-                      }
-                    },
-                    {
-                      'title': '用户昵称',
-                      'data': 'NickName',
-                      'renderName': {
-                        'type': 'notNull',
-                        'data': {}
-                      }
-                    },
-                    {
-                      'title': '手机',
-                      'data': 'MobileNumber',
-                      'renderName': {
-                        'type': 'notNull',
-                        'data': {}
-                      }
-                    },
-                    {
-                      'title': '出生日期',
-                      'data': 'Birthday',
-                      'renderName': {
-                        'type': 'date',
-                        'data': [
-                          {'className': 'font-green'},
-                        ]
-                      }
-                    },
-                    {
-                      'title': '账户状态',
-                      'data': 'Status',
-                      'renderName': {
-                        'type': 'notNull'
-                      }
-                    },
-                    {
-                      'title': '用户角色',
-                      'data': 'LoginLimitKind',
-                      'renderName': {
-                        'type': 'notNull'
-                      }
-                    },
-                    {
-                      'title': '',
-                      'data': 'Id',
-                      'renderName': {
-                        'type': 'handleButtons',
-                        'data': [
-                          {
-                            'text': '明细',
-                            'img': 'fa fa-search',
-                            'color': 'green-turquoise',
-                            'type': 'commonButton',
-                            'events': {
-                              'execution': {
-                                'api': 'SinoForce.Data.AppUser',
-                                'method': 'delete',
-                                'keyId': 'Id'
-                              }
-                            }
-                          },
-                          {
-                            'text': '删除',
-                            'img': 'fa fa-trash',
-                            'color': 'btn-outline red-pink',
-                            'type': 'confirmButton',
-                            'events': {
-                              'title': '确认提示',
-                              'text': '确定要删除当前记录?',
-                              'eventType': 'confirm_dialog',
-                              'execution': {
-                                'api': 'SinoForce.Data.AppUser',
-                                'method': 'delete',
-                                'keyId': 'Id'
-                              }
-                            }
-                          }
-                        ]
-                      },
-                      'className': 'text-center',
-                      'width': '220'
-                    },
-                  ]
-                }
-              }
-            ]
-          ],
           'ordering': true,
           'paging': true,
           'processing': false,
@@ -5103,7 +4443,7 @@ export class ApplicationTemplateComponent implements OnInit {
                     'events': {
                       'execution': {
                         'api': 'SinoForce.HJComm.JcDictionaryValue',
-                        'method': 'get',
+                        'method': 'delete',
                         'keyId': 'Id'
                       }
                     }
@@ -5157,19 +4497,19 @@ export class ApplicationTemplateComponent implements OnInit {
           'isCollapse': true,
           'blockType': 'portlet',
           'size': {
-            'xs': {
+            'xsCol': {
               'value': '12',
               'offset': ''
             },
-            'sm': {
+            'smCol': {
               'value': '12',
               'offset': ''
             },
-            'md': {
+            'mdCol': {
               'value': '12',
               'offset': ''
             },
-            'lg': {
+            'lgCol': {
               'value': '12',
               'offset': ''
             }
@@ -5813,19 +5153,19 @@ export class ApplicationTemplateComponent implements OnInit {
           'isCollapse': true,
           'blockType': 'portlet',
           'size': {
-            'xs': {
+            'xsCol': {
               'value': '12',
               'offset': ''
             },
-            'sm': {
+            'smCol': {
               'value': '12',
               'offset': ''
             },
-            'md': {
+            'mdCol': {
               'value': '12',
               'offset': ''
             },
-            'lg': {
+            'lgCol': {
               'value': '12',
               'offset': ''
             }
@@ -6349,19 +5689,19 @@ export class ApplicationTemplateComponent implements OnInit {
         'isCollapse': true,
         'blockType': 'portlet',
         'size': {
-          'xs': {
+          'xsCol': {
             'value': '12',
             'offset': ''
           },
-          'sm': {
+          'smCol': {
             'value': '12',
             'offset': ''
           },
-          'md': {
+          'mdCol': {
             'value': '12',
             'offset': ''
           },
-          'lg': {
+          'lgCol': {
             'value': '12',
             'offset': ''
           }
@@ -6781,19 +6121,19 @@ export class ApplicationTemplateComponent implements OnInit {
           'isCollapse': true,
           'blockType': 'portlet',
           'size': {
-            'xs': {
+            'xsCol': {
               'value': '12',
               'offset': ''
             },
-            'sm': {
+            'smCol': {
               'value': '12',
               'offset': ''
             },
-            'md': {
+            'mdCol': {
               'value': '12',
               'offset': ''
             },
-            'lg': {
+            'lgCol': {
               'value': '12',
               'offset': ''
             }
@@ -7437,19 +6777,19 @@ export class ApplicationTemplateComponent implements OnInit {
           'isCollapse': true,
           'blockType': 'portlet',
           'size': {
-            'xs': {
+            'xsCol': {
               'value': '12',
               'offset': ''
             },
-            'sm': {
+            'smCol': {
               'value': '12',
               'offset': ''
             },
-            'md': {
+            'mdCol': {
               'value': '12',
               'offset': ''
             },
-            'lg': {
+            'lgCol': {
               'value': '12',
               'offset': ''
             }
@@ -8012,19 +7352,19 @@ export class ApplicationTemplateComponent implements OnInit {
           'isCollapse': true,
           'blockType': 'portlet',
           'size': {
-            'xs': {
+            'xsCol': {
               'value': '12',
               'offset': ''
             },
-            'sm': {
+            'smCol': {
               'value': '12',
               'offset': ''
             },
-            'md': {
+            'mdCol': {
               'value': '12',
               'offset': ''
             },
-            'lg': {
+            'lgCol': {
               'value': '12',
               'offset': ''
             }
@@ -8668,19 +8008,19 @@ export class ApplicationTemplateComponent implements OnInit {
           'isCollapse': true,
           'blockType': 'portlet',
           'size': {
-            'xs': {
+            'xsCol': {
               'value': '12',
               'offset': ''
             },
-            'sm': {
+            'smCol': {
               'value': '12',
               'offset': ''
             },
-            'md': {
+            'mdCol': {
               'value': '12',
               'offset': ''
             },
-            'lg': {
+            'lgCol': {
               'value': '12',
               'offset': ''
             }
@@ -9138,6 +8478,7 @@ export class ApplicationTemplateComponent implements OnInit {
       ],
     ],
   };
+
   constructor(private router: ActivatedRoute, private clientStorage: ClientStorageService) {
     this.configs = this.clientStorage.getSessionStorage('appConfig');
     this.router.params.subscribe(param => {
@@ -9146,6 +8487,5 @@ export class ApplicationTemplateComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 }

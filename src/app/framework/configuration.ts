@@ -3,7 +3,7 @@
  */
 export class Configuration {
   public static web_api_2 = 'http://192.168.8.8:8005/f2771e4c90db29439e3c986d9859dc74/Res/';
-  public static web_api = 'http://192.168.8.8:8006/add8f868178b4cd18a10d45de7b8ebc8/Res/'; // 化建
+  public static web_api = 'http://192.168.8.8:8005/add8f868178b4cd18a10d45de7b8ebc8/Res/'; // 化建
   public static web_platCustomer = 'add8f868178b4cd18a10d45de7b8ebc8';
   public static commonCode_code = 'sinoforce_web';
   public static validCode_resource = 'ValidCode';
